@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Orders — Nova Studioz</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<nav class="navbar"><a href="/" class="nav-logo-wrap"><img src="/images/logo.png" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt=""><span class="nav-logo-text" style="display:none">NS</span></a><div class="nav-links"><a href="/index.html" class="nav-link">Home</a><a href="/shop.html" class="nav-link">Shop</a><a href="/orders.html" class="nav-link active">Orders</a></div><div class="nav-right"><button class="nav-icon-btn" onclick="openCart()" style="position:relative"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="cart-dot" id="cartDot"></span></button></div></nav>
+<div id="cartOverlay" onclick="closeCart()"></div>
+<div id="cartDrawer" class="cart-drawer"><div class="cart-hd"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:14px;font-weight:700;color:#fff">Cart</span><span class="cart-badge-pill" id="cartBadge">0</span></div><button class="cart-close-btn" onclick="closeCart()">✕</button></div><div id="cartItemsList" class="cart-items-list"></div><div class="cart-ft"><div class="cart-row"><span>Total</span><span id="cartSubtotal">₹0</span></div><div class="cart-total-row"><span>Total</span><span id="cartTotal">₹0</span></div></div></div>
+
+<div class="page-content">
+  <div class="wrap" style="max-width:800px;padding-bottom:80px">
+    <div id="successBanner" style="display:none;background:#0d1f0d;border:1px solid rgba(34,197,94,0.3);border-radius:10px;padding:16px 20px;margin-bottom:28px;margin-top:32px;align-items:center;gap:12px">
+      <span style="font-size:20px">✓</span>
+      <div><p style="font-size:14px;font-weight:700;color:#22c55e">Order Placed!</p><p style="font-size:12px;color:rgba(34,197,94,0.7)">You'll receive an email confirmation soon.</p></div>
+    </div>
+    <div style="padding:32px 0 24px;border-bottom:1px solid var(--bdr);margin-bottom:32px">
+      <p style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--w20);margin-bottom:8px">Account</p>
+      <h1 style="font-size:32px;font-weight:900;letter-spacing:-0.02em;text-transform:uppercase;color:var(--w88)">My Orders</h1>
+    </div>
+    <div id="ordersLoader" style="display:flex;justify-content:center;padding:40px"><div class="loader-dots"><span></span><span></span><span></span></div></div>
+    <div id="ordersList" style="display:flex;flex-direction:column;gap:16px"></div>
+    <div id="ordersEmpty" style="display:none;text-align:center;padding:60px 24px">
+      <p style="font-size:36px;opacity:0.3;margin-bottom:12px">📦</p>
+      <p style="font-size:15px;font-weight:600;color:var(--w60);margin-bottom:6px">No orders yet</p>
+      <p style="font-size:12px;color:var(--w20);margin-bottom:20px">Start shopping to see your orders here</p>
+      <a href="/shop.html"><button class="btn-o">Browse Shop</button></a>
+    </div>
+  </div>
+</div>
+<footer class="footer">
+<div class="wrap">
+  <div class="footer-grid">
+    <div>
+      <p class="f-brand-name">Nova Studioz</p>
+      <p class="f-desc">Minimal posters, pop culture accessories, collectibles and lifestyle merch. Delivered across India.</p>
+      <div class="f-socials">
+        <button class="f-soc-btn" onclick="window.open('https://instagram.com','_blank')">Instagram</button>
+        <button class="f-soc-btn" onclick="window.open('https://wa.me/919999999999','_blank')">WhatsApp</button>
+      </div>
+    </div>
+    <div>
+      <p class="f-col-title">Shop</p>
+      <div class="f-links">
+        <a href="/shop.html" class="f-link">All Products</a>
+        <a href="/shop.html?filter=themes" class="f-link">Themes</a>
+        <a href="/shop.html?sort=new" class="f-link">New Arrivals</a>
+        <a href="/custom-order.html" class="f-link">Custom Order</a>
+      </div>
+    </div>
+    <div>
+      <p class="f-col-title">Company</p>
+      <div class="f-links">
+        <a href="/about.html" class="f-link">About Us</a>
+        <a href="/contact.html" class="f-link">Contact</a>
+        <a href="/shipping-policy.html" class="f-link">Shipping</a>
+        <a href="/refund-policy.html" class="f-link">Refund Policy</a>
+        <a href="/privacy-policy.html" class="f-link">Privacy Policy</a>
+        <a href="/terms.html" class="f-link">Terms</a>
+      </div>
+    </div>
+    <div>
+      <p class="f-col-title">Account</p>
+      <div class="f-links">
+        <a href="/login.html" class="f-link">Login / Sign up</a>
+        <a href="/orders.html" class="f-link">My Orders</a>
+        <a href="/profile.html" class="f-link">Profile</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="f-copy">© 2025 Nova Studioz. All rights reserved.</span>
+    <span class="f-copy">Made with ♥ in India</span>
+  </div>
+</div>
+</footer>
+<div id="toastCont"></div>
+<script src="/js/utils.js?v=10"></script>
+<script src="/js/nav-cart.js"></script>
+<script>
+const STATUS_COLORS = {Pending:'#f59e0b',Processing:'#3b82f6',Shipped:'#8b5cf6',Delivered:'#22c55e',Cancelled:'#ef4444'};
+
+async function loadOrders() {
+  if (!localStorage.getItem('token')) { location.href = '/login.html?redirect=/orders.html'; return; }
+  if (new URLSearchParams(location.search).get('success')) {
+    const b = document.getElementById('successBanner');
+    b.style.display = 'flex';
+    setTimeout(() => b.style.display='none', 5000);
+    // Show pre-order delivery notice
+    if (new URLSearchParams(location.search).get('preorder') === '1') {
+      setTimeout(function(){
+        toast('Your Pre-Order is confirmed! Estimated delivery: 10–12 business days after we dispatch your item.', 'success');
+      }, 1200);
+    }
+  }
+  try {
+    const orders = await apiGet('/api/orders');
+    document.getElementById('ordersLoader').style.display = 'none';
+    if (!orders.length) { document.getElementById('ordersEmpty').style.display = 'block'; return; }
+    const list = document.getElementById('ordersList');
+    orders.forEach(o => {
+      const color = STATUS_COLORS[o.status] || '#888';
+      const d = document.createElement('div');
+      d.style.cssText = 'background:#0d0d0d;border:1px solid rgba(255,255,255,0.07);border-radius:10px;overflow:hidden';
+      d.innerHTML = `
+        <div style="padding:18px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.06)">
+          <div>
+            <p style="font-size:9px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:4px">Order #${o.id}</p>
+            <p style="font-size:12px;color:rgba(255,255,255,0.35)">${new Date(o.created_at).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}</p>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px">
+            <span style="font-size:15px;font-weight:800;color:#fff">₹${o.total}</span>
+            <span style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:${color};background:${color}22;padding:4px 12px;border-radius:999px">${o.status}</span>
+          </div>
+        </div>
+        <div style="padding:14px 20px">
+          <p style="font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:10px">Items</p>
+          <div style="display:flex;flex-direction:column;gap:7px">
+            ${(o.items||[]).map(i=>`<div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:rgba(255,255,255,0.55)">${i.product_name} <span style="color:rgba(255,255,255,0.25)">×${i.quantity}</span></span><span style="color:rgba(255,255,255,0.7);font-weight:600">₹${i.price*i.quantity}</span></div>`).join('')}
+          </div>
+          <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.06);display:flex;gap:20px;flex-wrap:wrap">
+            <div><p style="font-size:10px;color:rgba(255,255,255,0.2);margin-bottom:3px;text-transform:uppercase;letter-spacing:0.08em">Payment</p><p style="font-size:12px;color:rgba(255,255,255,0.45)">${o.payment}</p></div>
+            <div style="flex:1"><p style="font-size:10px;color:rgba(255,255,255,0.2);margin-bottom:3px;text-transform:uppercase;letter-spacing:0.08em">Address</p><p style="font-size:12px;color:rgba(255,255,255,0.45)">${o.address}</p></div>
+          </div>
+        </div>`;
+      list.appendChild(d);
+    });
+  } catch(e) {
+    document.getElementById('ordersLoader').style.display = 'none';
+    toast('Failed to load orders', 'error');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadOrders);
+</script>
+</body>
+</html>

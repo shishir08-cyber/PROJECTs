@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — Nova Studioz</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+<nav class="navbar">
+  <a href="/" class="nav-logo-wrap"><img src="/images/logo.png" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt=""><span class="nav-logo-text" style="display:none">NS</span></a>
+  <div class="nav-links"><a href="/index.html" class="nav-link">Home</a><a href="/shop.html" class="nav-link">Shop</a></div>
+  <div class="nav-right">
+    <button class="nav-icon-btn" onclick="openCart()" style="position:relative">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span class="cart-dot" id="cartDot"></span>
+    </button>
+  </div>
+</nav>
+
+<div id="cartOverlay" onclick="closeCart()"></div>
+<div id="cartDrawer" class="cart-drawer">
+  <div class="cart-hd"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:14px;font-weight:700;color:#fff">Cart</span><span class="cart-badge-pill" id="cartBadge">0</span></div><button class="cart-close-btn" onclick="closeCart()">✕</button></div>
+  <div id="cartItemsList" class="cart-items-list"></div>
+  <div class="cart-ft"><div class="cart-row"><span>Total</span><span id="cartSubtotal">₹0</span></div><div class="cart-total-row"><span>Total</span><span id="cartTotal">₹0</span></div></div>
+</div>
+
+<div class="page-content">
+  <div class="wrap" style="max-width:960px">
+
+    <!-- PAGE HEADER -->
+    <div style="padding:32px 0 28px;border-bottom:1px solid var(--bdr);margin-bottom:36px">
+      <p style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--w20);margin-bottom:8px">Nova Studioz</p>
+      <h1 style="font-size:28px;font-weight:900;letter-spacing:-0.02em;text-transform:uppercase;color:var(--w88)" id="checkoutTitle">Checkout</h1>
+      <div id="preorderNotice" style="display:none;margin-top:10px;padding:10px 16px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.28);border-radius:8px;font-size:12px;color:rgba(245,158,11,0.9);font-weight:500">&#9733; Pre-Order items: 50% now, 50% on dispatch. Regular posters: A4 &#8377;59, A5 &#8377;33. Black Frame +&#8377;130 (A4 only).</div>
+    </div>
+
+    <div class="checkout-layout">
+
+      <!-- LEFT: FORM -->
+      <div>
+
+        <!-- CONTACT -->
+        <div class="co-section">
+          <p class="co-section-title">Contact Details</p>
+          <div class="co-form">
+            <div style="grid-column:span 2"><label class="input-label">Full Name</label><input class="input-field" id="coName" placeholder="Your full name" required></div>
+            <div><label class="input-label">Email</label><input class="input-field" type="email" id="coEmail" placeholder="you@email.com" required></div>
+            <div><label class="input-label">Phone</label><input class="input-field" type="tel" id="coPhone" placeholder="+91 98765 43210" required></div>
+          </div>
+        </div>
+
+        <!-- DELIVERY ADDRESS -->
+        <div class="co-section">
+          <p class="co-section-title">Delivery Address</p>
+          <div class="co-form">
+            <div style="grid-column:span 2">
+              <label class="input-label">Street / House / Flat</label>
+              <input class="input-field" id="coStreet" placeholder="e.g. Flat 4B, MG Road, Shivaji Nagar" required>
+            </div>
+            <div style="grid-column:span 2">
+              <label class="input-label">Landmark <span style="color:var(--w20);font-size:10px">(optional)</span></label>
+              <input class="input-field" id="coLandmark" placeholder="e.g. Near Central Mall">
+            </div>
+            <div>
+              <label class="input-label">City</label>
+              <input class="input-field" id="coCity" placeholder="Nagpur" required>
+            </div>
+            <div>
+              <label class="input-label">PIN Code</label>
+              <input class="input-field" id="coPincode" placeholder="440001" maxlength="6" required>
+            </div>
+            <div style="grid-column:span 2">
+              <label class="input-label">State</label>
+              <select class="input-field" id="coState" required>
+                <option value="">Select State</option>
+                <option>Andhra Pradesh</option><option>Arunachal Pradesh</option><option>Assam</option>
+                <option>Bihar</option><option>Chhattisgarh</option><option>Goa</option><option>Gujarat</option>
+                <option>Haryana</option><option>Himachal Pradesh</option><option>Jharkhand</option>
+                <option>Karnataka</option><option>Kerala</option><option>Madhya Pradesh</option>
+                <option selected>Maharashtra</option><option>Manipur</option><option>Meghalaya</option>
+                <option>Mizoram</option><option>Nagaland</option><option>Odisha</option><option>Punjab</option>
+                <option>Rajasthan</option><option>Sikkim</option><option>Tamil Nadu</option>
+                <option>Telangana</option><option>Tripura</option><option>Uttar Pradesh</option>
+                <option>Uttarakhand</option><option>West Bengal</option>
+                <option>Delhi</option><option>Chandigarh</option><option>Puducherry</option>
+                <option>Jammu &amp; Kashmir</option><option>Ladakh</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- PAYMENT -->
+        <div class="co-section">
+          <p class="co-section-title">Payment Method</p>
+          <div id="preorderPayOption" style="display:none">
+            <label class="pay-option" style="border-color:rgba(245,158,11,0.4);background:rgba(245,158,11,0.05)">
+              <input type="radio" name="payment" value="preorder" id="preorderRadio" checked>
+              <div>
+                <p class="pay-name" style="color:#f59e0b">Pre-Order (50% Advance)</p>
+                <p class="pay-desc">Pay 50% now via Razorpay. Remaining 50% charged when item is ready to dispatch.</p>
+              </div>
+              <span class="pay-badge" style="background:rgba(245,158,11,0.2);color:#f59e0b;border:1px solid rgba(245,158,11,0.4)">Pre-Order</span>
+            </label>
+          </div>
+          <div id="normalPayOptions">
+          <label class="pay-option">
+            <input type="radio" name="payment" value="razorpay" checked>
+            <div>
+              <p class="pay-name">Full Payment</p>
+              <p class="pay-desc">Pay 100% now via Razorpay — UPI, cards, net banking</p>
+            </div>
+            <span class="pay-badge">Recommended</span>
+          </label>
+          <label class="pay-option">
+            <input type="radio" name="payment" value="cod">
+            <div>
+              <p class="pay-name">Cash on Delivery</p>
+              <p class="pay-desc">Pay 40% advance via Razorpay, rest on delivery</p>
+            </div>
+          </label>
+          </div><!-- /normalPayOptions -->
+        </div>
+        <!-- ERROR + SUBMIT -->
+        <div id="orderError" style="font-size:12px;color:#ef4444;display:none;margin-bottom:12px;padding:10px 14px;background:rgba(239,68,68,0.08);border-radius:6px;border:1px solid rgba(239,68,68,0.2)"></div>
+        <button class="btn-w" id="placeOrderBtn" onclick="placeOrder()" style="width:100%;justify-content:center;padding:15px 24px;font-size:13px;font-weight:700">Place Order →</button>
+        <p style="font-size:10px;color:var(--w20);margin-top:10px;text-align:center;letter-spacing:0.04em">Secured by Razorpay &middot; 256-bit SSL &middot; Min. order &#8377;99 &middot; Free shipping above &#8377;249 · Action Figures: &#8377;99 shipping</p>
+
+        <!-- COD NOTE -->
+        <div id="codNote" style="display:none;margin-top:16px;padding:14px;background:var(--bg1);border-radius:8px;border:1px solid var(--bdr)">
+          <p style="font-size:11px;color:var(--w60);font-weight:600;margin-bottom:4px">COD Advance</p>
+          <p style="font-size:11px;color:var(--w35)">40% advance: <span id="codAdvance" style="color:#fff;font-weight:700"></span></p>
+          <p style="font-size:10px;color:var(--w20);margin-top:4px">Remaining 60% paid on delivery</p>
+        </div>
+      </div>
+
+      <!-- RIGHT: ORDER SUMMARY -->
+      <div>
+        <div class="co-summary">
+          <p class="co-section-title" style="margin-bottom:20px">Order Summary</p>
+          <div id="summaryItems" style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px;max-height:340px;overflow-y:auto"></div>
+
+          <!-- FREE SHIPPING PROGRESS BAR -->
+          <div id="freeShipBar" style="margin-bottom:14px;padding:10px 12px;background:rgba(255,255,255,0.04);border:1px solid var(--bdr);border-radius:8px;display:none">
+            <div id="freeShipMsg" style="font-size:11px;color:rgba(255,255,255,0.6);margin-bottom:6px;font-weight:600;text-align:center"></div>
+            <div style="background:rgba(255,255,255,0.08);border-radius:999px;height:5px;overflow:hidden">
+              <div id="freeShipFill" style="height:100%;border-radius:999px;background:linear-gradient(90deg,#22c55e,#4ade80);transition:width 0.4s ease;width:0%"></div>
+            </div>
+          </div>
+
+          <div style="border-top:1px solid var(--bdr);padding-top:14px;display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--w35)"><span>Subtotal</span><span id="summarySubtotal">₹0</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--w35)"><span>Shipping</span><span id="summaryShipping">Free</span></div>
+            <div id="minOrderWarn" style="display:none;padding:8px 12px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-radius:6px;font-size:11px;color:#f87171;font-weight:600;text-align:center">⚠️ Minimum order is ₹99</div>
+            <div style="display:flex;justify-content:space-between;font-size:17px;font-weight:800;color:#fff;padding-top:12px;border-top:1px solid var(--bdr)">
+              <span>Total</span><span id="summaryTotal">₹0</span>
+            </div>
+          </div>
+          <div id="codNoteRight" style="display:none;margin-top:14px;padding:12px;background:rgba(255,255,255,0.04);border-radius:6px;border:1px solid var(--bdr)">
+            <p style="font-size:11px;color:var(--w60);font-weight:600;margin-bottom:3px">Pay only (40% advance)</p>
+            <p style="font-size:16px;font-weight:900;color:#fff" id="codAdvanceRight"></p>
+            <p style="font-size:10px;color:var(--w20);margin-top:3px">Remaining paid on delivery</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+<div class="wrap">
+  <div class="footer-grid">
+    <div>
+      <p class="f-brand-name">Nova Studioz</p>
+      <p class="f-desc">Minimal posters, pop culture accessories, collectibles and lifestyle merch. Delivered across India.</p>
+      <div class="f-socials">
+        <button class="f-soc-btn" onclick="window.open('https://instagram.com','_blank')">Instagram</button>
+        <button class="f-soc-btn" onclick="window.open('https://wa.me/919999999999','_blank')">WhatsApp</button>
+      </div>
+    </div>
+    <div>
+      <p class="f-col-title">Shop</p>
+      <div class="f-links">
+        <a href="/shop.html" class="f-link">All Products</a>
+        <a href="/shop.html?filter=themes" class="f-link">Themes</a>
+        <a href="/shop.html?sort=new" class="f-link">New Arrivals</a>
+        <a href="/custom-order.html" class="f-link">Custom Order</a>
+      </div>
+    </div>
+    <div>
+      <p class="f-col-title">Company</p>
+      <div class="f-links">
+        <a href="/about.html" class="f-link">About Us</a>
+        <a href="/contact.html" class="f-link">Contact</a>
+        <a href="/shipping-policy.html" class="f-link">Shipping</a>
+        <a href="/refund-policy.html" class="f-link">Refund Policy</a>
+        <a href="/privacy-policy.html" class="f-link">Privacy Policy</a>
+        <a href="/terms.html" class="f-link">Terms</a>
+      </div>
+    </div>
+    <div>
+      <p class="f-col-title">Account</p>
+      <div class="f-links">
+        <a href="/login.html" class="f-link">Login / Sign up</a>
+        <a href="/orders.html" class="f-link">My Orders</a>
+        <a href="/profile.html" class="f-link">Profile</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="f-copy">© 2025 Nova Studioz. All rights reserved.</span>
+    <span class="f-copy">Made with ♥ in India</span>
+  </div>
+</div>
+</footer>
+<div id="toastCont"></div>
+<script src="/js/utils.js?v=10"></script>
+<script src="/js/nav-cart.js"></script>
+<script>
+let RAZORPAY_KEY = '';  // fetched from /api/config on load — never hardcoded in frontend
+
+function renderSummary() {
+  const cart = getCart();
+  const el   = document.getElementById('summaryItems');
+  if (!cart.length) { location.href = '/shop.html'; return; }
+
+  // Detect pre-order items
+  const hasPreOrder = cart.some(function(i) { return i.isPreOrder; });
+  const allPreOrder = cart.every(function(i) { return i.isPreOrder; });
+
+  // Show/hide pre-order UI
+  var notice = document.getElementById('preorderNotice');
+  var preorderOpt = document.getElementById('preorderPayOption');
+  var normalOpts  = document.getElementById('normalPayOptions');
+  var title = document.getElementById('checkoutTitle');
+  var btn   = document.getElementById('placeOrderBtn');
+
+  if (hasPreOrder && notice) notice.style.display = 'block';
+if (hasPreOrder && preorderOpt) { 
+  preorderOpt.style.display = 'block';
+  var preRad = document.getElementById('preorderRadio');
+  if (preRad) { preRad.checked = true; }
+}
+  if (allPreOrder && normalOpts) { normalOpts.style.display = 'none'; }
+  if (allPreOrder && title) title.textContent = 'Pre-Order Checkout';
+  if (allPreOrder && btn) { btn.textContent = 'Confirm Pre-Order — Pay 50% Now'; btn.style.background = 'linear-gradient(135deg,#f59e0b,#d97706)'; btn.style.borderColor = '#d97706'; btn.style.color = '#000'; }
+
+  el.innerHTML = cart.map(item =>
+    '<div style="display:flex;gap:10px;align-items:center">'
+    + '<img src="' + (item.image||'https://picsum.photos/50/64') + '" onerror="this.src=\'https://picsum.photos/50/64\'" style="width:48px;height:60px;object-fit:cover;border-radius:5px;flex-shrink:0;background:#1a1a1a">'
+    + '<div style="flex:1;min-width:0">'
+    + '<p style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.85);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px">' + item.name + '</p>'
+    + '<p style="font-size:10px;color:rgba(255,255,255,0.28)">' + (item.size||'A4') + ' · ' + (item.frame||'No Frame') + ' · ×' + (item.quantity||1) + '</p>'
+    + '</div>'
+    + '<span style="font-size:13px;font-weight:800;color:#fff;flex-shrink:0">' + fmtPrice(parsePrice(item.price)*(item.quantity||1)) + '</span>'
+    + '</div>'
+  ).join('');
+  updateSummaryTotals();
+}
+
+function updateSummaryTotals() {
+  const total    = getTotal();
+  const cart     = getCart();
+  // Shipping rules: ₹70 flat for all orders, FREE above ₹249
+  // Action figures / Collectibles / pre-order = ₹99 flat, NEVER free
+  const hasActionFigure = cart.some(function(i){ return i.isPreOrder || i.category === 'Action Figures' || i.category === 'Collectibles' || i.size === 'Pre-Order'; });
+  const freeShip = !hasActionFigure && (total >= 249);
+  const shipping = hasActionFigure ? 99 : (freeShip ? 0 : 70);
+  const final    = total + shipping;
+
+  // Show split if mixed cart
+  var cartItems = getCart();
+  var preT  = cartItems.filter(function(i){return i.isPreOrder;}).reduce(function(s,i){return s+parsePrice(i.price)*(i.quantity||1);},0);
+  var normT = cartItems.filter(function(i){return !i.isPreOrder;}).reduce(function(s,i){return s+parsePrice(i.price)*(i.quantity||1);},0);
+  var subtotalEl = document.getElementById('summarySubtotal');
+  if (subtotalEl) {
+    if (preT > 0 && normT > 0) {
+      subtotalEl.innerHTML = fmtPrice(total) +
+        '<div style="font-size:10px;color:rgba(255,255,255,0.35);margin-top:2px">Pre-Order: ₹' + preT + ' (pay ₹' + Math.ceil(preT*0.5) + ' now) + Normal: ₹' + normT + '</div>';
+    } else {
+      subtotalEl.textContent = fmtPrice(total);
+    }
+  }
+  document.getElementById('summaryShipping').textContent = shipping === 0 ? 'Free' : fmtPrice(shipping);
+
+  // ── Free Shipping Progress Bar ──
+  var barWrap = document.getElementById('freeShipBar');
+  var barFill = document.getElementById('freeShipFill');
+  var barMsg  = document.getElementById('freeShipMsg');
+  if (barWrap && barFill && barMsg && !hasActionFigure) {
+    var FREE_THRESHOLD = 249;
+    if (total >= FREE_THRESHOLD) {
+      barWrap.style.display = 'block';
+      barFill.style.width = '100%';
+      barFill.style.background = 'linear-gradient(90deg,#22c55e,#4ade80)';
+      barMsg.textContent = '🎉 You\'ve unlocked FREE shipping!';
+      barMsg.style.color = '#4ade80';
+    } else {
+      var needed = FREE_THRESHOLD - total;
+      var pct = Math.round((total / FREE_THRESHOLD) * 100);
+      barWrap.style.display = 'block';
+      barFill.style.width = pct + '%';
+      barFill.style.background = 'linear-gradient(90deg,#f59e0b,#fbbf24)';
+      barMsg.textContent = 'Add ₹' + needed + ' more for FREE shipping (else + ₹70 shipping charges)';
+      barMsg.style.color = 'rgba(255,255,255,0.6)';
+    }
+  } else if (barWrap && hasActionFigure) {
+    barWrap.style.display = 'none';
+  }
+
+  document.getElementById('summaryTotal').textContent = fmtPrice(final);
+
+  // Min order warning
+  var minW = document.getElementById('minOrderWarn');
+  if (minW) {
+    if (total > 0 && total < 99) {
+      minW.textContent = '⚠️ Minimum order is ₹99. Add ₹' + (99 - total) + ' more.';
+      minW.style.display = 'block';
+      document.getElementById('placeOrderBtn').disabled = true;
+      document.getElementById('placeOrderBtn').style.opacity = '0.5';
+    } else {
+      minW.style.display = 'none';
+      document.getElementById('placeOrderBtn').disabled = false;
+      document.getElementById('placeOrderBtn').style.opacity = '1';
+    }
+  }
+
+  const payMethod = document.querySelector('input[name="payment"]:checked')?.value;
+  const isCod  = payMethod === 'cod';
+  const isPreO = payMethod === 'preorder';
+  const codNote = document.getElementById('codNoteRight');
+  const codAdv  = document.getElementById('codAdvanceRight');
+  if (codNote && codAdv) {
+    if (isCod) {
+      codNote.style.display = 'block';
+      codAdv.innerHTML = fmtPrice(Math.ceil(final * 0.4)) + '<br><span style="font-size:10px;color:rgba(255,255,255,0.28);font-weight:400">Remaining 60% on delivery</span>';
+    } else if (isPreO) {
+      codNote.style.display = 'block';
+      // Charge = 50% of item cost + full shipping (matches server + placeOrder logic)
+      var cartForPreO = getCart();
+      var preItemsTotal = cartForPreO.filter(function(i){return i.isPreOrder;}).reduce(function(s,i){return s+parsePrice(i.price)*(i.quantity||1);},0);
+      var normItemsTotal = cartForPreO.filter(function(i){return !i.isPreOrder;}).reduce(function(s,i){return s+parsePrice(i.price)*(i.quantity||1);},0);
+      var preAdvanceAmt = Math.ceil(preItemsTotal * 0.5) + normItemsTotal + shipping;
+      codAdv.innerHTML = fmtPrice(preAdvanceAmt) + '<br><span style="font-size:10px;color:rgba(255,255,255,0.28);font-weight:400">50% items + ₹'+shipping+' shipping now · Remaining 50% on dispatch</span>';
+      var lbl = codNote.querySelector('p:first-child');
+      if (lbl) lbl.textContent = 'Pay Now (Pre-Order Advance)';
+    } else {
+      codNote.style.display = 'none';
+    }
+  }
+}
+
+document.querySelectorAll('input[name="payment"]').forEach(r => r.addEventListener('change', updateSummaryTotals));
+
+async function prefillUser() {
+  const token = localStorage.getItem('token');
+  if (!token) return;
+  try {
+    const user = await apiGet('/api/user');
+    if (!user || user.error) { console.warn('prefillUser: no user returned'); return; }
+    // Prefill contact details
+    var fn = document.getElementById('coName');  if (fn && user.name)  fn.value = user.name;
+    var fe = document.getElementById('coEmail'); if (fe && user.email) fe.value = user.email;
+    var fp = document.getElementById('coPhone'); if (fp && user.phone) fp.value = user.phone;
+
+    // Try city/pincode direct columns first
+    if (user.city) {
+      var cityEl = document.getElementById('coCity'); if (cityEl) cityEl.value = user.city;
+    }
+    if (user.pincode) {
+      var pinEl = document.getElementById('coPincode'); if (pinEl) pinEl.value = user.pincode;
+    }
+
+    // Prefill address — supports both ' | ' separator (new) and ', ' (old)
+    if (user.address && user.address.trim()) {
+      var sep = user.address.indexOf(' | ') !== -1 ? ' | ' : ', ';
+      var parts = user.address.split(sep);
+      // Format saved as: street, landmark, city, state, pincode, India
+      var fieldMap = [
+        { id:'coStreet',   idx:0 },
+        { id:'coLandmark', idx:1 },
+        { id:'coCity',     idx:2 },
+        { id:'coState',    idx:3 },
+        { id:'coPincode',  idx:4 }
+      ];
+      fieldMap.forEach(function(f) {
+        var el = document.getElementById(f.id);
+        if (!el || parts[f.idx] === undefined) return;
+        var val = parts[f.idx].trim();
+        if (!val) return;
+        // For select elements (coState), try to match value
+        if (el.tagName === 'SELECT') {
+          var opt = Array.from(el.options).find(function(o) {
+            return o.value.toLowerCase() === val.toLowerCase() || o.text.toLowerCase() === val.toLowerCase();
+          });
+          if (opt) el.value = opt.value;
+        } else {
+          el.value = val;
+        }
+      });
+      // If city was set from address parts but we also have direct city column, prefer direct
+      if (user.city) { var ce = document.getElementById('coCity'); if (ce) ce.value = user.city; }
+      if (user.pincode) { var pe = document.getElementById('coPincode'); if (pe) pe.value = user.pincode; }
+    }
+  } catch(e) {
+    console.warn('prefillUser error:', e.message || e);
+  }
+}
+
+async function placeOrder() {
+  const name     = document.getElementById('coName').value.trim();
+  const email    = document.getElementById('coEmail').value.trim();
+  const phone    = document.getElementById('coPhone').value.trim();
+  const street   = document.getElementById('coStreet').value.trim();
+  const landmark = document.getElementById('coLandmark').value.trim();
+  const city     = document.getElementById('coCity').value.trim();
+  const pincode  = document.getElementById('coPincode').value.trim();
+  const state    = document.getElementById('coState').value.trim();
+  const address  = [street, landmark, city, state, pincode, 'India'].filter(Boolean).join(', ');
+  const errEl    = document.getElementById('orderError');
+  const btn      = document.getElementById('placeOrderBtn');
+
+  const cart        = getCart();
+  const allPreOrder = cart.every(function(i) { return i.isPreOrder; });
+  const hasAnyPre   = cart.some(function(i) { return i.isPreOrder; });
+  const checkedRad  = document.querySelector('input[name="payment"]:checked');
+  const payment     = allPreOrder ? 'preorder' : (checkedRad ? checkedRad.value : (hasAnyPre ? 'preorder' : 'razorpay'));
+
+  // Minimum order check
+  if (getTotal() < 99) {
+    errEl.textContent = 'Minimum order amount is ₹99. Please add more items to your cart.';
+    errEl.style.display = 'block';
+    btn.textContent = 'Place Order →'; btn.disabled = false;
+    return;
+  }
+  if (!name||!email||!phone||!street||!city||!pincode||!state) {
+    errEl.textContent = 'Please fill all required fields.';
+    errEl.style.display = 'block';
+    return;
+  }
+  if (!localStorage.getItem('token')) {
+    showLoginPrompt();
+    return;
+  }
+
+  errEl.style.display = 'none';
+  btn.textContent = 'Processing...'; btn.disabled = true;
+
+  const subtotal = getTotal();
+  const hasActionFigureB = cart.some(i => i.isPreOrder || i.category==='Action Figures' || i.category==='Collectibles' || i.size==='Pre-Order');
+  const freeShipB = !hasActionFigureB && (subtotal >= 249);
+  const shipping  = hasActionFigureB ? 99 : (freeShipB ? 0 : 70);
+  const total     = Math.max(0, subtotal + shipping);
+
+  const preTotal    = cart.filter(i => i.isPreOrder).reduce((s,i) => s + parsePrice(i.price)*(i.quantity||1), 0);
+  const normalTotal = cart.filter(i => !i.isPreOrder).reduce((s,i) => s + parsePrice(i.price)*(i.quantity||1), 0);
+  const hasPreO     = preTotal > 0;
+  const preAmt      = Math.ceil(preTotal * 0.5);
+  const amtToPay    = payment === 'cod'     ? Math.ceil(total * 0.4)
+                    : hasPreO               ? (preAmt + normalTotal + shipping)
+                    : total;
+
+  // Create Razorpay order
+  let rzpOrderId;
+  try {
+    const rzpOrderRes = await apiPost('/api/create-razorpay-order', { amount: amtToPay * 100 });
+    rzpOrderId = rzpOrderRes.orderId;
+  } catch(e) {
+    toast('Could not initiate payment. Try again.', 'error');
+    btn.textContent = 'Confirm Pre-Order — Pay 50% Now'; btn.disabled = false;
+    return;
+  }
+
+  const rzp = new Razorpay({
+    key: RAZORPAY_KEY,
+    amount: amtToPay * 100,
+    currency: 'INR',
+    order_id: rzpOrderId,
+    name: 'Nova Studioz',
+    description: payment === 'cod' ? '40% Advance' : hasPreO ? 'Pre-Order 50% Advance' : 'Full Payment',
+    prefill: { name, email, contact: phone },
+    theme: { color: '#000' },
+    handler: async function(response) {
+      try {
+        await apiPost('/api/order', {
+          name, email, phone, address, payment,
+          shipping,
+          items: cart.map(i => ({
+            product_id: i.id, product_name: i.name,
+            price: i.price, size: i.size||'A4',
+            frame: i.frame||'No Frame', quantity: i.quantity||1,
+            isPreOrder: i.isPreOrder||false
+          })),
+          razorpay_payment_id: response.razorpay_payment_id,
+          razorpay_order_id:   response.razorpay_order_id,
+          razorpay_signature:  response.razorpay_signature
+        });
+        saveCart([]);
+        const hasPreOCart = cart.some(function(i){ return i.isPreOrder; });
+        location.href = '/orders.html?success=1' + (hasPreOCart ? '&preorder=1' : '');
+      } catch(e) {
+        toast('Order failed. Contact support.', 'error');
+        btn.textContent = 'Confirm Pre-Order — Pay 50% Now'; btn.disabled = false;
+      }
+    },
+    modal: { ondismiss: () => { btn.textContent = 'Confirm Pre-Order — Pay 50% Now'; btn.disabled = false; } }
+  });
+  rzp.open();
+}
+
+function showLoginPrompt() {
+  const banner = document.createElement('div');
+  banner.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(8,8,8,0.92);backdrop-filter:blur(12px);z-index:2000;display:flex;align-items:center;justify-content:center;padding:24px';
+  banner.innerHTML = '<div style="background:#0d0d0d;border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:40px 36px;max-width:420px;width:100%;text-align:center">'
+    + '<div style="font-size:32px;margin-bottom:16px">🛍</div>'
+    + '<h2 style="font-size:20px;font-weight:800;color:#fff;letter-spacing:-0.02em;margin-bottom:8px">Almost there!</h2>'
+    + '<p style="font-size:13px;font-weight:300;color:rgba(255,255,255,0.45);line-height:1.7;margin-bottom:24px">Please log in to complete your purchase. Your cart will be saved.</p>'
+    + '<a href="/login.html?redirect=/checkout.html"><button style="width:100%;background:#fff;color:#000;border:none;border-radius:999px;padding:13px 24px;font-size:12px;font-weight:700;letter-spacing:0.08em;cursor:pointer;font-family:Inter,sans-serif;margin-bottom:10px">Login / Sign up →</button></a>'
+    + '<a href="/shop.html"><button style="width:100%;background:transparent;color:rgba(255,255,255,0.35);border:1px solid rgba(255,255,255,0.1);border-radius:999px;padding:11px 24px;font-size:11px;cursor:pointer;font-family:Inter,sans-serif">← Continue Shopping</button></a>'
+    + '<p style="font-size:10px;color:rgba(255,255,255,0.2);margin-top:14px">Your cart items are saved.</p>'
+    + '</div>';
+  document.body.appendChild(banner);
+}
+
+document.addEventListener('DOMContentLoaded', async function() {
+  updateCartUI(); renderCart();
+  var token = localStorage.getItem('token');
+  if (!token) {
+    window.location.href = '/login.html?redirect=/checkout.html';
+    return;
+  }
+  // Fetch Razorpay key_id from server — keeps it out of source code
+  try {
+    const cfg = await fetch('/api/config').then(r => r.json());
+    RAZORPAY_KEY = cfg.razorpay_key_id || '';
+  } catch(e) {
+    console.error('Could not fetch payment config:', e.message);
+  }
+  renderSummary();
+  prefillUser();
+  if (typeof initAuthUI === 'function') initAuthUI();
+});
+</script>
+</body>
+</html>

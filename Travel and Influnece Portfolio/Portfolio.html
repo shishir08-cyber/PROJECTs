@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Shishir Tirth — Cinematographer · Photographer · Content Creator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="mediaqueries.css" />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cur"></div>
+
+<nav>
+  <a href="#" class="logo" onclick="go('home')">ST<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="go('home')" id="nh" class="active">Home</a></li>
+    <li><a href="#" onclick="go('about')" id="na">About</a></li>
+    <li><a href="#" onclick="go('portfolio')" id="np">Visuals</a></li>
+    <li><a href="#" onclick="go('contact')" id="nc">Contact</a></li>
+  </ul>
+  <div class="nav-dot"></div>
+  <div class="hamburger" id="ham" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#" onclick="goMobile('home')">Home</a>
+  <a href="#" onclick="goMobile('about')">About</a>
+  <a href="#" onclick="goMobile('portfolio')">Portfolio</a>
+  <a href="#" onclick="goMobile('contact')">Contact</a>
+</div>
+
+<!-- HOME -->
+<section class="page active" id="page-home">
+
+  <!-- HERO -->
+  <div class="hero">
+    <!-- Single full-bleed background image -->
+    <div class="hero-bg">
+      <img src="IMAGEs/bg.jpg" alt="Travel landscape"/>
+    </div>
+
+    <div class="hero-left">
+      <div class="hero-tag">✦ Open to Collaborations</div>
+      <a href="https://www.instagram.com/shishirtirth08/" class="btn btn-color-1">Instagram>></a>
+      <h1 class="hero-h1">
+        Capture.<br/>
+        <span class="italic">Travel.</span><br/>
+        <span class="stroke">Influence.</span>
+      </h1>
+      <p class="hero-sub">
+        Cinematographer, travel & content creator with modelling — chasing light, stories, and landscapes across the world. Every frame is a new chapter.
+      </p>
+      <div class="hero-btns">
+        <a href="#" class="btn btn-fill" onclick="go('portfolio')">My Work</a>
+        <a href="#" class="btn btn-outline" onclick="go('contact')">Collab >></a>
+      </div>
+      <div class="scroll-hint">Scroll</div>
+    </div>
+
+    <!-- Stats bar pinned to bottom -->
+    <div class="hero-stats-bar">
+      <div class="hstat"><div class="hstat-n">2+</div><div class="hstat-l">Years Creating</div></div>
+      <div class="hstat"><div class="hstat-n">3+</div><div class="hstat-l">Years experience</div></div>
+      <div class="hstat"><div class="hstat-n">Multiple</div><div class="hstat-l">Projects Done</div></div>
+    </div>
+  </div>
+
+  <!-- HERO DETAIL ROW -->
+  <div class="hero-detail-bar">
+    <div class="hd-item"><div class="hd-dot"></div><div class="hd-text"><strong>Cinematography</strong> · Narrative & Cinematic Films</div></div>
+    <div class="hd-item"><div class="hd-dot"></div><div class="hd-text"><strong>Photography</strong> · Landscape · Travel · Portrait</div></div>
+    <div class="hd-item"><div class="hd-dot"></div><div class="hd-text"><strong>Content</strong> · Reels · YouTube · Social</div></div>
+    <div class="hd-item"><div class="hd-dot"></div><div class="hd-text"><strong>Travel</strong> · Stories from Around the World</div></div>
+  </div>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <span class="ticker-item">Cinematography <span>✦</span></span><span class="ticker-item">Travel Photography <span>✦</span></span><span class="ticker-item">Content Creation <span>✦</span></span><span class="ticker-item">Visual Storytelling <span>✦</span></span><span class="ticker-item">Colour Grading <span>✦</span></span><span class="ticker-item">Brand Films <span>✦</span></span><span class="ticker-item">3+ years <span>✦</span></span><span class="ticker-item">Cinematography <span>✦</span></span><span class="ticker-item">Travel Photography <span>✦</span></span><span class="ticker-item">Content Creation <span>✦</span></span><span class="ticker-item">Visual Storytelling <span>✦</span></span><span class="ticker-item">Colour Grading <span>✦</span></span><span class="ticker-item">Brand Films <span>✦</span></span><span class="ticker-item">3+ years <span>✦</span></span>
+    </div>
+  </div>
+
+
+<!--  -----------------------------------------------ABOUT ME--------------------------------------------------------  -->
+<section id="me" style="height: 1px;"></section>
+<br><br><br><br>
+    <p class="section__text__p1">EXPLORE</p>
+      <h1 style="text-align: center;">About Me</h1>
+    <section id="profile">
+      <div class="section__pic-container">
+        <img src="./IMAGES/profile_img.jpg" style="border-radius: 50%;" alt="John Doe profile picture" />
+      </div>
+      <div class="section__text">
+        <p class="section__text__p1">Hello, I'm</p>
+        <h1 class="title">Shishir Tirth</h1>
+        <p class="section__text__p2">Artistic Enthusiast</p>
+        <div class="btn-container">
+          <button
+            class="btn btn-color-2">Modelling          
+        </button>
+          <button class="btn btn-color-1">
+            Travel
+          </button>
+          <button
+            class="btn btn-color-2">Influencer          
+        </button>
+         <button class="btn btn-color-1">
+            Graphics
+          </button>
+        </div>
+      </div>
+    </section>
+<div class="spacer"></div>
+    <section id="about">
+        <div class="spacer"></div>
+<div class="text-container">
+  <p style="margin-left: 25%; margin-right: 25%;">
+    <b style="color: white;"><br><br>Creativity meets adventure in my world. I’m a passionate travel creator, photographer, and cinematography enthusiast with a deep love for storytelling through visuals. From capturing golden-hour landscapes to cinematic street moments, I’m always chasing experiences that inspire and frames that speak.
+
+Whether it’s exploring hidden destinations, creating aesthetic travel content, or turning everyday moments into cinematic memories, I’m all about blending emotion, culture, and creativity into every shot. Living through lenses, colors, motion, and meaningful journeys — one story at a time.
+    <br><br></p>
+</div>
+<div class="spacer"></div>
+  <!-------------------------------------------Magazine layout-------------------------------------------->
+
+  <section class="magazine-layout">
+  <div class="panel">
+    <img src="IMAGES/c1.jpg" alt="Leaf Closeup" />
+    <div class="text-block">
+      <h1>goals.</h1>
+      <p class="description">Let the creativity flow into your soul. Even the smallest textures are full of life and rhythm.</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <img src="IMAGES/c2.jpg" alt="Ocean" />
+    <div class="text-block">
+      <h1>values.</h1>
+      <p class="description">The infinite stillness — every ripple, every silence, has meaning.</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <img src="IMAGES/c3.jpg" alt="Leaf Macro" />
+    <div class="text-block">
+      <h1>focus.</h1>
+      <p class="description">craft with intent. Every phase is art. Every peice is unique.</p>
+    </div>
+  </div>
+</section>
+    </section>
+
+    <!----------------------------------------------------END----------------------------------------------------- -->
+
+  <!-- FEATURED WORK -->
+  <div class="sec">
+    <div class="sec-hd revel">
+      <div><div class="sec-label">Featured Work</div><h2 class="sec-title">Recent <em>Frames</em></h2></div>
+      <a href="#" class="sec-link" onclick="go('portfolio')">View All →</a>
+    </div>
+    <div class="feat-grid revel">
+      <div class="fcard"><img src="IMAGEs/b1.jpg" alt="Travel"/><div class="fcard-num">01</div><div class="fcard-info"><div class="fcard-cat">Photography</div><div class="fcard-title">Wild Wilderness</div></div></div>
+      <div class="fcard"><img src="IMAGEs/b2.jpg" alt="Travel"/><div class="fcard-num">02</div><div class="fcard-info"><div class="fcard-cat">Cinematography</div><div class="fcard-title">Above the Clouds</div></div></div>
+      <div class="fcard"><img src="IMAGEs/b3.jpg" alt="Travel"/><div class="fcard-num">03</div><div class="fcard-info"><div class="fcard-cat">Travel Film</div><div class="fcard-title">Sacred Terraces</div></div></div>
+      <div class="fcard"><img src="IMAGEs/b4.jpg" alt="Travel"/><div class="fcard-num">04</div><div class="fcard-info"><div class="fcard-cat">Photography</div><div class="fcard-title">Edge of the World</div></div></div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="svc-grid revel">
+    <div class="svc-card"><div class="svc-num">01</div><div class="svc-name">Cinematography</div><div class="svc-desc">Cinematic travel films, brand films, and documentary-style short films crafted with intention and atmosphere.</div></div>
+    <div class="svc-card"><div class="svc-num">02</div><div class="svc-name">Modelling</div><div class="svc-desc">Landscape, portrait, and lifestyle photography for brands, magazines, and personal projects.</div></div>
+    <div class="svc-card"><div class="svc-num">03</div><div class="svc-name">Content Creation</div><div class="svc-desc">Instagram Reels, YouTube vlogs, and platform-native content designed to stop the scroll and grow audiences.</div></div>
+    <div class="svc-card"><div class="svc-num">04</div><div class="svc-name">Graphic Designing</div><div class="svc-desc">Authentic visual collaborations with travel, hospitality, and lifestyle brands — telling stories that resonate.</div></div>
+  </div>
+
+</section>
+
+<!-- ABOUT -->
+<section class="page" id="page-about">
+  <div class="about-split">
+    <div class="about-img-side">
+      <img src="IMAGEs/a3.jpg" alt="Shishir Tirth"/>
+      <div class="about-badge"><div class="about-badge-n">3+</div><div class="about-badge-l"><br>years<br>Experience</div></div>
+    </div>
+    <div class="about-text-side revel">
+      <div class="about-eyebrow">Hello, I'm Shishir</div>
+      <h2 class="about-h2">Storyteller Who <em>Wanders</em><br/>with Purpose</h2>
+      <p class="about-p">I'm Shishir Tirth — a cinematographer, travel photographer, and content creator with a deep love for visual storytelling. For over five years, I've been chasing golden hours, misty mountains, and untold stories across 3+ years</p>
+      <p class="about-p">From crafting cinematic travel films to shooting stills for brands and magazines, every project carries authenticity and a sense of place. My work spans landscape, portrait, and travel photography alongside narrative-driven films and social content.</p>
+      <div class="about-pull"><p>"The world is endlessly beautiful — my camera is just my way of saying 'look at this.'"</p></div>
+      <a href="#" class="btn btn-fill" onclick="go('contact')">Let's Create</a>
+    </div>
+  </div>
+
+  <div class="skills-section">
+    <div class="sec-hd revel"><div><div class="sec-label">Expertise</div><h2 class="sec-title">Skills & <em>Craft</em></h2></div></div>
+    <div class="skills-g revel">
+      <div class="skill-c" data-n="01"><div class="skill-c-title">Cinematography</div><div class="skill-c-desc">Narrative films, travel documentaries, brand films — from concept to final cut.</div><div class="skill-bar"><div class="skill-bar-fill" style="width:95%"></div></div></div>
+      <div class="skill-c" data-n="02"><div class="skill-c-title">Travel Photography</div><div class="skill-c-desc">Landscape, architectural, lifestyle & portrait photography across all continents.</div><div class="skill-bar"><div class="skill-bar-fill" style="width:93%"></div></div></div>
+      <div class="skill-c" data-n="03"><div class="skill-c-title">Photo & Video Editing</div><div class="skill-c-desc">Lightroom, Premiere Pro, DaVinci Resolve — colour grading, retouching & compositing.</div><div class="skill-bar"><div class="skill-bar-fill" style="width:90%"></div></div></div>
+      <div class="skill-c" data-n="04"><div class="skill-c-title">Content Creation</div><div class="skill-c-desc">Reels, YouTube vlogs, short-form films crafted for maximum platform engagement.</div><div class="skill-bar"><div class="skill-bar-fill" style="width:88%"></div></div></div>
+      <div class="skill-c" data-n="05"><div class="skill-c-title">Storytelling & Writing</div><div class="skill-c-desc">Travel narratives, caption copy, blog articles, and creative direction for campaigns.</div><div class="skill-bar"><div class="skill-bar-fill" style="width:85%"></div></div></div>
+      <div class="skill-c" data-n="06"><div class="skill-c-title">Social Strategy</div><div class="skill-c-desc">Content calendars, audience growth, analytics & brand campaign management.</div><div class="skill-bar"><div class="skill-bar-fill" style="width:80%"></div></div></div>
+    </div>
+  </div>
+
+  <div class="timeline-sec">
+    <div class="tl-title revel">Journey</div>
+    <div class="tl-list revel">
+      <div class="tl-card"><div class="tl-year">2022</div><div class="tl-event">Started the Journey</div><div class="tl-desc">Picked up a camera and began travelling — documenting landscapes, cultures, and stories through the lens one frame at a time.</div></div>
+      <div class="tl-card"><div class="tl-year">2022</div><div class="tl-event">First Cinematic Travel Film</div><div class="tl-desc">Released first short travel film. Pivoted fully to freelance content creation and cinematography for travel brands.</div></div>
+      <div class="tl-card"><div class="tl-year">2023</div><div class="tl-event">Brand Campaigns & Editorial</div><div class="tl-desc">Photography and film work featured in travel campaigns. Collaborated with hospitality and travel brands across multiple regions.</div></div>
+      <div class="tl-card"><div class="tl-year">2024–Now</div><div class="tl-event">Global Projects & Growing</div><div class="tl-desc">Creative direction for 20+ brand projects. 3+ years of creating. Available for global partnerships and collaborations.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="page" id="page-portfolio">
+  <div class="port-hero revel">
+    <h1 class="port-h1">Visual<br/><em>Work</em> &<br/>Stories</h1>
+  </div>
+    <p class="port-desc">Cinematography · Modelling · Travel Films · Photography · Content Creation</p>
+
+  <div class="port-grid">
+
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p1.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p2.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p3.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p4.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p5.jpg"></div></div>
+  
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p21.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p22.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p23.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p24.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p25.jpg"></div></div>
+
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p6.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p7.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p8.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p9.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p10.jpg"></div></div>
+
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p11.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p12.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p13.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p14.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p15.jpg"></div></div>
+
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p16.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p17.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p18.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p19.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p20.jpg"></div></div>
+
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p26.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p27.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p28.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p29.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p30.jpg"></div></div>
+
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p31.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p32.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p33.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p34.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p35.jpg"></div></div>
+
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p36.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p37.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p38.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p39.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p40.jpg"></div></div>
+
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p41.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p42.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p43.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p44.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p45.jpg"></div></div>
+
+   <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p51.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p52.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p53.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p54.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p55.jpg"></div></div>
+
+   <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p46.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p47.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p48.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p49.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p50.jpg"></div></div>
+
+
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p56.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p57.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p58.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p59.jpg"></div></div>
+  <div class="pitem"><div class="pitem-inner"><img src="IMAGEs/p60.jpg"></div></div>
+
+</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="page" id="page-contact">
+  <div class="contact-pg">
+    <div class="contact-left revel">
+      <div class="ct-eyebrow">Get In Touch</div>
+      <h2 class="ct-h2">Let's Create<br/>Something <em>Beautiful</em><br/>Together</h2>
+      <p class="ct-desc">Whether you're a brand needing a film, a publication seeking editorial photography, or just someone who loves travel and wants to collaborate — I'd love to hear from you.</p>
+      <div class="ct-info"><div class="ct-icon">📧</div><div><div class="ct-label">Email</div><div class="ct-val"><a href="mailto:shishirtirth1008@gmail.com">shishirtirth1008@gmail.com</a></div></div></div>
+      <div class="ct-info"><div class="ct-icon">📱</div><div><div class="ct-label">Phone / WhatsApp</div><div class="ct-val">+91 9156346108</div></div></div>
+      <div class="ct-info"><div class="ct-icon">📍</div><div><div class="ct-label">Location</div><div class="ct-val">Kolhapur,Maharahstra ,India</div></div></div>
+      <div class="ct-info"><div class="ct-icon">🌐</div><div><div class="ct-label">Instagram</div><div class="ct-val"><a href="https://www.instagram.com/shishirtirth08/"">shishirtirth08</a></div></div></div>
+      <div class="social-bar">
+        <a href="#" class="s-btn">📸</a><a href="#" class="s-btn">🎥</a><a href="#" class="s-btn">📌</a><a href="#" class="s-btn">💼</a><a href="#" class="s-btn">▶</a>
+      </div>
+        <button class="f-submit" style="background:var(--accent); color:#000;"onmouseover="this.style.background='var(--accent)'"onmouseout="this.style.background='var(--accent)'" >Contact me through Any of the above options</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+const cur=document.getElementById('cur');
+document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';});
+document.querySelectorAll('a,button,.pitem,.fcard,.svc-card,.skill-c,.tl-card,.collab-c,.exp-row').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cur.classList.add('big'));
+  el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
+});
+function go(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  const ids={home:'nh',about:'na',portfolio:'np',resume:'nr',contact:'nc'};
+  const n=document.getElementById(ids[id]);
+  if(n)n.classList.add('active');
+  window.scrollTo(0,0);
+  setTimeout(reveal,80);
+  return false;
+}
+
+function submitF(){
+  document.getElementById('cForm').style.display='none';
+  document.getElementById('fOk').classList.add('show');
+}
+function reveal(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});
+  },{threshold:.08});
+  document.querySelectorAll('.revel:not(.in)').forEach(el=>obs.observe(el));
+}
+reveal();
+function loadResume(input){
+  const file = input.files[0];
+  if(!file) return;
+  const display = document.getElementById('resumeDisplay');
+  const empty = document.getElementById('resumeEmpty');
+  const content = document.getElementById('resumeContent');
+  const url = URL.createObjectURL(file);
+  display.innerHTML = '';
+  if(file.type === 'application/pdf'){
+    const iframe = document.createElement('iframe');
+    iframe.src = url;
+    iframe.style.width='100%';
+    iframe.style.height='100%';
+    iframe.style.border='none';
+    display.appendChild(iframe);
+  } else {
+    const img = document.createElement('img');
+    img.src = url;
+    img.style.width='100%';
+    img.style.height='100%';
+    img.style.objectFit='contain';
+    display.appendChild(img);
+  }
+  empty.style.display='none';
+  content.style.display='block';
+}
+function toggleMenu(){
+  const m=document.getElementById('mobileMenu');
+  m.classList.toggle('open');
+}
+function goMobile(id){
+  document.getElementById('mobileMenu').classList.remove('open');
+  go(id);
+}
+</script>
+</body>
+</html>

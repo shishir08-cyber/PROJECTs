@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebSite8", "WebSite8\", "{CAAAF438-9E78-4A2E-979F-6F787480EEDC}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.7.2"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_64541"
+		Debug.AspNetCompiler.PhysicalPath = "WebSite8\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64541\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_64541"
+		Release.AspNetCompiler.PhysicalPath = "WebSite8\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64541\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "64541"
+		SlnRelativePath = "WebSite8\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0844FD4C-0013-4F78-A157-AB3CC5B70977}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Desktop\0ad895fb6d59bf56eb53947001169176.jpg = ..\..\..\Desktop\0ad895fb6d59bf56eb53947001169176.jpg
+		..\..\..\Desktop\acb812eb59e91043d6b9f3dd51cc4ec4.jpg = ..\..\..\Desktop\acb812eb59e91043d6b9f3dd51cc4ec4.jpg
+		..\..\..\Desktop\bhediya-02.jpg = ..\..\..\Desktop\bhediya-02.jpg
+		..\..\..\Desktop\maxresdefault.jpg = ..\..\..\Desktop\maxresdefault.jpg
+		..\..\..\Desktop\movie_17004_vikram-vedha-photos-images-77552.jpg = ..\..\..\Desktop\movie_17004_vikram-vedha-photos-images-77552.jpg
+		..\..\..\Desktop\MV5BMmJhNmE0NzMtYjM2Ni00MTcwLWJmYjAtZGJjNzZmOGJmYzBlXkEyXkFqcGdeQXVyMTM1MzAzNzUx._V1_.jpg = ..\..\..\Desktop\MV5BMmJhNmE0NzMtYjM2Ni00MTcwLWJmYjAtZGJjNzZmOGJmYzBlXkEyXkFqcGdeQXVyMTM1MzAzNzUx._V1_.jpg
+		..\..\..\Desktop\MV5BNTM5MGFkNjEtZmJkMi00ZDE4LWE2NTctNDc3MjQzYTUxNzc5XkEyXkFqcGdeQXVyMTA5NzIyMDY5._V1_.jpg = ..\..\..\Desktop\MV5BNTM5MGFkNjEtZmJkMi00ZDE4LWE2NTctNDc3MjQzYTUxNzc5XkEyXkFqcGdeQXVyMTA5NzIyMDY5._V1_.jpg
+		..\..\..\Desktop\Vikrant-Rona-Movie-Poster.webp = ..\..\..\Desktop\Vikrant-Rona-Movie-Poster.webp
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CAAAF438-9E78-4A2E-979F-6F787480EEDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAAAF438-9E78-4A2E-979F-6F787480EEDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {451C85E3-33A7-4E58-9FE2-38976BE1CEDE}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop — Nova Studioz</title>
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css?v=5">
+</head>
+<body>
+<nav class="navbar" id="navbar">
+  <a href="/" class="nav-logo-wrap">
+    <img src="/images/logo.png" id="navLogoImg" onerror="this.style.display='none';document.getElementById('navLogoText').style.display='flex'" alt="Logo">
+    <span id="navLogoText" class="nav-logo-text" style="display:none">NS</span>
+  </a>
+  <div class="nav-links">
+    <a href="/index.html" class="nav-link">Home</a>
+    <a href="/shop.html?filter=themes" class="nav-link">Themes</a>
+    <a href="/#section-categories" class="nav-link active">Categories</a>
+    <a href="/contact.html" class="nav-link">Contact</a>
+  </div>
+  <div class="nav-right">
+    <form class="nav-search" id="navSearchForm">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="navSearchInput" placeholder="Search...">
+    </form>
+    <div class="nav-user-wrap" id="navUserWrap">
+      <button class="nav-icon-btn" id="navUserBtn" onclick="toggleDropdown()" title="Account">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </button>
+      <div class="user-dropdown" id="userDropdown">
+        <a href="/login.html" class="dd-item" id="ddLogin"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg> Login / Sign up</a>
+        <a href="/profile.html" class="dd-item" id="ddProfile" style="display:none"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>Profile</a>
+        <a href="/orders.html" class="dd-item" id="ddOrders" style="display:none"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>My Orders</a>
+        <a href="/admin.html" class="dd-item" id="ddAdmin" style="display:none"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Admin</a>
+        <div class="dd-sep" id="ddSep" style="display:none"></div>
+        <button class="dd-item danger" id="ddLogout" onclick="logout()" style="display:none"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Logout</button>
+      </div>
+    </div>
+    <button class="nav-icon-btn" onclick="openCart()" style="position:relative">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span class="cart-dot" id="cartDot"></span>
+    </button>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <form class="mob-search" id="mobSearchForm">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="mobSearchInput" placeholder="Search...">
+  </form>
+  <a href="/index.html" class="mob-link">Home</a>
+  <a href="/shop.html?filter=themes" class="mob-link">Themes</a>
+  <a href="/#section-categories" class="mob-link">Categories</a>
+  <a href="/contact.html" class="mob-link">Contact</a>
+  <a href="/login.html" class="mob-link" id="mobLoginLink">Login / Signup</a>
+</div>
+<div id="cartOverlay" onclick="closeCart()"></div>
+<div id="cartDrawer" class="cart-drawer">
+  <div class="cart-hd">
+    <div style="display:flex;align-items:center;gap:10px"><span style="font-size:14px;font-weight:700;color:#fff">Cart</span><span class="cart-badge-pill" id="cartBadge">0</span></div>
+    <button class="cart-close-btn" onclick="closeCart()">✕</button>
+  </div>
+  <div id="cartItemsList" class="cart-items-list"></div>
+  <div class="cart-ft">
+    <div class="cart-row"><span>Subtotal</span><span id="cartSubtotal">₹0</span></div>
+    <div class="cart-total-row"><span>Total</span><span id="cartTotal">₹0</span></div>
+    <button class="btn-w" style="width:100%;justify-content:center" onclick="closeCart();goCheckout()">Checkout →</button>
+    <button class="btn-o" onclick="closeCart()" style="width:100%;justify-content:center;margin-top:8px">Continue Shopping</button>
+  </div>
+</div>
+
+<!-- SHOP PAGE -->
+<div class="page-content">
+  <!-- SHOP HERO STRIP -->
+  <div class="shop-hero">
+    <div class="wrap">
+      <p class="shop-hero-pre reveal-text">Nova Studioz</p>
+      <h1 class="shop-hero-h reveal-text" style="transition-delay:60ms">All Products</h1>
+      <p class="shop-hero-sub reveal-text" id="shopSubtitle" style="transition-delay:120ms">Default search filters might only show posters, Try adjusting your filters to see more products</p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <!-- MOBILE FILTER TOGGLE -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin:16px 0 0;flex-wrap:wrap;gap:10px" id="shopTopControls">
+      <button class="shop-filter-toggle" id="filterToggleBtn" onclick="toggleFilters()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
+        Filters
+      </button>
+    </div>
+
+    <div id="shopSidebarOverlay" onclick="toggleFilters()"></div>
+    <div class="shop-layout">
+      <!-- SIDEBAR -->
+    <aside class="shop-sidebar" id="shopSidebar">
+
+        <div class="filter-group" style="border-bottom-color:#f0f0f0">
+          <div class="filter-title">Themes</div>
+          <div id="themeFilters"></div>
+        </div>
+        <div class="filter-group" style="border-bottom-color:#f0f0f0">
+          <div class="filter-title">Category</div>
+          <div id="categoryFilters"></div>
+        </div>
+        <div class="filter-group" style="border-bottom-color:#f0f0f0">
+          <div class="filter-title">Sort By</div>
+          <div style="display:flex;flex-direction:column;gap:6px" id="sortFilters">
+            <label class="filter-item"><input type="radio" name="sort" value="" checked> <span style="font-size:12px;color:rgba(0,0,0,0.55);cursor:pointer;font-family:Inter,sans-serif">Default</span></label>
+            <label class="filter-item"><input type="radio" name="sort" value="price_asc"> <span style="font-size:12px;color:rgba(0,0,0,0.55);cursor:pointer">Price: Low to High</span></label>
+            <label class="filter-item"><input type="radio" name="sort" value="price_desc"> <span style="font-size:12px;color:rgba(0,0,0,0.55);cursor:pointer">Price: High to Low</span></label>
+          </div>
+        </div>
+        <button class="btn-o btn-sm" id="clearFilters" style="width:100%;justify-content:center;margin-top:8px;background:#111;color:#fff;border-color:#111;border-radius:8px;font-weight:700">Clear Filters</button>
+      </aside>
+
+      <!-- MAIN -->
+      <div class="shop-main">
+        <div class="shop-topbar">
+          <form class="shop-search-wrap" id="shopSearchForm">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input type="text" id="shopSearch" placeholder="Search products...">
+          </form>
+          <span class="shop-count" id="shopCount"></span>
+        </div>
+
+        <!-- THEME TABS (visible when themes filter active) -->
+        <div class="theme-tabs-wrap" id="themeTabsWrap" style="display:none">
+          <div class="theme-tabs" id="themeTabs"></div>
+        </div>
+
+        <div class="products-grid" id="productsGrid"></div>
+        <div id="shopLoader" class="shop-loader">
+          <div class="loader-dots"><span></span><span></span><span></span></div>
+        </div>
+        <div id="shopEmpty" class="shop-empty" style="display:none">
+          <p class="shop-empty-icon">🔍</p>
+          <p class="shop-empty-text">No products found</p>
+          <p class="shop-empty-sub">Try adjusting your filters</p>
+          <button class="btn-o btn-sm" onclick="clearAllFilters()">Clear Filters</button>
+        </div>
+        <div class="pagination" id="paginationWrap" style="display:none"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-sec">
+  <div class="ticker-inner">
+    <div class="tick-item"><span class="tick-text">Free Shipping Above ₹249</span><span class="tick-dot"></span></div>
+    <div class="tick-item"><span class="tick-text">200 GSM Premium Paper</span><span class="tick-dot"></span></div>
+    <div class="tick-item"><span class="tick-text">Custom Orders Available</span><span class="tick-dot"></span></div>
+    <div class="tick-item"><span class="tick-text">Fast Dispatch · Pan India</span><span class="tick-dot"></span></div>
+    <div class="tick-item"><span class="tick-text">Free Shipping Above ₹249</span><span class="tick-dot"></span></div>
+    <div class="tick-item"><span class="tick-text">200 GSM Premium Paper</span><span class="tick-dot"></span></div>
+    <div class="tick-item"><span class="tick-text">Custom Orders Available</span><span class="tick-dot"></span></div>
+    <div class="tick-item"><span class="tick-text">Fast Dispatch · Pan India</span><span class="tick-dot"></span></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <p class="f-brand-name">Nova Studioz</p>
+        <p class="f-desc">Minimal posters, pop culture accessories, collectibles and lifestyle merch.</p>
+        <div class="f-tags"><span class="f-tag">Posters</span><span class="f-tag">Collectibles</span><span class="f-tag">Culture Drops</span></div>
+        <div class="f-socials"><button class="f-soc-btn" onclick="window.open('https://instagram.com','_blank')">Instagram</button><button class="f-soc-btn" onclick="window.open('https://wa.me/919999999999','_blank')">WhatsApp</button></div>
+      </div>
+      <div><p class="f-col-title">Shop</p><div class="f-links"><a href="/shop.html" class="f-link">All Products</a><a href="/shop.html?filter=themes" class="f-link">Themes</a><a href="/shop.html?sort=new" class="f-link">New Arrivals</a><a href="/custom-order.html" class="f-link">Custom Order</a></div></div>
+      <div><p class="f-col-title">Company</p><div class="f-links"><a href="/about.html" class="f-link">About Us</a><a href="/contact.html" class="f-link">Contact</a><a href="/shipping-policy.html" class="f-link">Shipping</a><a href="/refund-policy.html" class="f-link">Refund Policy</a><a href="/privacy-policy.html" class="f-link">Privacy Policy</a><a href="/terms.html" class="f-link">Terms</a></div></div>
+      <div><p class="f-col-title">Account</p><div class="f-links"><a href="/login.html" class="f-link"> Login / Sign up</a><a href="/signup.html" class="f-link">Sign Up</a><a href="/orders.html" class="f-link">My Orders</a></div></div>
+    </div>
+    <div class="footer-bottom"><span class="f-copy">© 2025 Nova Studioz. All rights reserved.</span><span class="f-copy">Made with ♥ in India</span></div>
+  </div>
+</footer>
+<div id="toastCont"></div>
+<script src="/js/utils.js?v=10"></script>
+<script src="/js/nav-cart.js?v=5"></script>
+<script>
+const THEMES_LIST = ['Anime', 'Culture Drops', 'Gaming and Cars', 'Movies and TV Shows', 'Aesthetic', 'Superhero Collection'];
+const CATS_LIST   = ['Posters', 'Action Figures', 'Collectibles', 'Limited Edition', 'T-Shirts & Merchandise'];
+// Poster subcategories (shown when Posters is selected)
+const POSTER_SUBCATS = ['All Posters', 'A4 Posters', 'Portrait Posters', 'Landscape Posters', 'Poster Sets'];
+// Limited Edition subcategories
+const LE_SUBCATS = ['All LE', 'Special Cards', 'Special Posters'];
+const PAGE_SIZE   = 20; // products per page - scalable to 10000+ products
+
+let state = {
+  theme:'', category:'', sort:'', search:'', posterSubcat:'', leSubcat:'', specialType:'',
+  page: 1, totalPages: 1, totalProducts: 0, loading: false,
+  layoutGroup: ''   // locked when page resets to 1; stable across pagination pages
+};
+
+/* ── BUILD SIDEBAR FILTERS ── */
+function buildFilters() {
+  const tf = document.getElementById('themeFilters');
+  THEMES_LIST.forEach(t => {
+    const l = document.createElement('label');
+    l.className = 'filter-item';
+    l.innerHTML = `<input type="checkbox" value="${t}" class="theme-cb"> <span>${t}</span>`;
+    tf.appendChild(l);
+  });
+
+  const cf = document.getElementById('categoryFilters');
+  CATS_LIST.forEach(c => {
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'display:flex;flex-direction:column;gap:0';
+
+    const l = document.createElement('label');
+    l.className = 'filter-item';
+    l.innerHTML = `<input type="checkbox" value="${c}" class="cat-cb"> <span>${c}</span>`;
+    wrap.appendChild(l);
+
+    // Poster subcategory panel (hidden by default)
+    if (c === 'Posters') {
+      const subPanel = document.createElement('div');
+      subPanel.id = 'posterSubPanel';
+      subPanel.style.cssText = 'display:none;margin:4px 0 4px 16px;flex-direction:column;gap:4px';
+      POSTER_SUBCATS.forEach((sc, i) => {
+        const sl = document.createElement('label');
+        sl.className = 'filter-item';
+        sl.style.cssText = 'font-size:10px;opacity:0.7';
+        sl.innerHTML = `<input type="radio" name="poster_sub" value="${sc}" class="psub-rb" ${i===0?'checked':''}> <span>${sc}</span>`;
+        subPanel.appendChild(sl);
+      });
+      wrap.appendChild(subPanel);
+    }
+
+    // Limited Edition subcategory panel (hidden by default)
+    if (c === 'Limited Edition') {
+      const lePanel = document.createElement('div');
+      lePanel.id = 'leSubPanel';
+      lePanel.style.cssText = 'display:none;margin:4px 0 4px 16px;flex-direction:column;gap:4px';
+      LE_SUBCATS.forEach((sc, i) => {
+        const sl = document.createElement('label');
+        sl.className = 'filter-item';
+        sl.style.cssText = 'font-size:10px;opacity:0.7';
+        sl.innerHTML = `<input type="radio" name="le_sub" value="${sc}" class="lesub-rb" ${i===0?'checked':''}> <span>${sc === 'Special Cards' ? '🃏 '+sc : (sc === 'Special Posters' ? '🖼️ '+sc : sc)}</span>`;
+        lePanel.appendChild(sl);
+      });
+      wrap.appendChild(lePanel);
+    }
+
+    cf.appendChild(wrap);
+  });
+
+  // Category checkbox handlers
+  document.querySelectorAll('.cat-cb').forEach(cb => cb.addEventListener('change', () => {
+    // Dedup: collect checked values
+    const checked = [...document.querySelectorAll('.cat-cb:checked')].map(c=>c.value);
+    state.category = checked.join(',');
+    state.posterSubcat = '';
+    state.leSubcat = '';
+    state.specialType = '';
+    // Show/hide poster subpanel
+    const subPanel = document.getElementById('posterSubPanel');
+    if (subPanel) {
+      const showSub = checked.includes('Posters');
+      subPanel.style.display = showSub ? 'flex' : 'none';
+      if (showSub) {
+        const firstRb = subPanel.querySelector('input[type=radio]');
+        if (firstRb) firstRb.checked = true;
+      }
+    }
+    // Show/hide LE subpanel
+    const lePanel = document.getElementById('leSubPanel');
+    if (lePanel) {
+      const showLE = checked.includes('Limited Edition');
+      lePanel.style.display = showLE ? 'flex' : 'none';
+      if (showLE) {
+        const firstRb = lePanel.querySelector('input[type=radio]');
+        if (firstRb) firstRb.checked = true;
+      }
+    }
+    novaResetAndFetch();
+  }));
+
+  // Poster subcategory radio handlers
+  document.addEventListener('change', e => {
+    if (e.target.classList.contains('psub-rb')) {
+      state.posterSubcat = e.target.value === 'All Posters' ? '' : e.target.value;
+      novaResetAndFetch();
+    }
+    if (e.target.classList.contains('lesub-rb')) {
+      const val = e.target.value;
+      if (val === 'All LE')           { state.leSubcat = ''; state.specialType = ''; }
+      else if (val === 'Special Cards')   { state.leSubcat = 'Special Cards';  state.specialType = 'special_card'; }
+      else if (val === 'Special Posters') { state.leSubcat = 'Special Posters'; state.specialType = 'special_poster'; }
+      else { state.leSubcat = val; state.specialType = ''; }
+      novaResetAndFetch();
+    }
+  });
+
+  document.querySelectorAll('.theme-cb').forEach(cb => cb.addEventListener('change', () => {
+    state.theme = [...document.querySelectorAll('.theme-cb:checked')].map(c=>c.value).join(',');
+    novaResetAndFetch();
+    if (!state.theme) {
+      document.querySelectorAll('.theme-tab').forEach(b => b.classList.toggle('active', b.textContent==='All'));
+    }
+  }));
+  document.querySelectorAll('input[name="sort"]').forEach(r => r.addEventListener('change', e => {
+    state.sort = e.target.value; novaResetAndFetch();
+  }));
+  const searchInput = document.getElementById('shopSearch');
+  if (searchInput) {
+    searchInput.addEventListener('input', debounce(e => {
+      state.search = e.target.value.trim(); novaResetAndFetch();
+    }, 350));
+  }
+  document.getElementById('shopSearchForm')?.addEventListener('submit', e => e.preventDefault());
+  document.getElementById('clearFilters')?.addEventListener('click', clearAllFilters);
+}
+
+/* ── THEME TABS ── */
+function buildThemeTabs() {
+  const wrap = document.getElementById('themeTabsWrap');
+  const tabs  = document.getElementById('themeTabs');
+  if (!wrap || !tabs) return;
+  wrap.style.display = 'block';
+  const all = document.createElement('button');
+  all.className = 'theme-tab active'; all.textContent = 'All';
+  all.onclick = () => setThemeTab('', all);
+  tabs.appendChild(all);
+  THEMES_LIST.forEach(t => {
+    const btn = document.createElement('button');
+    btn.className = 'theme-tab'; btn.textContent = t;
+    btn.onclick = () => setThemeTab(t, btn);
+    tabs.appendChild(btn);
+  });
+}
+
+function setThemeTab(theme, el) {
+  document.querySelectorAll('.theme-tab').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  state.theme = theme;
+  document.querySelectorAll('.theme-cb').forEach(cb => { cb.checked = theme && cb.value === theme; });
+  novaResetAndFetch();
+}
+
+function clearAllFilters() {
+  state = {...state, theme:'', category:'', sort:'', search:'', posterSubcat:'', leSubcat:'', specialType:'', page:1, layoutGroup:''};
+  _novaPoolKey = '';
+  document.querySelectorAll('.theme-cb, .cat-cb').forEach(cb => cb.checked = false);
+  document.querySelectorAll('input[name="sort"]').forEach(r => r.checked = r.value === '');
+  const si = document.getElementById('shopSearch'); if (si) si.value = '';
+  document.querySelectorAll('.theme-tab').forEach(b => b.classList.toggle('active', b.textContent==='All'));
+  // Reset poster subcategory panel
+  const subPanel = document.getElementById('posterSubPanel');
+  if (subPanel) {
+    subPanel.style.display = 'none';
+    const firstRb = subPanel.querySelector('input[type=radio]');
+    if (firstRb) firstRb.checked = true;
+  }
+  // Reset LE subpanel
+  const lePanel = document.getElementById('leSubPanel');
+  if (lePanel) {
+    lePanel.style.display = 'none';
+    const firstRb = lePanel.querySelector('input[type=radio]');
+    if (firstRb) firstRb.checked = true;
+  }
+  fetchProducts();
+}
+
+/* ── Reset layout pool + state on filter change, then fetch ── */
+function novaResetAndFetch() {
+  state.page = 1;
+  state.layoutGroup = '';
+  _novaPoolKey = '';   // force pool rebuild on next fetch
+  fetchProducts();
+}
+
+/* ── FETCH PRODUCTS WITH PAGINATION ── */
+// ── Internal pool: fetched once per filter-change, paginated client-side ──
+// This is the key to layout-safe pagination: we fetch ALL matching products
+// (up to 200) once, pick ONE layout group from the full set, shuffle it, then
+// slice into pages of PAGE_SIZE. Page changes just re-slice — no new API call.
+var _novaPool = [];          // full shuffled single-group array for current filters
+var _novaPoolKey = '';       // cache key — rebuild pool when filters change
+
+function _poolKey() {
+  return [state.theme, state.category, state.posterSubcat, state.leSubcat,
+          state.specialType, state.search, state.sort].join('|');
+}
+
+async function fetchProducts() {
+  if (state.loading) return;
+  state.loading = true;
+
+  const loader  = document.getElementById('shopLoader');
+  const empty   = document.getElementById('shopEmpty');
+  const pgWrap  = document.getElementById('paginationWrap');
+  const grid    = document.getElementById('productsGrid');
+
+  if (loader) loader.style.display = 'none';
+  if (empty)  empty.style.display  = 'none';
+  if (pgWrap) pgWrap.style.display = 'none';
+
+  // Show skeleton cards while loading
+  if (grid) {
+    grid.innerHTML = '';
+    for (var _si = 0; _si < PAGE_SIZE; _si++) {
+      var _sk = document.createElement('div');
+      _sk.className = 'pc-d pc-skeleton';
+      _sk.style.cssText = 'display:flex;flex-direction:column';
+      _sk.innerHTML = '<div class="pc-skel-img"></div><div class="pc-d-body"><div class="pc-skel-line" style="width:35%;height:8px"></div><div class="pc-skel-line" style="width:80%;height:10px"></div><div class="pc-skel-line" style="width:55%;height:10px;margin-top:2px"></div><div class="pc-skel-btn"></div></div>';
+      grid.appendChild(_sk);
+    }
+  }
+
+  // Scroll to top when changing pages
+  const shopMain = document.querySelector('.shop-main');
+  if (shopMain && state.page > 1) {
+    shopMain.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  try {
+    const curKey = _poolKey();
+
+    // ── Rebuild pool only when filters actually change ──
+    // On page navigation we reuse the cached pool — no API call needed.
+    if (curKey !== _novaPoolKey || !_novaPool.length) {
+      const params = new URLSearchParams();
+      if (state.theme) params.set('theme', state.theme);
+      if (state.posterSubcat) {
+        params.set('category', 'Posters');
+        params.set('subcategory', state.posterSubcat);
+      } else if (state.category) {
+        params.set('category', state.category);
+      }
+      if (state.leSubcat && state.leSubcat !== 'All LE') {
+        params.set('le_subcategory', state.leSubcat);
+      } else if (state.specialType) {
+        params.set('special_type', state.specialType);
+      }
+      params.set('sort', state.sort || 'random');  // default random so DB returns varied products
+      if (state.search) params.set('search', state.search);
+      // Fetch the maximum the server allows so we have a full pool to work with
+      params.set('limit', '200');
+      params.set('offset', '0');
+
+      const res  = await fetch('/api/products?' + params.toString());
+      const data = await res.json();
+      let all  = Array.isArray(data) ? data : (data.products || []);
+
+      if (!state.sort && typeof novaPickSingleGroup === 'function') {
+        // ── SINGLE-GROUP ENFORCEMENT ──────────────────────────────────────────
+        // On default page (no category/theme filter), explicitly ensure portrait
+        // posters are included — they are priority #1 but may not appear in a
+        // generic DB-ordered batch of 200 mixed products.
+        const hasFilter = state.category || state.theme || state.search ||
+                          state.posterSubcat || state.leSubcat || state.specialType;
+        if (!hasFilter) {
+          try {
+            // Fetch portrait posters specifically and prepend to pool
+            const pRes  = await fetch('/api/products?category=Posters&subcategory=Portrait+Posters&limit=60');
+            const pData = await pRes.json();
+            const pProds = Array.isArray(pData) ? pData : (pData.products || []);
+            // Merge: portrait products first, then dedupe by id
+            const seen = new Set(pProds.map(p => String(p.id)));
+            const rest = all.filter(p => !seen.has(String(p.id)));
+            all = pProds.concat(rest);
+          } catch(e) { /* non-fatal */ }
+        }
+        var extraSeed = curKey;
+        var picked    = novaPickSingleGroup(all, extraSeed);
+        state.layoutGroup = picked.group;
+        _novaPool = picked.products;
+        // ──────────────────────────────────────────────────────────────────────
+      } else {
+        // User chose explicit sort — show everything as returned, no grouping
+        state.layoutGroup = '';
+        _novaPool = all;
+      }
+
+      _novaPoolKey = curKey;
+    }
+
+    // ── Client-side pagination from the pool ──
+    const totalProds      = _novaPool.length;
+    state.totalPages      = Math.max(1, Math.ceil(totalProds / PAGE_SIZE));
+    // Clamp page to valid range (e.g. after filter change reduces page count)
+    if (state.page > state.totalPages) state.page = state.totalPages;
+    if (state.page < 1)               state.page = 1;
+
+    const pageStart       = (state.page - 1) * PAGE_SIZE;
+    const displayProducts = _novaPool.slice(pageStart, pageStart + PAGE_SIZE);
+
+    // Clear skeletons
+    if (grid) grid.innerHTML = '';
+    if (loader) loader.style.display = 'none';
+
+    if (!displayProducts.length && state.page === 1) {
+      if (empty) empty.style.display = 'flex';
+      const sc = document.getElementById('shopCount'); if(sc) sc.textContent = '';
+      state.loading = false;
+      return;
+    }
+
+    displayProducts.forEach(p => grid.appendChild(makeCard(p)));
+    const sc = document.getElementById('shopCount'); if(sc) sc.textContent = '';
+    renderPagination();
+
+  } catch(err) {
+    if (loader) loader.style.display = 'none';
+    if (grid) grid.innerHTML = '<div style="padding:48px 24px;text-align:center;color:rgba(255,255,255,0.4);font-size:13px;line-height:2">' +
+      '<div style="font-size:28px;margin-bottom:12px">⚠️</div>' +
+      '<div style="font-size:14px;color:rgba(255,255,255,0.6);font-weight:600;margin-bottom:8px">Could not load products</div>' +
+      '<div style="font-size:12px;color:rgba(255,255,255,0.3)">Check that the server is running and database is connected.<br>See SUPABASE-SETUP.md for setup instructions.</div>' +
+      '<button onclick="fetchProducts()" style="margin-top:20px;background:#fff;color:#000;border:none;border-radius:999px;padding:10px 24px;font-size:12px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif">Retry →</button>' +
+      '</div>';
+    console.error('Products fetch error:', err);
+  }
+  state.loading = false;
+}
+
+function updatePaginationFromCount(returned, hasMore) {
+  // Estimate total pages from current page + whether more exist
+  if (returned < PAGE_SIZE && !hasMore) {
+    // This is the last page
+    state.totalPages = state.page;
+  } else if (hasMore) {
+    // At least one more page
+    state.totalPages = Math.max(state.page + 1, state.totalPages);
+  }
+  renderPagination();
+}
+
+/* ── RENDER PAGINATION ── */
+function renderPagination() {
+  const wrap = document.getElementById('paginationWrap');
+  if (!wrap) return;
+  if (state.totalPages <= 1) { wrap.style.display = 'none'; return; }
+  wrap.style.display = 'flex';
+  wrap.innerHTML = '';
+
+  // Prev button
+  const prev = document.createElement('button');
+  prev.className = 'page-btn prev-next';
+  prev.textContent = '← Prev';
+  prev.disabled = state.page <= 1;
+  prev.onclick = () => { state.page--; fetchProducts(); };
+  wrap.appendChild(prev);
+
+  // Page numbers
+  const total = state.totalPages;
+  const cur   = state.page;
+  let pages = [];
+  if (total <= 7) {
+    for (let i = 1; i <= total; i++) pages.push(i);
+  } else {
+    pages = [1, 2];
+    if (cur > 3) pages.push('...');
+    for (let i = Math.max(3, cur-1); i <= Math.min(total-2, cur+1); i++) pages.push(i);
+    if (cur < total-2) pages.push('...');
+    pages.push(total-1, total);
+    pages = [...new Set(pages)];
+  }
+
+  pages.forEach(p => {
+    if (p === '...') {
+      const dots = document.createElement('span');
+      dots.className = 'page-info'; dots.textContent = '...';
+      wrap.appendChild(dots);
+    } else {
+      const btn = document.createElement('button');
+      btn.className = 'page-btn' + (p === cur ? ' active' : '');
+      btn.textContent = p;
+      btn.onclick = () => { state.page = p; fetchProducts(); };
+      wrap.appendChild(btn);
+    }
+  });
+
+  // Next button
+  const next = document.createElement('button');
+  next.className = 'page-btn prev-next';
+  next.textContent = 'Next →';
+  next.disabled = state.page >= state.totalPages;
+  next.onclick = () => { state.page++; fetchProducts(); };
+  wrap.appendChild(next);
+}
+
+/* ── PRODUCT CARD ── */
+function makeCard(p) {
+  return novaCard(p);
+}
+
+/* ── MOBILE SIDEBAR TOGGLE ── */
+function toggleFilters() {
+  const sidebar  = document.getElementById('shopSidebar');
+  const overlay  = document.getElementById('shopSidebarOverlay');
+  const btn      = document.getElementById('filterToggleBtn');
+  if (!sidebar) return;
+  const isOpen = sidebar.classList.toggle('open');
+  if (overlay) overlay.classList.toggle('open', isOpen);
+  if (btn) btn.innerHTML = isOpen ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg> Filters' : '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg> Filters';
+const cartDrawer = document.getElementById('cartDrawer');
+const cartIsOpen = cartDrawer && cartDrawer.classList.contains('open');
+if (!cartIsOpen) {
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}}
+
+function debounce(fn, ms) {
+  let t;
+  return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); };
+}
+
+/* ── URL PARAMS ── */
+function applyURLParams() {
+  const p = new URLSearchParams(location.search);
+  if (p.get('theme')) {
+    state.theme = p.get('theme');
+    document.querySelectorAll('.theme-cb').forEach(cb => { if(cb.value===state.theme) cb.checked=true; });
+    document.querySelector('.shop-hero-h').textContent = state.theme;
+    document.getElementById('shopSubtitle').textContent = state.theme;
+  }
+  if (p.get('category')) {
+    state.category = p.get('category');
+    document.querySelectorAll('.cat-cb').forEach(cb => { if(cb.value===state.category) cb.checked=true; });
+    document.querySelector('.shop-hero-h').textContent = state.category;
+  }
+  if (p.get('search')) {
+    state.search = p.get('search');
+    const si = document.getElementById('shopSearch');
+    if (si) si.value = state.search;
+    document.querySelector('.shop-hero-h').textContent = '"' + state.search + '"';
+  }
+  if (p.get('filter') === 'themes') {
+    buildThemeTabs();
+    document.querySelector('.shop-hero-h').textContent = 'Shop by Theme';
+  }
+  if (p.get('filter') === 'categories') {
+    document.querySelector('.shop-hero-h').textContent = 'Shop by Category';
+    document.getElementById('shopSubtitle').textContent = 'Browse all product categories';
+    // Open sidebar automatically on desktop to show category filters
+    if (window.innerWidth > 768) {
+      var sidebar = document.getElementById('shopSidebar');
+      if (sidebar) sidebar.classList.add('open');
+    }
+  }
+  if (p.get('sort') === 'new') state.sort = 'new';
+  // LE special type from URL (e.g. from Fan Collectibles section)
+  if (p.get('special_type')) {
+    state.specialType = p.get('special_type');
+    state.category    = 'Limited Edition';
+    document.querySelectorAll('.cat-cb').forEach(cb => { if(cb.value==='Limited Edition') cb.checked=true; });
+    // Show LE subpanel and select matching radio
+    const lePanel = document.getElementById('leSubPanel');
+    if (lePanel) {
+      lePanel.style.display = 'flex';
+      const matchRb = lePanel.querySelector('input[value="'+(state.specialType==='special_card'?'Special Cards':'Special Posters')+'"]');
+      if (matchRb) matchRb.checked = true;
+    }
+    const heroH = document.querySelector('.shop-hero-h');
+    if (heroH) heroH.textContent = state.specialType === 'special_card' ? '🃏 Special Cards' : '🖼️ Special Posters';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  buildFilters();
+  applyURLParams();
+  fetchProducts();
+  if (typeof initReveal === 'function') initReveal();
+});
+
+// Close mobile filter on resize to desktop
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 768) {
+    const sidebar = document.getElementById('shopSidebar');
+    if (sidebar) sidebar.classList.remove('open');
+const cartDrawer = document.getElementById('cartDrawer');
+if (!cartDrawer || !cartDrawer.classList.contains('open')) document.body.style.overflow = '';
+    const btn = document.getElementById('filterToggleBtn');
+    if (btn) btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg> Filters';
+  }
+});
+</script>
+</body>
+</html>

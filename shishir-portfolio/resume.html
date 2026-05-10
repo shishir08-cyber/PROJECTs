@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resume — Shishir Tirth</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ===== RESUME PAGE ===== */
+    .resume-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px 100px;
+    }
+    .resume-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+    .resume-block {
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,0.05);
+      padding: 32px;
+    }
+    .rb-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--gray);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .rb-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.06);
+    }
+    .resume-item {
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .resume-item:last-child { border: none; margin: 0; padding: 0; }
+    .ri-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 6px;
+      gap: 12px;
+    }
+    .ri-title {
+      font-family: var(--display);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .ri-period {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--gray);
+      white-space: nowrap;
+    }
+    .ri-org {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--white2);
+      margin-bottom: 8px;
+    }
+    .ri-desc {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+    .ri-desc ul { padding-left: 16px; }
+    .ri-desc li { margin-bottom: 4px; }
+    .ri-badge {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 3px 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--white2);
+      margin-top: 8px;
+    }
+    .skills-full {
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,0.05);
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+    .sf-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 16px;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .sf-row:last-child { border: none; }
+    .sf-key {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--gray);
+    }
+    .sf-val { display: flex; flex-wrap: wrap; gap: 6px; }
+    .sf-val span {
+      font-size: 12px;
+      color: var(--white2);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 3px 10px;
+    }
+
+    /* ===== CERTIFICATES SECTION ===== */
+    .certs-section {
+      margin-top: 60px;
+    }
+    .certs-header {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--gray);
+      margin-bottom: 28px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .cert-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: border-color 0.2s, transform 0.2s;
+      aspect-ratio: 4/3;
+    }
+    .cert-item:hover { border-color: rgba(255,255,255,0.2); transform: scale(1.02); }
+    .cert-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(30%) contrast(0.9);
+      display: block;
+      transition: filter 0.3s;
+    }
+    .cert-item:hover img { filter: grayscale(0%) contrast(1); }
+    .cert-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      padding: 24px 12px 10px;
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--white2);
+      letter-spacing: 0.05em;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .cert-item:hover .cert-overlay { opacity: 1; }
+
+    /* ===== LIGHTBOX ===== */
+    .lightbox {
+      display: none;
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.92);
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      cursor: pointer;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 24px; right: 32px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--gray);
+      cursor: pointer;
+      letter-spacing: 0.1em;
+    }
+
+    @media (max-width: 900px) {
+      .resume-wrap { padding: 0 24px 80px; }
+      .resume-cols { grid-template-columns: 1fr; }
+      .certs-grid { grid-template-columns: repeat(2, 1fr); }
+      .sf-row { grid-template-columns: 1fr; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">ST<span class="dot">.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">ABOUT</a></li>
+    <li><a href="index.html#projects">PROJECTS</a></li>
+    <li><a href="index.html#skills">SKILLS</a></li>
+    <li><a href="resume.html" style="color:var(--white)">RESUME</a></li>
+    <li><a href="cinematography.html">LENS</a></li>
+    <li><a href="contact.html" class="nav-cta">CONTACT</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">HOME</a>
+  <a href="resume.html" onclick="toggleMenu()">RESUME</a>
+  <a href="cinematography.html" onclick="toggleMenu()">LENS</a>
+  <a href="contact.html" onclick="toggleMenu()">CONTACT</a>
+</div>
+
+<div class="page-header">
+  <div class="page-header-tag">// RESUME</div>
+  <h1>Curriculum<br><span class="outline-text">Vitae</span></h1>
+  <p>B.Tech CSE (AI&ML) · Developer · Cyber Security Intern</p>
+</div>
+
+<div class="resume-wrap">
+
+  <!-- EDUCATION + EXPERIENCE -->
+  <div class="resume-cols">
+    <div class="resume-block">
+      <div class="rb-label">EDUCATION</div>
+      <div class="resume-item">
+        <div class="ri-head">
+          <div class="ri-title">B.Tech — CSE (AIML)</div>
+          <div class="ri-period">2023 – 2027</div>
+        </div>
+        <div class="ri-org">DKTE Textile & Engineering Institute, Ichalkaranji</div>
+        <div class="ri-desc">Current CGPA: <strong style="color:var(--white)">6.66</strong></div>
+        <span class="ri-badge">AIML Specialization</span>
+      </div>
+      <div class="resume-item">
+        <div class="ri-head">
+          <div class="ri-title">Diploma — Computer Science</div>
+          <div class="ri-period">2020 – 2023</div>
+        </div>
+        <div class="ri-org">Sharad Institute of Technology, Yadrav</div>
+        <div class="ri-desc">Percentage: <strong style="color:var(--white)">75.89%</strong></div>
+      </div>
+      <div class="resume-item">
+        <div class="ri-head">
+          <div class="ri-title">Class X — CBSE</div>
+          <div class="ri-period">2020</div>
+        </div>
+        <div class="ri-org">Hausabai Jaypal Magdum Public High School, Nimshirgaon</div>
+        <div class="ri-desc">Percentage: <strong style="color:var(--white)">76.00%</strong></div>
+      </div>
+    </div>
+    <div class="resume-block">
+      <div class="rb-label">EXPERIENCE</div>
+      <div class="resume-item">
+        <div class="ri-head">
+          <div class="ri-title">Cyber Security Intern</div>
+          <div class="ri-period">Dec 2025 – Jan 2026</div>
+        </div>
+        <div class="ri-org">Sunbeam, Pune</div>
+        <div class="ri-desc">
+          <ul>
+            <li>Hands-on training in cyber security concepts & practices</li>
+            <li>Network security, vulnerability assessment, basic penetration testing</li>
+          </ul>
+        </div>
+        <span class="ri-badge">Penetration Testing · Network Security</span>
+      </div>
+      <div class="resume-item">
+        <div class="ri-head">
+          <div class="ri-title">Implant Training — Web Dev</div>
+          <div class="ri-period">Jul – Aug 2022</div>
+        </div>
+        <div class="ri-org">StormSoft, Ichalkaranji</div>
+        <div class="ri-desc">
+          <ul>
+            <li>Web Development using ASP.NET</li>
+            <li>Frontend-backend integration concepts</li>
+          </ul>
+        </div>
+        <span class="ri-badge">ASP.NET · Web Dev</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS TABLE -->
+  <div class="skills-full">
+    <div class="rb-label">SKILLS</div>
+    <div class="sf-row">
+      <div class="sf-key">LANGUAGES</div>
+      <div class="sf-val"><span>Python</span><span>C</span><span>C++</span><span>Java</span><span>JavaScript</span></div>
+    </div>
+    <div class="sf-row">
+      <div class="sf-key">FRONTEND</div>
+      <div class="sf-val"><span>HTML</span><span>CSS</span><span>React.js</span></div>
+    </div>
+    <div class="sf-row">
+      <div class="sf-key">BACKEND</div>
+      <div class="sf-val"><span>Node.js</span><span>Express.js</span><span>REST APIs</span></div>
+    </div>
+    <div class="sf-row">
+      <div class="sf-key">DATABASE</div>
+      <div class="sf-val"><span>PostgreSQL</span><span>SQLite</span></div>
+    </div>
+    <div class="sf-row">
+      <div class="sf-key">TOOLS</div>
+      <div class="sf-val"><span>Git</span><span>GitHub</span><span>VS Code</span></div>
+    </div>
+    <div class="sf-row">
+      <div class="sf-key">SOFT SKILLS</div>
+      <div class="sf-val"><span>Problem Solving</span><span>Adaptability</span><span>Teamwork</span><span>Communication</span></div>
+    </div>
+    <div class="sf-row">
+      <div class="sf-key">COURSEWORK</div>
+      <div class="sf-val"><span>AI & Machine Learning</span><span>Computer Networks</span><span>DBMS</span><span>OOP</span><span>Software Engineering</span><span>DSA</span></div>
+    </div>
+  </div>
+
+  <!-- CERTIFICATES GRID -->
+  <div class="certs-section">
+    <div class="certs-header">CERTIFICATES & ACHIEVEMENTS — CLICK TO VIEW</div>
+    <div class="certs-grid">
+      <div class="cert-item" onclick="openLight('IMAGES/certificates/1.jpg','Certificate 1')">
+        <img src="IMAGES/certificates/1.jpg" alt="Certificate 1" />
+        <div class="cert-overlay">CERTIFICATE</div>
+      </div>
+      <div class="cert-item" onclick="openLight('IMAGES/certificates/2.jpg','Certificate 2')">
+        <img src="IMAGES/certificates/2.jpg" alt="Certificate 2" />
+        <div class="cert-overlay">CERTIFICATE</div>
+      </div>
+      <div class="cert-item" onclick="openLight('IMAGES/certificates/3.jpg','Certificate 3')">
+        <img src="IMAGES/certificates/3.jpg" alt="Certificate 3" />
+        <div class="cert-overlay">CERTIFICATE</div>
+      </div>
+      <div class="cert-item" onclick="openLight('IMAGES/certificates/4.jpg','Certificate 4')">
+        <img src="IMAGES/certificates/4.jpg" alt="Certificate 4" />
+        <div class="cert-overlay">CERTIFICATE</div>
+      </div>
+      <div class="cert-item" onclick="openLight('IMAGES/certificates/5.jpg','Certificate 5')">
+        <img src="IMAGES/certificates/5.jpg" alt="Certificate 5" />
+        <div class="cert-overlay">CERTIFICATE</div>
+      </div>
+      <div class="cert-item" onclick="openLight('IMAGES/certificates/6.jpg','Certificate 6')">
+        <img src="IMAGES/certificates/6.jpg" alt="Certificate 6" />
+        <div class="cert-overlay">CERTIFICATE</div>
+      </div>
+      <div class="cert-item" onclick="openLight('IMAGES/certificates/7.jpg','Certificate 7')">
+        <img src="IMAGES/certificates/7.jpg" alt="Certificate 7" />
+        <div class="cert-overlay">CERTIFICATE</div>
+      </div>
+      <div class="cert-item" onclick="openLight('IMAGES/certificates/8.jpg','Certificate 8')">
+        <img src="IMAGES/certificates/8.jpg" alt="Certificate 8" />
+        <div class="cert-overlay">CERTIFICATE</div>
+      </div>
+      <div class="cert-item" onclick="openLight('IMAGES/certificates/9.jpg','Certificate 9')">
+        <img src="IMAGES/certificates/9.jpg" alt="Certificate 9" />
+        <div class="cert-overlay">CERTIFICATE</div>
+      </div>
+      <div class="cert-item" onclick="openLight('IMAGES/certificates/Technocrat 2k23.jpg','Technocrat 2k23')">
+        <img src="IMAGES/certificates/Technocrat 2k23.jpg" alt="Technocrat" />
+        <div class="cert-overlay">TECHNOCRAT 2K23</div>
+      </div>
+      <div class="cert-item" onclick="openLight('IMAGES/certificates/Spoken Tutuorials CPP training_page-0001.jpg','C++ Training')">
+        <img src="IMAGES/certificates/Spoken Tutuorials CPP training_page-0001.jpg" alt="CPP" />
+        <div class="cert-overlay">C++ TRAINING</div>
+      </div>
+      <div class="cert-item" onclick="openLight('IMAGES/certificates/Dominos.jpg','Dominos Certificate')">
+        <img src="IMAGES/certificates/Dominos.jpg" alt="Dominos" />
+        <div class="cert-overlay">CERTIFICATE</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLight()">
+  <div class="lightbox-close">ESC / CLICK TO CLOSE</div>
+  <img id="lightbox-img" src="" alt="" />
+</div>
+
+<footer class="footer">
+  <div class="footer-logo">ST<span class="dot">.</span></div>
+  <p>© 2025 Shishir Tirth.</p>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="cinematography.html">Lens Work</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
+
+<script>
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function openLight(src, label) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLight() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLight(); });
+</script>
+</body>
+</html>

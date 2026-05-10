@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lens — Shishir Tirth</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .lens-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px 120px;
+    }
+    .lens-intro {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--white2);
+      line-height: 1.9;
+      max-width: 580px;
+      margin-bottom: 64px;
+    }
+
+    /* Masonry-like magazine grid */
+    .lens-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 60px;
+    }
+    .lens-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--bg2);
+      transition: transform 0.3s;
+    }
+    .lens-card:hover { transform: scale(1.01); z-index: 2; }
+    .lens-card.tall { grid-row: span 2; }
+    .lens-card.wide { grid-column: span 2; }
+
+    .lens-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 260px;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(15%);
+      transition: filter 0.4s, transform 0.4s;
+    }
+    .lens-card:hover img { filter: grayscale(0%); transform: scale(1.04); }
+
+    .lens-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .lens-card:hover .lens-overlay { opacity: 1; }
+
+    .lens-info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 20px 18px 16px;
+      transform: translateY(8px);
+      transition: transform 0.3s;
+    }
+    .lens-card:hover .lens-info { transform: translateY(0); }
+    .lens-title {
+      font-family: var(--display);
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+    .lens-sub {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--white2);
+      letter-spacing: 0.08em;
+    }
+    .lens-quote {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: rgba(255,255,255,0.6);
+      font-style: italic;
+      margin-top: 4px;
+    }
+
+    /* Passions sidebar note */
+    .lens-also {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 40px;
+    }
+    .also-card {
+      padding: 28px;
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .also-card h3 {
+      font-family: var(--display);
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .also-card p {
+      font-size: 13px;
+      color: var(--white2);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .also-link {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--gray);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .also-link:hover { color: var(--white); border-color: var(--white); }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.92);
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      cursor: pointer;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 24px; right: 32px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--gray);
+      cursor: pointer;
+      letter-spacing: 0.1em;
+    }
+
+    @media (max-width: 900px) {
+      .lens-wrap { padding: 0 24px 80px; }
+      .lens-grid { grid-template-columns: 1fr 1fr; }
+      .lens-card.tall { grid-row: span 1; }
+      .lens-card.wide { grid-column: span 1; }
+      .lens-also { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">ST<span class="dot">.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">ABOUT</a></li>
+    <li><a href="index.html#projects">PROJECTS</a></li>
+    <li><a href="index.html#skills">SKILLS</a></li>
+    <li><a href="resume.html">RESUME</a></li>
+    <li><a href="cinematography.html" style="color:var(--white)">LENS</a></li>
+    <li><a href="contact.html" class="nav-cta">CONTACT</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">HOME</a>
+  <a href="resume.html" onclick="toggleMenu()">RESUME</a>
+  <a href="cinematography.html" onclick="toggleMenu()">LENS</a>
+  <a href="contact.html" onclick="toggleMenu()">CONTACT</a>
+</div>
+
+<div class="page-header">
+  <div class="page-header-tag">// LENS WORK</div>
+  <h1>Through<br><span class="outline-text">the Lens.</span></h1>
+  <p>Cinematography, wildlife, and visual storytelling — the other side.</p>
+</div>
+
+<div class="lens-wrap">
+  <div class="lens-intro">
+    Code is my profession. The camera is my instinct. I have a strong eye for visuals and storytelling — whether it's wildlife macro, aerial seascapes, or monochrome portraits. I capture emotions and angles that bring stories to life. Basic video editing, color grading, motion transitions — all part of the kit.
+  </div>
+
+  <div class="lens-grid">
+
+    <div class="lens-card tall" onclick="openLight('IMAGES/c10.jpg')">
+      <img src="IMAGES/c10.jpg" alt="Perch" />
+      <div class="lens-overlay"></div>
+      <div class="lens-info">
+        <div class="lens-title">Perch</div>
+        <div class="lens-sub">Minimalist Wildlife</div>
+        <div class="lens-quote">"Stillness is its own kind of flight."</div>
+      </div>
+    </div>
+
+    <div class="lens-card" onclick="openLight('IMAGES/c2.jpg')">
+      <img src="IMAGES/c2.jpg" alt="Drift" />
+      <div class="lens-overlay"></div>
+      <div class="lens-info">
+        <div class="lens-title">Drift</div>
+        <div class="lens-sub">Aerial Seascape</div>
+      </div>
+    </div>
+
+    <div class="lens-card" onclick="openLight('IMAGES/c3.jpg')">
+      <img src="IMAGES/c3.jpg" alt="Fractal" />
+      <div class="lens-overlay"></div>
+      <div class="lens-info">
+        <div class="lens-title">Fractal</div>
+        <div class="lens-sub">Botanical Macro</div>
+        <div class="lens-quote">"Nature writes in patterns."</div>
+      </div>
+    </div>
+
+    <div class="lens-card wide" onclick="openLight('IMAGES/c4.jpg')">
+      <img src="IMAGES/c4.jpg" alt="Shine" />
+      <div class="lens-overlay"></div>
+      <div class="lens-info">
+        <div class="lens-title">Shine</div>
+        <div class="lens-sub">Your Moment</div>
+        <div class="lens-quote">"Even quiet sparks light up the dark."</div>
+      </div>
+    </div>
+
+    <div class="lens-card" onclick="openLight('IMAGES/c5.jpg')">
+      <img src="IMAGES/c5.jpg" alt="Realm" />
+      <div class="lens-overlay"></div>
+      <div class="lens-info">
+        <div class="lens-title">Realm</div>
+        <div class="lens-sub">Monochrome</div>
+      </div>
+    </div>
+
+    <div class="lens-card" onclick="openLight('IMAGES/c6.jpg')">
+      <img src="IMAGES/c6.jpg" alt="Whirl" />
+      <div class="lens-overlay"></div>
+      <div class="lens-info">
+        <div class="lens-title">Whirl</div>
+        <div class="lens-sub">Beyond Edges</div>
+      </div>
+    </div>
+
+    <div class="lens-card" onclick="openLight('IMAGES/c8.jpg')">
+      <img src="IMAGES/c8.jpg" alt="Breathe" />
+      <div class="lens-overlay"></div>
+      <div class="lens-info">
+        <div class="lens-title">Breathe</div>
+        <div class="lens-sub">One Pause</div>
+      </div>
+    </div>
+
+    <div class="lens-card" onclick="openLight('IMAGES/c7.jpg')">
+      <img src="IMAGES/c7.jpg" alt="Grow" />
+      <div class="lens-overlay"></div>
+      <div class="lens-info">
+        <div class="lens-title">Grow</div>
+        <div class="lens-sub">Minimalism</div>
+      </div>
+    </div>
+
+    <div class="lens-card" onclick="openLight('IMAGES/c9.jpg')">
+      <img src="IMAGES/c9.jpg" alt="Echo" />
+      <div class="lens-overlay"></div>
+      <div class="lens-info">
+        <div class="lens-title">Echo</div>
+        <div class="lens-sub">By Example</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="lens-also">
+    <div class="also-card">
+      <h3>Modeling</h3>
+      <p>A hobby I explore — photo shoots and aesthetic concepts. Expressing confidence, creativity, and style through the lens. A creative outlet that runs parallel to the code.</p>
+      <a href="https://www.instagram.com/shishirtirth08/" target="_blank" class="also-link">View on Instagram →</a>
+    </div>
+    <div class="also-card">
+      <h3>Graphic Designing</h3>
+      <p>Canva, Figma, Adobe — digital artwork, branding concepts, social media content. I experiment with color, layout, and typography to craft visuals with intent.</p>
+      <a href="https://www.instagram.com/shishirtirth08/" target="_blank" class="also-link">View on Instagram →</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLight()">
+  <div class="lightbox-close">ESC / CLICK TO CLOSE</div>
+  <img id="lightbox-img" src="" alt="" />
+</div>
+
+<footer class="footer">
+  <div class="footer-logo">ST<span class="dot">.</span></div>
+  <p>© 2025 Shishir Tirth.</p>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="resume.html">Resume</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
+
+<script>
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function openLight(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLight() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeLight(); });
+</script>
+</body>
+</html>
