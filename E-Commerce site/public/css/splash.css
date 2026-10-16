@@ -1,0 +1,275 @@
+/* ══════════════════════════════════════════════════════════════════
+   NOVA STUDIOZ — SPLASH SCREEN
+   File: public/css/splash.css
+   Usage: Included in index.html only. Shows once per user (localStorage).
+   To disable: comment out the <link> and <script> tags in index.html.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── 1. OVERLAY CONTAINER ────────────────────────────────────────── */
+#ns-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  /* Placeholder gradient — replace with your own bg-image later:
+     background-image: url('/images/your-bg.jpg');
+     background-size: cover;
+     background-position: center;
+  */
+  background:
+    linear-gradient(
+      160deg,
+      #0a0a0a 0%,
+      #0f0c1a 35%,
+      #0d0d0d 65%,
+      #080808 100%
+    );
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* 3D perspective for child depth effects */
+  perspective: 900px;
+
+  /* Prevent interaction bleed-through */
+  overflow: hidden;
+
+  /* EXIT animation class — appended by JS after min-duration */
+  transition: none; /* JS handles the exit */
+}
+
+/* ── 2. CINEMATIC DARK OVERLAY ───────────────────────────────────── */
+#ns-splash::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(255,255,255,0.025) 0%, transparent 70%),
+    linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.72) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Subtle grain texture overlay */
+#ns-splash::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ── 3. INNER CONTENT WRAPPER ────────────────────────────────────── */
+#ns-splash-inner {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  padding: 0 24px;
+  max-width: 760px;
+  width: 100%;
+
+  /* 3D entry state — starts pulled back & invisible */
+  transform: perspective(900px) translateZ(-60px) scale(0.92);
+  opacity: 0;
+
+  /* Smooth entrance */
+  transition:
+    transform 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Triggered by JS after mount */
+#ns-splash-inner.ns-visible {
+  transform: perspective(900px) translateZ(0px) scale(1);
+  opacity: 1;
+}
+
+/* ── 4. EYEBROW LINE ─────────────────────────────────────────────── */
+.ns-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.22);
+  margin-bottom: 28px;
+
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.7s ease 0.25s,
+    transform 0.7s ease 0.25s;
+}
+
+.ns-eyebrow.ns-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ns-eyebrow::before,
+.ns-eyebrow::after {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ── 5. MAIN HEADLINE ────────────────────────────────────────────── */
+.ns-headline {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(22px, 4.5vw, 54px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  margin-bottom: 20px;
+
+  opacity: 0;
+  transform: perspective(900px) translateY(18px) translateZ(-20px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s,
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+}
+
+.ns-headline.ns-visible {
+  opacity: 1;
+  transform: perspective(900px) translateY(0) translateZ(0);
+}
+
+/* The strikethrough segment "on screens" */
+.ns-strike {
+  text-decoration: line-through;
+  text-decoration-color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* "beyond screens" — glows subtly */
+.ns-highlight {
+  color: #ffffff;
+  position: relative;
+}
+
+/* ── 6. SUBTEXT ──────────────────────────────────────────────────── */
+.ns-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(11px, 1.6vw, 13px);
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.28);
+  line-height: 1.7;
+
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.8s ease 0.4s,
+    transform 0.8s ease 0.4s;
+}
+
+.ns-sub.ns-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── 7. PROGRESS BAR ─────────────────────────────────────────────── */
+.ns-progress-wrap {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 1px;
+  overflow: hidden;
+  z-index: 3;
+
+  opacity: 0;
+  transition: opacity 0.5s ease 0.6s;
+}
+
+.ns-progress-wrap.ns-visible {
+  opacity: 1;
+}
+
+.ns-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 1px;
+  /* Duration set dynamically by JS via --splash-dur */
+  transition: width var(--splash-dur, 3s) linear;
+}
+
+.ns-progress-fill.ns-running {
+  width: 100%;
+}
+
+/* ── 8. EXIT ANIMATION ───────────────────────────────────────────── */
+/*
+  JS adds .ns-exit to #ns-splash when the timer is done.
+  The entire screen lifts upward with a subtle scale compression
+  for a premium "curtain rising" cinematic reveal.
+*/
+#ns-splash.ns-exit {
+  animation: nsExitUp 0.95s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+@keyframes nsExitUp {
+  0% {
+    transform: translateY(0%) scale(1);
+    opacity: 1;
+  }
+  /* Brief scale-down for depth illusion, then sweeps up */
+  18% {
+    transform: translateY(2%) scale(0.985) perspective(1200px) rotateX(1.5deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100%) scale(0.97) perspective(1200px) rotateX(3deg);
+    opacity: 0.6;
+  }
+}
+
+/* ── 9. CORNER MARK (subtle brand detail) ──────────────────────── */
+.ns-corner-mark {
+  position: absolute;
+  bottom: 28px;
+  right: 32px;
+  font-family: 'Inter', sans-serif;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.1);
+  text-transform: uppercase;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.6s ease 0.8s;
+}
+
+.ns-corner-mark.ns-visible {
+  opacity: 1;
+}
+
+/* ── 10. RESPONSIVE ADJUSTMENTS ─────────────────────────────────── */
+@media (max-width: 480px) {
+  .ns-headline {
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .ns-progress-wrap {
+    bottom: 24px;
+  }
+
+  .ns-corner-mark {
+    display: none;
+  }
+}

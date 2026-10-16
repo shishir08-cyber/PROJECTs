@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="theme-color" content="#0a0a0a">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product — Nova Studioz</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css?v=7">
+</head>
+<body>
+<nav class="navbar" id="navbar">
+  <a href="/" class="nav-logo-wrap"><img src="/images/logo.png" onerror="this.style.display='none';document.getElementById('nlt').style.display='flex'" alt=""><span id="nlt" class="nav-logo-text" style="display:none">NS</span></a>
+  <div class="nav-links"><a href="/index.html" class="nav-link">Home</a><a href="/shop.html?filter=themes" class="nav-link">Themes</a><a href="/#section-categories" class="nav-link active">Categories</a><a href="/contact.html" class="nav-link">Contact</a></div>
+  <div class="nav-right">
+    <form class="nav-search" id="navSearchForm"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input type="text" id="navSearchInput" placeholder="Search..."></form>
+    <div class="nav-user-wrap"><button class="nav-icon-btn" id="navUserBtn" onclick="toggleDropdown()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></button>
+    <div class="user-dropdown" id="userDropdown"><a href="/login.html" class="dd-item" id="ddLogin"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg> Login / Sign up</a><a href="/profile.html" class="dd-item" id="ddProfile" style="display:none"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg> Profile</a><a href="/orders.html" class="dd-item" id="ddOrders" style="display:none"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> My Orders</a><a href="/admin.html" class="dd-item" id="ddAdmin" style="display:none"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> Admin</a><div class="dd-sep" id="ddSep" style="display:none"></div><button class="dd-item danger" id="ddLogout" onclick="logout()" style="display:none"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg> Logout</button></div></div>
+    <button class="nav-icon-btn" onclick="openCart()" style="position:relative"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="cart-dot" id="cartDot"></span></button>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu"><form class="mob-search" id="mobSearchForm"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input type="text" id="mobSearchInput" placeholder="Search..."></form><a href="/index.html" class="mob-link">Home</a><a href="/shop.html?filter=themes" class="mob-link">Themes</a><a href="/#section-categories" class="mob-link">Categories</a><a href="/contact.html" class="mob-link">Contact</a><a href="/login.html" class="mob-link" id="mobLoginLink">Login / Signup</a></div>
+<div id="cartOverlay" onclick="closeCart()"></div>
+<div id="cartDrawer" class="cart-drawer"><div class="cart-hd"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:14px;font-weight:700;color:#fff">Cart</span><span class="cart-badge-pill" id="cartBadge">0</span></div><button class="cart-close-btn" onclick="closeCart()">✕</button></div><div id="cartItemsList" class="cart-items-list"></div><div class="cart-ft"><div class="cart-row"><span>Subtotal</span><span id="cartSubtotal">₹0</span></div><div class="cart-total-row"><span>Total</span><span id="cartTotal">₹0</span></div><button class="btn-w" style="width:100%;justify-content:center" onclick="closeCart();goCheckout()">Checkout →</button><button class="btn-o" onclick="closeCart()" style="width:100%;justify-content:center;margin-top:8px">Continue Shopping</button></div></div>
+
+<div class="page-content">
+  <div class="wrap">
+
+    <!-- BREADCRUMB -->
+<nav class="breadcrumb">
+      <a href="/">Home</a><span>/</span>
+      <a href="/shop.html">Shop</a><span>/</span>
+      <span id="breadTheme"></span>
+      </nav>
+
+    <!-- PRODUCT LAYOUT -->
+    <div class="product-layout" id="productLayout">
+      <div>
+        <div class="product-img-wrap" id="productImgWrap">
+          <div class="product-img-skeleton"></div>
+        </div>
+        <div class="product-img-thumbs" id="productThumbs"></div>
+      </div>
+      <div class="product-info" id="productInfo">
+        <div style="display:flex;align-items:center;justify-content:center;height:300px">
+          <div class="loader-dots"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHY NOVA STUDIOZ — trust badges -->
+    <div class="prod-trust-bar">
+      <div class="prod-trust-item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        <div><div class="prod-trust-title">200 GSM Paper</div><div class="prod-trust-sub">Premium matte finish</div></div>
+      </div>
+      <div class="prod-trust-item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12H19M12 5l7 7-7 7"/></svg>
+        <div><div class="prod-trust-title">Pan India Delivery</div><div class="prod-trust-sub">5–7 business days</div></div>
+      </div>
+      <div class="prod-trust-item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div><div class="prod-trust-title">Safe Packaging</div><div class="prod-trust-sub">Secured & protected</div></div>
+      </div>
+      <div class="prod-trust-item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <div><div class="prod-trust-title">Free Shipping</div><div class="prod-trust-sub">Orders above ₹249</div></div>
+      </div>
+    </div>
+
+  </div><!-- /wrap -->
+
+  <!-- RELATED PRODUCTS -->
+  <div class="sec-dark" style="padding:56px 0">
+    <div class="wrap">
+      <div class="sec-top">
+        <div><p class="sec-lbl">Collect The Look</p><h2 class="sec-ttl-d">Action Figures & Collectibles</h2></div>
+        <a href="/shop.html?category=Action+Figures" class="see-all-d" id="suggestedSeeAll">See All →</a>
+      </div>
+      <div class="prod-carousel-wrap" style="margin-top:4px">
+        <button class="carousel-btn prev" onclick="scrollCarousel('suggestedGrid',-1)">&#8592;</button>
+        <div class="prod-carousel" id="suggestedGrid"></div>
+        <button class="carousel-btn next" onclick="scrollCarousel('suggestedGrid',1)">&#8594;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MORE FROM THIS THEME -->
+  <div class="sec-light" style="padding:56px 0" id="moreThemeSec">
+    <div class="wrap">
+      <div class="sec-top">
+        <div><p class="sec-lbl-l" id="moreThemeLbl">More From This Theme</p><h2 class="sec-ttl-l" id="moreThemeTitle">Explore Collection</h2></div>
+        <a href="/shop.html" class="see-all-l" id="moreThemeLink">Browse All →</a>
+      </div>
+      <div class="prod-carousel-wrap" style="margin-top:4px">
+        <button class="carousel-btn prev" onclick="scrollCarousel('moreThemeGrid',-1)" style="background:#000;color:#fff">&#8592;</button>
+        <div class="prod-carousel" id="moreThemeGrid"></div>
+        <button class="carousel-btn next" onclick="scrollCarousel('moreThemeGrid',1)" style="background:#000;color:#fff">&#8594;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEW ARRIVALS — white section -->
+  <div class="sec-light" style="padding:56px 0" id="newArrivalsSec">
+    <div class="wrap">
+      <div class="sec-top">
+        <div><p class="sec-lbl-l">Just Dropped</p><h2 class="sec-ttl-l">New Arrivals</h2></div>
+        <a href="/shop.html?sort=new" class="see-all-l">View All New →</a>
+      </div>
+      <div class="prod-carousel-wrap" style="margin-top:4px">
+        <button class="carousel-btn prev" onclick="scrollCarousel('newArrivalsGrid',-1)" style="background:#000;color:#fff">&#8592;</button>
+        <div class="prod-carousel" id="newArrivalsGrid"></div>
+        <button class="carousel-btn next" onclick="scrollCarousel('newArrivalsGrid',1)" style="background:#000;color:#fff">&#8594;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUALITY PROMISE — dark editorial section -->
+  <div style="background:#080808;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);padding:48px 0">
+    <div class="wrap">
+      <div class="quality-grid">
+        <div class="quality-text">
+          <p style="font-size:9px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:12px">Nova Studioz Promise</p>
+          <h2 style="font-size:clamp(24px,3.5vw,36px);font-weight:900;letter-spacing:-0.02em;line-height:1.1;color:#fff;margin-bottom:16px">Every print tells<br>a story.</h2>
+          <p style="font-size:13px;font-weight:300;color:rgba(255,255,255,0.45);line-height:1.8;margin-bottom:24px">We use premium 200 GSM paper with vibrant CMYK printing. Each poster is carefully rolled and packed to reach you in perfect condition — ready to transform your space.</p>
+          <a href="/about.html"><button class="btn-o" style="font-size:11px">Our Story →</button></a>
+        </div>
+        <div class="quality-stats">
+          <div class="quality-stat"><div class="quality-stat-num">900+</div><div class="quality-stat-lbl">Designs</div></div>
+          <div class="quality-stat"><div class="quality-stat-num">Multiple</div><div class="quality-stat-lbl">Themes</div></div>
+          <div class="quality-stat"><div class="quality-stat-num">200</div><div class="quality-stat-lbl">GSM Paper</div></div>
+          <div class="quality-stat"><div class="quality-stat-num">Pan</div><div class="quality-stat-lbl">India Delivery</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUSTOM ORDER CTA -->
+  <div style="background:#fff;padding:48px 0;border-bottom:1px solid #e8e8e8">
+    <div class="wrap" style="text-align:center">
+      <p style="font-size:9px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(0,0,0,0.3);margin-bottom:10px">Made Just For You</p>
+      <h2 style="font-size:clamp(22px,3vw,32px);font-weight:900;letter-spacing:-0.02em;color:#000;margin-bottom:10px">Want a custom order?</h2>
+      <p style="font-size:13px;font-weight:300;color:rgba(0,0,0,0.45);margin-bottom:24px">Tell us your idea — we'll bring it to life. Character art, room setups, name posters, and more.</p>
+      <a href="/custom-order.html"><button class="btn-bk">Order Custom Print →</button></a>
+    </div>
+  </div>
+
+  <!-- FANART DISCLAIMER -->
+  <div class="fanart-disclaimer">
+    <div class="wrap">
+      <p class="fanart-disclaimer-text">
+        All artworks featured on this website are created as fan interpretations and are not affiliated with or endorsed by any official brand or organization unless explicitly stated.
+        If you believe any content infringes your rights, please contact us at <a href="mailto:novastudioz010@gmail.com" style="color:rgba(255,255,255,0.5);text-decoration:underline">novastudioz010@gmail.com</a>.
+        © Copyright – All rights reserved. Nova Studioz.
+      </p>
+    </div>
+  </div>
+
+</div><!-- /page-content -->
+
+<div class="ticker-sec"><div class="ticker-inner"><div class="tick-item"><span class="tick-text">Free Shipping Above ₹249</span><span class="tick-dot"></span></div><div class="tick-item"><span class="tick-text">200 GSM Premium Paper</span><span class="tick-dot"></span></div><div class="tick-item"><span class="tick-text">High Finish · Premium Quality</span><span class="tick-dot"></span></div><div class="tick-item"><span class="tick-text">Pan India Delivery</span><span class="tick-dot"></span></div><div class="tick-item"><span class="tick-text">Free Shipping Above ₹249</span><span class="tick-dot"></span></div><div class="tick-item"><span class="tick-text">200 GSM Premium Paper</span><span class="tick-dot"></span></div><div class="tick-item"><span class="tick-text">High Finish · Premium Quality</span><span class="tick-dot"></span></div><div class="tick-item"><span class="tick-text">Pan India Delivery</span><span class="tick-dot"></span></div></div></div>
+
+<footer class="footer"><div class="wrap"><div class="footer-grid"><div><p class="f-brand-name">Nova Studioz</p><p class="f-desc">Minimal posters, pop culture accessories, collectibles and lifestyle merch. Delivered across India.</p><div class="f-socials"><button class="f-soc-btn" onclick="window.open('https://instagram.com','_blank')">Instagram</button><button class="f-soc-btn" onclick="window.open('https://wa.me/919999999999','_blank')">WhatsApp</button></div></div><div><p class="f-col-title">Shop</p><div class="f-links"><a href="/shop.html" class="f-link">All Products</a><a href="/shop.html?filter=themes" class="f-link">Themes</a><a href="/shop.html?sort=new" class="f-link">New Arrivals</a><a href="/custom-order.html" class="f-link">Custom Order</a></div></div><div><p class="f-col-title">Company</p><div class="f-links"><a href="/about.html" class="f-link">About Us</a><a href="/contact.html" class="f-link">Contact</a><a href="/shipping-policy.html" class="f-link">Shipping</a><a href="/refund-policy.html" class="f-link">Refund Policy</a><a href="/privacy-policy.html" class="f-link">Privacy Policy</a><a href="/terms.html" class="f-link">Terms</a></div></div><div><p class="f-col-title">Account</p><div class="f-links"><a href="/login.html" class="f-link">Login / Sign up</a><a href="/orders.html" class="f-link">My Orders</a><a href="/profile.html" class="f-link">Profile</a></div></div></div><div class="footer-bottom"><span class="f-copy">© 2025 Nova Studioz. All rights reserved.</span><span class="f-copy">Made with ♥ in India</span></div></div></footer>
+
+<div id="toastCont"></div>
+<script src="/js/utils.js?v=10"></script>
+<script src="/js/nav-cart.js?v=5"></script>
+<script>
+function scrollCarousel(id, direction) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var cardW = el.querySelector('.pc-carousel-card') ? el.querySelector('.pc-carousel-card').offsetWidth + 12 : 212;
+  el.scrollBy({ left: direction * cardW * 2, behavior: 'smooth' });
+}
+
+let product = null;
+let selSize = 'A5', selFrame = 'No Frame';
+
+async function loadProduct() {
+  const id = new URLSearchParams(location.search).get('id');
+  if (!id) { location.href = '/shop.html'; return; }
+  try {
+    product = await apiGet('/api/products/' + id);
+    var COLLECT_CATS = ['Action Figures','Collectibles','Limited Edition'];
+    if (COLLECT_CATS.indexOf(product.category) !== -1) {
+      location.href = '/product-collectible.html?id=' + id;
+      return;
+    }
+    renderProduct(product);
+    updatePriceDisplay();
+    if (typeof initReveal === 'function') setTimeout(initReveal, 50);
+    ['suggestedGrid','moreThemeGrid'].forEach(function(gid) {
+      var sg = document.getElementById(gid);
+      if (!sg) return;
+      sg.innerHTML = '';
+      for (var i = 0; i < 6; i++) {
+        var sk = document.createElement('div');
+        sk.className = 'pc-d pc-skeleton pc-carousel-card';
+        sk.innerHTML = '<div class="pc-skel-img"></div><div class="pc-d-body"><div class="pc-skel-line" style="width:40%;height:8px;margin-bottom:6px"></div><div class="pc-skel-line" style="width:80%;height:10px;margin-bottom:8px"></div><div class="pc-skel-btn"></div></div>';
+        sg.appendChild(sk);
+      }
+    });
+    loadSuggested(product.theme, product.id);
+    loadMoreFromTheme(product.theme, product.id);
+    loadNewArrivals(product.id);
+  } catch(e) {
+    document.getElementById('productInfo').innerHTML =
+      '<div style="text-align:center;padding:40px 0">' +
+      '<p style="color:var(--w35);font-size:14px;margin-bottom:16px">Product not found or no longer available.</p>' +
+      '<a href="/shop.html"><button class="btn-o" style="font-size:12px">← Back to Shop</button></a>' +
+      '</div>';
+  }
+}
+
+function buildMeta(p) {
+  var rows = '';
+  var cat = p.category || '';
+  var szRaw = (p.poster_sizes || 'A4').split(',').map(function(s){return s.trim();}).filter(Boolean);
+  var primarySz = szRaw[0] || 'A4';
+  var isPortrait  = primarySz === 'Portrait';
+  var isLandscape = primarySz === 'Landscape';
+
+  rows += '<div class="product-meta-row"><span>Theme</span><span>' + p.theme + '</span></div>';
+  rows += '<div class="product-meta-row"><span>Category</span><span>' + cat + '</span></div>';
+
+  if (cat === 'Posters') {
+    rows += '<div class="product-meta-row"><span>Paper Quality</span><span>' + (p.paper_quality||'200 GSM Premium Paper') + '</span></div>';
+    rows += '<div class="product-meta-row"><span>Print Finish</span><span>' + (p.print_type||'Matte Finish') + '</span></div>';
+    if (isPortrait) {
+      rows += '<div class="product-meta-row"><span>Poster Type</span><span>Portrait · 9:16 Ratio</span></div>';
+      rows += '<div class="product-meta-row"><span>Available Sizes</span><span>Portrait (Vertical)</span></div>';
+      rows += '<div class="product-meta-row"><span>Frame Option</span><span>No Frame</span></div>';
+      rows += '<div class="product-meta-row"><span>Best For</span><span>Phone wallpaper art · Door posters</span></div>';
+    } else if (isLandscape) {
+      rows += '<div class="product-meta-row"><span>Poster Type</span><span>Split · 3-panel</span></div>';
+      rows += '<div class="product-meta-row"><span>Available Sizes</span><span>A4 Single · 3×A4 Split</span></div>';
+      rows += '<div class="product-meta-row"><span>Frame Option</span><span>No Frame</span></div>';
+      rows += '<div class="product-meta-row"><span>Best For</span><span>Wide wall art · Cinematic decor</span></div>';
+    } else {
+      rows += '<div class="product-meta-row"><span>Poster Type</span><span>Standard · A4/A5</span></div>';
+      rows += '<div class="product-meta-row"><span>Available Sizes</span><span>A4 (8.3×11.7 in) · A5 (5.8×8.3 in)</span></div>';
+      rows += '<div class="product-meta-row"><span>Frame Option</span><span>No Frame · Black Frame (+₹110 on A4)</span></div>';
+      rows += '<div class="product-meta-row"><span>Best For</span><span>Room decor · Gifting · Wall art</span></div>';
+    }
+    rows += '<div class="product-meta-row"><span>Packaging</span><span>Rolled · Secure · Pan India</span></div>';
+  } else if (cat === 'Action Figures') {
+    rows += '<div class="product-meta-row"><span>Type</span><span>Fan Art Action Figure</span></div>';
+    rows += '<div class="product-meta-row"><span>Material</span><span>Premium PVC</span></div>';
+    rows += '<div class="product-meta-row"><span>Height</span><span>~15 cm</span></div>';
+    rows += '<div class="product-meta-row"><span>Base Included</span><span>Yes</span></div>';
+    rows += '<div class="product-meta-row"><span>Packaging</span><span>Foam-padded collector box</span></div>';
+    rows += '<div class="product-meta-row"><span>Delivery</span><span>Pan India · Insured</span></div>';
+  } else if (cat === 'Collectibles') {
+    rows += '<div class="product-meta-row"><span>Type</span><span>Collectible / Fan Art</span></div>';
+    rows += '<div class="product-meta-row"><span>Material</span><span>Premium Quality</span></div>';
+    rows += '<div class="product-meta-row"><span>Edition</span><span>Limited Fan Art Edition</span></div>';
+    rows += '<div class="product-meta-row"><span>Packaging</span><span>Safe padded packaging</span></div>';
+    rows += '<div class="product-meta-row"><span>Delivery</span><span>Pan India · Insured</span></div>';
+  } else if (cat === 'Limited Edition') {
+    rows += '<div class="product-meta-row"><span>Type</span><span>Limited Edition Drop</span></div>';
+    rows += '<div class="product-meta-row"><span>Availability</span><span>Limited Stock Only</span></div>';
+    rows += '<div class="product-meta-row"><span>Material</span><span>Premium Quality</span></div>';
+    rows += '<div class="product-meta-row"><span>Packaging</span><span>Safe padded packaging</span></div>';
+    rows += '<div class="product-meta-row"><span>Delivery</span><span>Pan India · Insured</span></div>';
+  } else if (cat === 'T-Shirts & Merchandise') {
+    rows += '<div class="product-meta-row"><span>Type</span><span>Featured Culture Drop</span></div>';
+    rows += '<div class="product-meta-row"><span>Edition</span><span>Nova Studioz Exclusive</span></div>';
+    rows += '<div class="product-meta-row"><span>Material</span><span>Premium Quality</span></div>';
+    rows += '<div class="product-meta-row"><span>Packaging</span><span>Safe padded packaging</span></div>';
+    rows += '<div class="product-meta-row"><span>Delivery</span><span>Pan India · Insured</span></div>';
+  } else {
+    rows += '<div class="product-meta-row"><span>Paper Quality</span><span>' + (p.paper_quality||'200 GSM Premium Paper') + '</span></div>';
+    rows += '<div class="product-meta-row"><span>Print Finish</span><span>' + (p.print_type||'Matte Finish') + '</span></div>';
+    rows += '<div class="product-meta-row"><span>Packaging</span><span>Secure · Pan India</span></div>';
+  }
+  return rows;
+}
+
+function renderProduct(p) {
+  var img = p.image || p.image_url || ('https://picsum.photos/600/800?random=' + p.id);
+  document.title = p.name + ' — Nova Studioz';
+
+  var breadThemeEl = document.getElementById('breadTheme');
+  if (breadThemeEl) {
+    var themeLink = document.createElement('a');
+    themeLink.href = '/shop.html?theme=' + encodeURIComponent(p.theme);
+    themeLink.textContent = p.theme;
+    themeLink.style.cssText = 'color:inherit;text-decoration:none;transition:color 0.2s';
+    themeLink.onmouseover = function() { this.style.color='#fff'; };
+    themeLink.onmouseout  = function() { this.style.color=''; };
+    breadThemeEl.parentNode.insertBefore(themeLink, breadThemeEl);
+    var sep2 = document.createElement('span');
+    sep2.textContent = '›';
+    breadThemeEl.parentNode.insertBefore(sep2, breadThemeEl);
+    breadThemeEl.textContent = p.name;
+  }
+
+  var imgs = [
+    p.image || p.image_url || ('https://picsum.photos/600/800?random=' + p.id),
+    p.image2 || p.image || p.image_url || ('https://picsum.photos/600/800?random=' + (p.id + 100)),
+    p.image3 || p.image || p.image_url || ('https://picsum.photos/600/800?random=' + (p.id + 200))
+  ];
+
+  var imgWrap = document.getElementById('productImgWrap');
+  var primarySzRaw = ((p.poster_sizes || 'A4').split(',')[0] || 'A4').trim();
+  if (primarySzRaw === 'Portrait') {
+    imgWrap.className = 'product-img-wrap portrait';
+  } else if (primarySzRaw === 'Landscape' || (p.poster_type || '').toLowerCase().includes('split')) {
+    imgWrap.className = 'product-img-wrap landscape';
+  } else {
+    imgWrap.className = 'product-img-wrap default';
+  }
+  imgWrap.innerHTML = '';
+
+  var mainImg = document.createElement('img');
+  mainImg.id = 'mainProductImg';
+  mainImg.alt = p.name;
+  mainImg.loading = 'eager';
+  mainImg.fetchpriority = 'high';
+  mainImg.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:center;display:block;border-radius:6px;background:#111;opacity:0;transition:opacity 0.3s ease';
+  mainImg.onload = function() {
+    this.style.opacity = '1';
+    var w = document.getElementById('productImgWrap');
+    if (w) w.classList.add('loaded');
+  };
+  mainImg.onerror = function() {
+    this.style.opacity = '1';
+    this.style.background = 'linear-gradient(135deg,#1a1a1a 0%,#2a2a2a 100%)';
+    this.style.display = 'flex';
+    this.alt = p.name;
+    this.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="533" viewBox="0 0 400 533"%3E%3Crect fill="%231a1a1a" width="400" height="533"/%3E%3Ctext x="50%25" y="50%25" fill="%23444" font-size="14" font-family="Inter,sans-serif" text-anchor="middle" dominant-baseline="middle"%3EImage not available%3C/text%3E%3C/svg%3E';
+    this.onerror = null;
+  };
+  mainImg.src = imgs[0];
+  imgWrap.appendChild(mainImg);
+
+  var thumbs = document.getElementById('productThumbs');
+  if (thumbs) {
+    thumbs.innerHTML = '';
+    imgs.forEach(function(src, i) {
+      var t = document.createElement('div');
+      t.className = 'prod-thumb' + (i === 0 ? ' active' : '');
+      var ti = document.createElement('img');
+      ti.src = src; ti.alt = ''; ti.loading = 'lazy';
+      ti.onerror = function() {
+        this.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="120" height="160" viewBox="0 0 120 160"%3E%3Crect fill="%231a1a1a" width="120" height="160"/%3E%3C/svg%3E';
+        this.onerror = null;
+      };
+t.appendChild(ti);
+t.style.position = 'relative';
+
+/* ── SAME overlays visible on thumbnail cards ── */
+
+// 2nd thumb card
+if (i === 1) {
+
+  var isLandscapeThumb =
+    primarySzRaw === 'Landscape' ||
+    (p.poster_type || '').toLowerCase().includes('split');
+
+  var thumbOv1 = document.createElement('div');
+
+  thumbOv1.style.cssText =
+    'position:absolute;inset:0;background:rgba(0,0,0,.58);border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;pointer-events:none;z-index:2';
+
+  thumbOv1.innerHTML = isLandscapeThumb
+    ? '<img src="./images/logo2.png" style="width:16px;height:16px;max-width:none;object-fit:contain;display:block;">' +
+      '<span style="font-size:6px;font-weight:800;color:#fff;text-transform:uppercase;text-align:center;line-height:1.3">3 Panels<br>Split</span>'
+
+    : '<img src="./images/logo2.png" style="width:16px;height:16px;max-width:none;object-fit:contain;display:block;">' +
+      '<span style="font-size:6px;font-weight:800;color:#fff;text-transform:uppercase;text-align:center;line-height:1.3">Premium<br>Quality</span>';
+
+  t.appendChild(thumbOv1);
+}
+
+// 3rd thumb card
+if (i === 2) {
+
+  var AD_TEXTS = [
+    { line1:'Free Ship', line2:'₹249+' },
+    { line1:'200 GSM', line2:'Premium' },
+    { line1:'Perfect', line2:'Gift' },
+    { line1:'Pan India', line2:'Delivery' },
+    { line1:'Safe', line2:'Packing' }
+  ];
+
+  var adMini = AD_TEXTS[Math.floor(Math.random() * AD_TEXTS.length)];
+
+  var thumbOv2 = document.createElement('div');
+
+  thumbOv2.style.cssText =
+    'position:absolute;inset:0;background:rgba(255,255,255,.96);border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;pointer-events:none;z-index:2';
+
+  thumbOv2.innerHTML =
+    '<img src="./images/logo2.png" style="width:18px;height:18px;max-width:none;object-fit:contain;display:block;">' +
+    '<span style="font-size:5.8px;font-weight:900;color:#000;text-transform:uppercase;text-align:center;line-height:1.25">' + adMini.line1 + '<br>' + adMini.line2 + '</span>';
+
+  t.appendChild(thumbOv2);
+}
+
+
+/* ── Click handler with main image overlay logic ── */
+if (i !== 2) {
+
+  t.addEventListener('click', (function(s, thumb, idx) {
+    return function() {
+
+      var mainImg = document.getElementById('mainProductImg');
+      var imgWrap = document.getElementById('productImgWrap');
+      if (!mainImg || !imgWrap) return;
+
+      var oldOv = imgWrap.querySelector('.main-img-overlay');
+      if (oldOv) oldOv.parentNode.removeChild(oldOv);
+
+      mainImg.style.opacity = '0';
+
+      setTimeout(function() {
+
+        mainImg.style.transition = 'opacity 0.25s ease';
+        mainImg.src = s;
+
+        mainImg.onload = function() {
+          mainImg.style.opacity = '1';
+
+          if (idx === 1) {
+
+            var isLandscapeThumb =
+              primarySzRaw === 'Landscape' ||
+              (p.poster_type || '').toLowerCase().includes('split');
+
+            var ov1 = document.createElement('div');
+            ov1.className = 'main-img-overlay';
+
+            ov1.style.cssText =
+              'position:absolute;inset:0;background:rgba(0,0,0,0.55);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;pointer-events:none;z-index:3;border-radius:6px';
+
+            ov1.innerHTML = isLandscapeThumb
+              ? '<img src="./images/logo2.png" style="width:44px;height:44px;object-fit:contain;">' +
+                '<span style="font-size:13px;font-weight:800;color:#fff;text-transform:uppercase;text-align:center;line-height:1.5">3 Panels<br>Split Set</span>' +
+                '<span style="font-size:10px;color:rgba(255,255,255,.6)">You receive 3 separate A4 prints</span>'
+
+              : '<img src="./images/logo2.png" style="width:44px;height:44px;object-fit:contain;">' +
+                '<span style="font-size:13px;font-weight:800;color:#fff;text-transform:uppercase;text-align:center;line-height:1.5">Premium<br>Quality</span>' +
+                '<span style="font-size:10px;color:rgba(255,255,255,.6)">Single premium print</span>';
+
+            imgWrap.style.position = 'relative';
+            imgWrap.appendChild(ov1);
+          }
+        };
+
+        mainImg.onerror = function() {
+          mainImg.style.opacity = '1';
+        };
+
+      }, 150);
+
+      document.querySelectorAll('.prod-thumb').forEach(function(el) {
+        el.classList.remove('active');
+      });
+
+      thumb.classList.add('active');
+
+    };
+  })(src, t, i));
+
+} else {
+
+  t.addEventListener('click', (function(thumb) {
+    return function() {
+
+      var imgWrap = document.getElementById('productImgWrap');
+      if (!imgWrap) return;
+
+      var oldOv = imgWrap.querySelector('.main-img-overlay');
+      if (oldOv) oldOv.parentNode.removeChild(oldOv);
+
+      var AD_TEXTS = [
+        { line1:'Free Shipping', line2:'On orders above ₹249' },
+        { line1:'200 GSM Paper', line2:'Premium matte finish' },
+        { line1:'Perfect Gift', line2:'For any occasion' },
+        { line1:'Pan India', line2:'5–7 business days' },
+        { line1:'Safe Packing', line2:'Secure & protected' }
+      ];
+
+      var ad = AD_TEXTS[Math.floor(Math.random() * AD_TEXTS.length)];
+
+      var ov2 = document.createElement('div');
+      ov2.className = 'main-img-overlay';
+
+      ov2.style.cssText =
+        'position:absolute;inset:0;background:rgba(255,255,255,0.96);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;pointer-events:none;z-index:3;border-radius:6px';
+
+      ov2.innerHTML =
+        '<img src="./images/logo2.png" style="width:72px;height:72px;object-fit:contain;">' +
+        '<span style="font-size:16px;font-weight:900;color:#000;text-transform:uppercase;text-align:center;line-height:1.3">' + ad.line1 + '</span>' +
+        '<span style="font-size:11px;color:rgba(0,0,0,.45);text-align:center">' + ad.line2 + '</span>' +
+        '<span style="font-size:9px;font-weight:700;color:rgba(0,0,0,.25);letter-spacing:.15em;text-transform:uppercase">Nova Studioz</span>';
+
+      imgWrap.style.position = 'relative';
+      imgWrap.appendChild(ov2);
+
+      document.querySelectorAll('.prod-thumb').forEach(function(el) {
+        el.classList.remove('active');
+      });
+
+      thumb.classList.add('active');
+
+    };
+  })(t));
+}
+// Also remove overlay when 1st thumb clicked
+if (i === 0) {
+  t.addEventListener('click', function() {
+    var imgWrap = document.getElementById('productImgWrap');
+    if (!imgWrap) return;
+
+    var oldOv = imgWrap.querySelector('.main-img-overlay');
+    if (oldOv) oldOv.parentNode.removeChild(oldOv);
+  });
+}
+
+thumbs.appendChild(t);
+        });
+  }
+
+      // ── Click handler with main image overlay logic
+  var info = document.getElementById('productInfo');
+  info.innerHTML = '';
+
+  var isPoster = (p.category === 'Posters');
+
+  var tag = document.createElement('p');
+  tag.className = 'product-theme-tag reveal-text';
+  tag.textContent = p.theme + ' · ' + p.category;
+  info.appendChild(tag);
+
+  var h1 = document.createElement('h1');
+  h1.className = 'product-title reveal-text';
+  h1.style.transitionDelay = '60ms';
+  h1.textContent = p.name;
+  info.appendChild(h1);
+
+  var priceWrap = document.createElement('div');
+  priceWrap.className = 'product-price reveal-text';
+  priceWrap.style.transitionDelay = '120ms';
+  priceWrap.innerHTML = '<div id="livePriceEl"></div>';
+  info.appendChild(priceWrap);
+
+  var PAPER_CATS = ['Posters'];
+  var showSizeFrame = PAPER_CATS.indexOf(p.category) !== -1;
+
+  if (showSizeFrame) {
+    var dbSizes = (p.poster_sizes || 'A4').split(',').map(function(s){ return s.trim(); }).filter(Boolean);
+    if (!dbSizes.length) dbSizes = ['A4'];
+    var primarySz = dbSizes[0];
+    var isPortrait  = primarySz === 'Portrait';
+    var isLandscape = primarySz === 'Landscape';
+    var isA4type    = !isPortrait && !isLandscape;
+
+    var SDEFS = {
+      'A4':            { label:'A4',               dims:'8.3 × 11.7 in',  price:(p.custom_price>0?p.custom_price:59),                 imgKey:'image' },
+      'A5':            { label:'A5',               dims:'5.8 × 8.3 in',   price:(p.custom_price>0?Math.round(p.custom_price*0.56):33), imgKey:'image' },
+      'Portrait':      { label:'Portrait',         dims:'9:16 · Vertical',price:(p.custom_price>0?p.custom_price:65),                 imgKey:'image' },
+      'Landscape':     { label:'Single A4',        dims:'Landscape · A4', price:(p.custom_price>0?p.custom_price:70),                 imgKey:'image' },
+      'LandscapeSplit':{ label:'Split Set (3×A4)', dims:'3 panels · A4',  price:(p.custom_price>0?p.custom_price:169),                imgKey:'image' },
+    };
+
+    var sizeOptions = [];
+    if (isA4type)         sizeOptions = ['A4','A5'];
+    else if (isPortrait)  sizeOptions = ['Portrait','A5'];
+    else if (isLandscape) sizeOptions = ['Landscape','LandscapeSplit'];
+
+    selSize = isA4type ? 'A5' : (isLandscape ? 'LandscapeSplit' : (isPortrait ? 'A5' : sizeOptions[0]));
+
+    var sizeLabel = document.createElement('p');
+    sizeLabel.className = 'size-label';
+    sizeLabel.textContent = 'Size';
+    info.appendChild(sizeLabel);
+
+    var sizeBtns = document.createElement('div');
+    sizeBtns.className = 'size-btns';
+
+    sizeOptions.forEach(function(sz) {
+      var def = SDEFS[sz];
+      var btn = document.createElement('button');
+      btn.className = 'size-btn' + (sz === selSize ? ' active' : '');
+      btn.dataset.size = sz;
+      btn.innerHTML = def.label + ' <span style="font-size:9px;opacity:0.5">' + def.dims + '</span>';
+      btn.addEventListener('click', function() { setSizePoster(sz, def, btn, p); });
+      sizeBtns.appendChild(btn);
+    });
+    info.appendChild(sizeBtns);
+
+    var frameWrap = document.createElement('div');
+    frameWrap.id = 'frameSection';
+
+    if (isA4type) {
+      var frameLabel = document.createElement('p');
+      frameLabel.className = 'frame-label';
+      frameLabel.textContent = 'Frame';
+      frameWrap.appendChild(frameLabel);
+
+      var frameBtns = document.createElement('div');
+      frameBtns.className = 'frame-btns';
+
+      [['No Frame',''],['Black Frame','+₹130 · A4 only']].forEach(function(fr) {
+        var btn = document.createElement('button');
+        btn.className = 'frame-btn' + (fr[0] === 'No Frame' ? ' active' : '');
+        btn.innerHTML = fr[0] + (fr[1] ? ' <span style="font-size:9px;opacity:0.5">' + fr[1] + '</span>' : '');
+        btn.addEventListener('click', function() { setFrame(fr[0], btn); });
+        frameBtns.appendChild(btn);
+      });
+      frameWrap.appendChild(frameBtns);
+    }
+    info.appendChild(frameWrap);
+
+  } else {
+    selSize = 'One Size';
+    selFrame = 'No Frame';
+  }
+
+  var descText = p.description || 'High quality print, perfect for home, office or gifting. Vibrant colours with premium matte finish on 200 GSM paper.';
+  var shortDesc = descText.length > 120 ? descText.substring(0, 120).replace(/\s\S*$/, '') + '…' : descText;
+  var desc = document.createElement('p');
+  desc.className = 'product-desc';
+  desc.style.cssText = 'margin-bottom:12px';
+  desc.textContent = shortDesc;
+  info.appendChild(desc);
+
+  var detailsToggle = document.createElement('button');
+  detailsToggle.style.cssText = 'background:none;border:none;padding:0;font-size:11px;font-weight:600;color:rgba(255,255,255,0.45);cursor:pointer;display:flex;align-items:center;gap:6px;margin-bottom:16px;letter-spacing:0.04em;font-family:Inter,sans-serif';
+  detailsToggle.innerHTML = '<span>View Details</span><svg id="detailsArrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transition:transform 0.25s"><polyline points="6 9 12 15 18 9"/></svg>';
+  info.appendChild(detailsToggle);
+
+  var meta = document.createElement('div');
+  meta.className = 'product-meta';
+  meta.id = 'productMetaTable';
+  meta.style.cssText = 'display:none;margin-bottom:16px';
+  meta.innerHTML = buildMeta(p);
+  info.appendChild(meta);
+
+  var _metaOpen = false;
+  detailsToggle.addEventListener('click', function() {
+    _metaOpen = !_metaOpen;
+    meta.style.display = _metaOpen ? 'flex' : 'none';
+    var arrow = document.getElementById('detailsArrow');
+    if (arrow) arrow.style.transform = _metaOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+    detailsToggle.querySelector('span').textContent = _metaOpen ? 'Hide Details' : 'View Details';
+  });
+
+  var actions = document.createElement('div');
+  actions.style.cssText = 'display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;margin-top:16px';
+  var addBtn = document.createElement('button');
+  addBtn.className = 'btn-w';
+  addBtn.style.cssText = 'flex:1;justify-content:center;min-width:120px;display:inline-flex';
+  addBtn.textContent = 'Add to Cart';
+  addBtn.addEventListener('click', handleAddToCart);
+  var buyBtn = document.createElement('button');
+  buyBtn.className = 'btn-o';
+  buyBtn.style.cssText = 'flex:1;justify-content:center;min-width:100px;display:inline-flex';
+  buyBtn.textContent = 'Buy Now →';
+  buyBtn.addEventListener('click', handleBuyNow);
+  actions.appendChild(addBtn);
+  actions.appendChild(buyBtn);
+  info.appendChild(actions);
+
+  var badges = document.createElement('p');
+  badges.style.cssText = 'font-size:11px;color:var(--w20);letter-spacing:0.04em;margin-top:10px';
+  var primarySzB = ((p.poster_sizes||'A4').split(',')[0]||'A4').trim();
+  if (primarySzB === 'Portrait') {
+    badges.textContent = '✓ Portrait ₹65 · A5 ₹33 · No Frame · Matte 200 GSM · Free ship ₹249+ · Pan India';
+  } else if (primarySzB === 'Landscape') {
+    badges.textContent = '✓ Single A4 ₹70 · Split Set (3×A4) ₹169 · No Frame · Free ship ₹249+';
+  } else {
+    badges.textContent = '✓ A4 ₹59 · A5 ₹33 · Frame +₹130 (A4 only) · 200 GSM · Free ship ₹249+ · Pan India';
+  }
+  info.appendChild(badges);
+
+  updatePriceDisplay();
+  setTimeout(function(){ renderProductExtras(p); }, 0);
+}
+
+/* ── Shipping rules ── */
+var POSTER_SHIP   = 70;
+var FREE_SHIP_MIN = 249;
+
+function getShippingInfo() {
+  var cart = [];
+  try { cart = JSON.parse(localStorage.getItem('cart')) || []; } catch(e){}
+  var total = cart.reduce(function(s,i){ return s + (parseFloat(String(i.price).replace(/[^0-9.]/g,''))||0)*(i.quantity||1); }, 0);
+  var freeShip = (total >= FREE_SHIP_MIN);
+  var shipCost = freeShip ? 0 : POSTER_SHIP;
+  return { total:total, freeShip:freeShip, shipCost:shipCost };
+}
+
+function renderProductExtras(p) {
+  var old = document.getElementById('productExtrasSection');
+  if (old) old.parentNode.removeChild(old);
+
+  var section = document.createElement('div');
+  section.id = 'productExtrasSection';
+  section.style.cssText = 'margin:20px auto;width:100%;max-width:420px;';
+
+  var cat = p.category || '';
+
+  /* A5 theme explorer — only for poster types */
+  if (cat === 'Posters') {
+    section.appendChild(buildThemeExplorer());
+  }
+
+  /* Action Figure free gift upsell */
+  if (cat === 'Action Figures') {
+    var afEl = buildActionFigureUpsell(p.price || 0);
+    if (afEl) section.appendChild(afEl);
+  }
+
+  /* Shipping bar */
+  section.appendChild(buildShippingBar());
+
+  var infoEl = document.getElementById('productInfo');
+  if (infoEl) infoEl.appendChild(section);
+
+  document.addEventListener('cartUpdated', updateShippingBar);
+  updateShippingBar();
+}
+
+/* ── Theme explorer (replaces A5 addon) ── */
+function buildThemeExplorer() {
+  var wrap = document.createElement('div');
+  wrap.style.cssText = 'background:#0d0d0d;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:16px;margin-bottom:24px';
+
+  var hdr = document.createElement('p');
+  hdr.style.cssText = 'font-size:12px;font-weight:700;color:#fff;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.06em';
+  hdr.textContent = '✚ Explore More Themes';
+  var sub = document.createElement('p');
+  sub.style.cssText = 'font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:14px';
+  sub.textContent = 'Tap a theme to browse more posters';
+  wrap.appendChild(hdr);
+  wrap.appendChild(sub);
+
+  var g = document.createElement('div');
+  g.style.cssText = 'display:grid;grid-template-columns:repeat(2,1fr);gap:10px';
+
+var THEME_CARDS = [
+  { label:'Anime',         url:'/shop.html?theme=Anime',                img:'./images/theme1.png' },
+  { label:'Culture Drops', url:'/shop.html?theme=Culture+Drops',        img:'./images/theme5.png' },
+  { label:'Gaming & Cars', url:'/shop.html?theme=Gaming+and+Cars',      img:'./images/theme3.png' },
+  { label:'Movies & TV',   url:'/shop.html?theme=Movies+and+TV+Shows',  img:'./images/theme4.png' },
+  { label:'Aesthetic',     url:'/shop.html?theme=Aesthetic',            img:'./images/theme2.png' },
+  { label:'Superhero',     url:'/shop.html?theme=Superhero+Collection', img:'./images/theme6.png' },
+];
+  THEME_CARDS.forEach(function(a) {
+    var c = document.createElement('div');
+    c.style.cssText = 'background:#1a1a1a;border:1.5px solid rgba(255,255,255,0.08);border-radius:10px;cursor:pointer;text-align:center;transition:border-color 0.15s,box-shadow 0.15s;overflow:hidden;display:flex;flex-direction:column';
+    c.innerHTML =
+      '<div style="width:100%;height:80px;overflow:hidden;flex-shrink:0;background:#111">' +
+        '<img src="'+a.img+'" alt="'+a.label+'" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;opacity:0.85">' +
+      '</div>' +
+      '<div style="padding:10px 8px">' +
+        '<div style="font-size:11px;color:rgba(255,255,255,0.6);font-weight:600">'+a.label+'</div>' +
+        '<div style="font-size:9px;color:rgba(255,255,255,0.3);margin-top:2px">View posters →</div>' +
+      '</div>';
+    c.onclick = function() { window.location.href = a.url; };
+    c.onmouseenter = function() { c.style.borderColor='rgba(255,255,255,0.4)'; c.style.boxShadow='0 0 0 2px rgba(255,255,255,0.08)'; };
+    c.onmouseleave = function() { c.style.borderColor='rgba(255,255,255,0.08)'; c.style.boxShadow='none'; };
+    g.appendChild(c);
+  });
+  wrap.appendChild(g);
+  return wrap;
+}
+
+/* ── Action Figure free gift upsell ── */
+function buildActionFigureUpsell(price) {
+  var cards = price >= 499 ? 5 : price >= 299 ? 3 : 0;
+  if (!cards) return null;
+  var w = document.createElement('div');
+  w.style.cssText = 'background:linear-gradient(135deg,#1a0a00,#2d1500);border:1px solid rgba(245,158,11,0.4);border-radius:12px;padding:16px;margin-bottom:24px;display:flex;align-items:center;gap:14px';
+  w.innerHTML =
+    '<div style="font-size:36px;margin-right:4px">🎴</div>' +
+    '<div style="flex:1">' +
+      '<div style="font-size:13px;font-weight:800;color:#fbbf24;margin-bottom:4px">FREE Gift Included!</div>' +
+      '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">' +
+        '<img src="https://picsum.photos/40/40?random=999" alt="" style="width:36px;height:36px;border-radius:6px;object-fit:cover;opacity:0.8">' +
+        '<div>' +
+          '<div style="font-size:12px;color:rgba(255,255,255,0.9);font-weight:600">'+cards+' Premium Collector Cards</div>' +
+          '<div style="font-size:10px;color:rgba(255,255,255,0.4)">Worth ₹'+(cards*49)+'</div>' +
+        '</div>' +
+      '</div>' +
+      '<div style="font-size:10px;color:rgba(255,255,255,0.4)">📦 Pre-order · Delivered in 5–7 business days</div>' +
+    '</div>';
+  return w;
+}
+
+/* ── Shipping bar ── */
+function buildShippingBar() {
+  var w = document.createElement('div');
+  w.id = 'shippingBarWrap';
+  w.style.cssText = 'background:#0d0d0d;border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px 16px;margin-bottom:24px';
+  w.innerHTML =
+    '<div id="shippingBarText" style="font-size:11px;color:rgba(255,255,255,0.6);margin-bottom:8px">Calculating shipping...</div>' +
+    '<div style="background:rgba(255,255,255,0.08);border-radius:999px;height:4px;overflow:hidden">' +
+      '<div id="shippingBarFill" style="height:100%;background:linear-gradient(90deg,#22c55e,#16a34a);border-radius:999px;transition:width 0.4s;width:0%"></div>' +
+    '</div>';
+  return w;
+}
+
+function updateShippingBar() {
+  var textEl = document.getElementById('shippingBarText');
+  var fillEl = document.getElementById('shippingBarFill');
+  if (!textEl || !fillEl) return;
+  var info = getShippingInfo();
+  var pct  = Math.min(100, Math.round((info.total / FREE_SHIP_MIN) * 100));
+  fillEl.style.width = pct + '%';
+  if (info.freeShip) {
+    textEl.innerHTML = '<span style="color:#22c55e;font-weight:700">✓ FREE shipping unlocked!</span>';
+  } else {
+    var need = Math.ceil(FREE_SHIP_MIN - info.total);
+    textEl.textContent = '📦 Add ₹' + need + ' more for FREE shipping (₹70 shipping cost otherwise)';
+  }
+}
+
+/* ── Size / frame / price helpers ── */
+var POSTER_SIZE_DEFS = {
+  'A4':            { label:'A4',               dims:'8.3 × 11.7 in', price:59,  imgKey:'image'  },
+  'A5':            { label:'A5',               dims:'5.8 × 8.3 in',  price:33,  imgKey:'image'  },
+  'Portrait':      { label:'Portrait',         dims:'9:16 ratio',    price:65,  imgKey:'image2' },
+  'Landscape':     { label:'Single A4',        dims:'Landscape A4',  price:70,  imgKey:'image3' },
+  'LandscapeSplit':{ label:'Split Set (3×A4)', dims:'3 panels A4',   price:169, imgKey:'image3' }
+};
+
+function _getSizeFamily(sz) {
+  if (sz === 'A5') return 'A5';
+  if (sz === 'Portrait') return 'Portrait';
+  if (sz === 'Landscape' || sz === 'LandscapeSplit') return 'Landscape';
+  return 'A4';
+}
+
+function setSizePoster(sz, def, btn, p) {
+  selSize = sz;
+  document.querySelectorAll('.size-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+
+  var imgKey = (def && def.imgKey) ? def.imgKey : 'image';
+  var newSrc = p[imgKey] || p.image || '';
+  var mainImg = document.getElementById('mainProductImg');
+  if (mainImg) {
+    mainImg.style.opacity = '0';
+    setTimeout(function(){
+      if (newSrc) {
+        mainImg.src = newSrc;
+        mainImg.onload = function() { mainImg.style.opacity = '1'; };
+        mainImg.onerror = function() { mainImg.style.opacity = '1'; };
+      } else {
+        mainImg.style.opacity = '1';
+      }
+    }, 150);
+  }
+
+  var frameSection = document.getElementById('frameSection');
+  if (frameSection) {
+    frameSection.style.display = (sz === 'A4') ? 'block' : 'none';
+    if (sz !== 'A4') { selFrame = 'No Frame'; }
+  }
+
+  var thumbs = document.querySelectorAll('.prod-thumb');
+  var imgIdx = ['image','image2','image3'].indexOf(imgKey);
+  thumbs.forEach(function(t, i){ t.classList.toggle('active', i === imgIdx); });
+
+  updatePriceDisplay();
+}
+
+function setSize(s, el) {
+  selSize = s;
+  document.querySelectorAll('.size-btn').forEach(function(b){ b.classList.remove('active'); });
+  el.classList.add('active');
+  updatePriceDisplay();
+}
+
+function setFrame(f, el) {
+  selFrame = f;
+  document.querySelectorAll('.frame-btn').forEach(function(b){ b.classList.remove('active'); });
+  el.classList.add('active');
+  updatePriceDisplay();
+}
+
+function _getPosterPrice(sz, frame) {
+  if (!product) return 0;
+  var cp = product.custom_price && product.custom_price > 0;
+  var PRICE_MAP = { 'A4':59, 'A5':33, 'Portrait':65, 'Landscape':70, 'LandscapeSplit':169 };
+  var base;
+  if (cp) {
+    var a4p = product.custom_price;
+    if (sz === 'A5')                  base = Math.round(a4p * 0.56);
+    else if (sz === 'Portrait')       base = Math.round(a4p * 1.1);
+    else if (sz === 'Landscape')      base = 70;
+    else if (sz === 'LandscapeSplit') base = a4p;
+    else                              base = a4p;
+  } else {
+    base = PRICE_MAP[sz] || 59;
+  }
+  if (frame === 'Black Frame' && sz === 'A4') base += 130;
+  return base;
+}
+
+function updatePriceDisplay() {
+  if (!product) return;
+  var priceEl = document.getElementById('livePriceEl');
+  if (!priceEl) return;
+  var isPaper = ['Posters'].indexOf(product.category) !== -1;
+  var price = isPaper ? _getPosterPrice(selSize, selFrame) : product.price;
+  var suffix = '';
+  if (isPaper && selFrame !== 'No Frame') {
+    suffix = '<span style="font-size:11px;color:rgba(255,255,255,0.35);margin-left:8px;font-weight:400">incl. ' + selFrame + '</span>';
+  }
+  priceEl.innerHTML = '<span class="price-num">&#8377;' + price + '</span>' + suffix;
+}
+
+function handleAddToCart() {
+  if (!product) return;
+  var isPaper = ['Posters'].indexOf(product.category) !== -1;
+  var cartPrice = isPaper ? _getPosterPrice(selSize, selFrame) : product.price;
+  var cartImg = isPaper ? (product[POSTER_SIZE_DEFS[selSize] ? POSTER_SIZE_DEFS[selSize].imgKey : 'image'] || product.image) : product.image;
+  var sf = _getSizeFamily(selSize);
+  addToCart({id:product.id, name:product.name, price:cartPrice, image:cartImg, size:selSize, frame:selFrame, sizeFamily:sf, poster_type:product.poster_type||''});
+}
+
+function handleBuyNow() {
+  if (!product) return;
+  var isPaper = ['Posters'].indexOf(product.category) !== -1;
+  var buyPrice = isPaper ? _getPosterPrice(selSize, selFrame) : product.price;
+  var buyImg = isPaper ? (product[POSTER_SIZE_DEFS[selSize] ? POSTER_SIZE_DEFS[selSize].imgKey : 'image'] || product.image) : product.image;
+  var sf = _getSizeFamily(selSize);
+  addToCart({id:product.id, name:product.name, price:buyPrice, image:buyImg, size:selSize, frame:selFrame, sizeFamily:sf, poster_type:product.poster_type||''});
+  location.href = '/checkout.html';
+}
+
+function makeRelatedCard(p) {
+  return novaCard(p);
+}
+
+async function loadSuggested(theme, excludeId) {
+  try {
+    var [r1, r2] = await Promise.all([
+      fetch('/api/products?category=' + encodeURIComponent('Action Figures') + '&limit=20'),
+      fetch('/api/products?category=' + encodeURIComponent('Collectibles') + '&limit=20')
+    ]);
+    var [d1, d2] = await Promise.all([r1.json(), r2.json()]);
+    var all = [
+      ...(Array.isArray(d1) ? d1 : (d1.products || [])),
+      ...(Array.isArray(d2) ? d2 : (d2.products || []))
+    ].filter(function(p) { return String(p.id) !== String(excludeId); });
+
+    if (typeof novaShuffled === 'function') {
+      all = novaShuffled(all, 'suggested|' + excludeId);
+    }
+    var list = all.slice(0, 8);
+    var grid = document.getElementById('suggestedGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    if (!list.length) { var sd = document.querySelector('.sec-dark'); if(sd) sd.style.display = 'none'; return; }
+    var seeAll = document.getElementById('suggestedSeeAll');
+    if (seeAll) seeAll.href = '/shop.html?category=Action+Figures';
+    list.forEach(function(p) { grid.appendChild(makeRelatedCard(p)); });
+  } catch(e) { console.warn('Related products error:', e.message); }
+}
+
+async function loadMoreFromTheme(theme, excludeId) {
+  if (!product) return;
+  try {
+    var curGroup = (typeof novaGetLayoutGroup === 'function') ? novaGetLayoutGroup(product) : 'a4poster';
+    var url = '/api/products?limit=80';
+    if (theme) url += '&theme=' + encodeURIComponent(theme);
+    var res  = await fetch(url);
+    var data = await res.json();
+    var all  = (Array.isArray(data) ? data : (data.products || [])).filter(function(p) {
+      return String(p.id) !== String(excludeId);
+    });
+    var different = all.filter(function(p) {
+      return (typeof novaGetLayoutGroup === 'function') ? novaGetLayoutGroup(p) !== curGroup : true;
+    });
+    var pool   = different.length ? different : all;
+    var picked = (typeof novaPickSingleGroup === 'function')
+      ? novaPickSingleGroup(pool, 'moretheme|' + excludeId)
+      : { group: 'a4poster', products: pool };
+    var list = picked.products.slice(0, 8);
+    var grid = document.getElementById('moreThemeGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    var GROUP_LABELS = {
+      'portrait':    { lbl:'Portrait Posters',      title:'You May Also Like',   href:'/shop.html?category=Posters&subcategory=Portrait+Posters' },
+      'a4poster':    { lbl:'More Posters',           title:'Complete the Look',   href:'/shop.html?category=Posters' },
+      'collectible': { lbl:'Action Figures & More',  title:'Collectors Corner',   href:'/shop.html?category=Action+Figures' },
+      'special':     { lbl:'Special Edition',        title:'Limited & Exclusive', href:'/shop.html?category=Limited+Edition' },
+      'landscape':   { lbl:'Split Sets',             title:'Split Poster Sets',   href:'/shop.html?category=Posters&subcategory=Landscape+Posters' },
+    };
+    var info = GROUP_LABELS[picked.group] || GROUP_LABELS['a4poster'];
+    var lbl = document.getElementById('moreThemeLbl');
+    var ttl = document.getElementById('moreThemeTitle');
+    var lnk = document.getElementById('moreThemeLink');
+    if (lbl) lbl.textContent = info.lbl;
+    if (ttl) ttl.textContent = info.title;
+    if (lnk) { lnk.href = info.href; lnk.textContent = 'See All →'; }
+    if (!list.length) { var mts = document.getElementById('moreThemeSec'); if(mts) mts.style.display='none'; return; }
+    list.forEach(function(p) { grid.appendChild(makeRelatedCard(p)); });
+  } catch(e) { console.warn('White block error:', e.message); }
+}
+
+async function loadNewArrivals(excludeId) {
+  var grid = document.getElementById('newArrivalsGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  for (var i = 0; i < 6; i++) {
+    var sk = document.createElement('div');
+    sk.className = 'pc-d pc-skeleton pc-carousel-card';
+    sk.innerHTML = '<div class="pc-skel-img"></div><div class="pc-d-body"><div class="pc-skel-line" style="width:40%;height:8px;margin-bottom:6px"></div><div class="pc-skel-line" style="width:80%;height:10px;margin-bottom:8px"></div><div class="pc-skel-btn"></div></div>';
+    grid.appendChild(sk);
+  }
+  try {
+    var curGroup2  = (typeof novaGetLayoutGroup === 'function') ? novaGetLayoutGroup(product) : 'a4poster';
+    var themeParam = product && product.theme ? '&theme=' + encodeURIComponent(product.theme) : '';
+    var res  = await fetch('/api/products?sort=new&limit=80' + themeParam);
+    var data = await res.json();
+    var all  = (Array.isArray(data) ? data : (data.products || [])).filter(function(p) {
+      return String(p.id) !== String(excludeId);
+    });
+    var different2 = all.filter(function(p) {
+      return (typeof novaGetLayoutGroup === 'function') ? novaGetLayoutGroup(p) !== curGroup2 : true;
+    });
+    var pool2   = different2.length ? different2 : all;
+    var picked2 = (typeof novaPickSingleGroup === 'function')
+      ? novaPickSingleGroup(pool2, 'newarrivals|' + excludeId)
+      : { group: 'a4poster', products: pool2 };
+    var list = picked2.products.slice(0, 12);
+    grid.innerHTML = '';
+    if (!list.length) { document.getElementById('newArrivalsSec').style.display = 'none'; return; }
+    list.forEach(function(p) { grid.appendChild(makeRelatedCard(p)); });
+  } catch(e) { console.warn('New arrivals error:', e); }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  loadProduct();
+  if (typeof initReveal === 'function') initReveal();
+});
+</script>
+</body>
+</html>

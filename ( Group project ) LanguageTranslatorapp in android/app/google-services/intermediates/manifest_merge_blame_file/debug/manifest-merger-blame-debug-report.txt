@@ -1,0 +1,82 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.languagetranslatorapp"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="16"
+8-->C:\Users\shish\AndroidStudioProjects\LanguageTranslatorapp\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="32" />
+9-->C:\Users\shish\AndroidStudioProjects\LanguageTranslatorapp\app\src\main\AndroidManifest.xml
+10
+11    <application
+11-->C:\Users\shish\AndroidStudioProjects\LanguageTranslatorapp\app\src\main\AndroidManifest.xml:5:5-28:19
+12        android:allowBackup="true"
+12-->C:\Users\shish\AndroidStudioProjects\LanguageTranslatorapp\app\src\main\AndroidManifest.xml:6:9-35
+13        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+13-->[androidx.core:core:1.8.0] C:\Users\shish\.gradle\caches\transforms-3\87a796fe63836d99a2198ac6a6284cb3\transformed\core-1.8.0\AndroidManifest.xml:24:18-86
+14        android:dataExtractionRules="@xml/data_extraction_rules"
+14-->C:\Users\shish\AndroidStudioProjects\LanguageTranslatorapp\app\src\main\AndroidManifest.xml:7:9-65
+15        android:debuggable="true"
+16        android:fullBackupContent="@xml/backup_rules"
+16-->C:\Users\shish\AndroidStudioProjects\LanguageTranslatorapp\app\src\main\AndroidManifest.xml:8:9-54
+17        android:icon="@mipmap/ic_launcher"
+17-->C:\Users\shish\AndroidStudioProjects\LanguageTranslatorapp\app\src\main\AndroidManifest.xml:9:9-43
+18        android:label="@string/app_name"
+18-->C:\Users\shish\AndroidStudioProjects\LanguageTranslatorapp\app\src\main\AndroidManifest.xml:10:9-41
+19        android:roundIcon="@mipmap/ic_launcher_round"
+19-->C:\Users\shish\AndroidStudioProjects\LanguageTranslatorapp\app\src\main\AndroidManifest.xml:11:9-54
+20        android:supportsRtl="true"
+20-->C:\Users\shish\AndroidStudioProjects\LanguageTranslatorapp\app\src\main\AndroidManifest.xml:12:9-35
+21        android:theme="@style/Theme.LanguageTranslatorApp" >
+21-->C:\Users\shish\AndroidStudioProjects\LanguageTranslatorapp\app\src\main\AndroidManifest.xml:13:9-59
+22        <activity
+22-->C:\Users\shish\AndroidStudioProjects\LanguageTranslatorapp\app\src\main\AndroidManifest.xml:15:9-27:20
+23            android:name="com.example.languagetranslatorapp.MainActivity"
+23-->C:\Users\shish\AndroidStudioProjects\LanguageTranslatorapp\app\src\main\AndroidManifest.xml:16:13-41
+24            android:exported="true" >
+24-->C:\Users\shish\AndroidStudioProjects\LanguageTranslatorapp\app\src\main\AndroidManifest.xml:17:13-36
+25            <intent-filter>
+25-->C:\Users\shish\AndroidStudioProjects\LanguageTranslatorapp\app\src\main\AndroidManifest.xml:18:13-22:29
+26                <action android:name="android.intent.action.MAIN" />
+26-->C:\Users\shish\AndroidStudioProjects\LanguageTranslatorapp\app\src\main\AndroidManifest.xml:19:17-69
+26-->C:\Users\shish\AndroidStudioProjects\LanguageTranslatorapp\app\src\main\AndroidManifest.xml:19:25-66
+27
+28                <category android:name="android.intent.category.LAUNCHER" />
+28-->C:\Users\shish\AndroidStudioProjects\LanguageTranslatorapp\app\src\main\AndroidManifest.xml:21:17-77
+28-->C:\Users\shish\AndroidStudioProjects\LanguageTranslatorapp\app\src\main\AndroidManifest.xml:21:27-74
+29            </intent-filter>
+30
+31            <meta-data
+31-->C:\Users\shish\AndroidStudioProjects\LanguageTranslatorapp\app\src\main\AndroidManifest.xml:24:13-26:36
+32                android:name="android.app.lib_name"
+32-->C:\Users\shish\AndroidStudioProjects\LanguageTranslatorapp\app\src\main\AndroidManifest.xml:25:17-52
+33                android:value="" />
+33-->C:\Users\shish\AndroidStudioProjects\LanguageTranslatorapp\app\src\main\AndroidManifest.xml:26:17-33
+34        </activity>
+35
+36        <provider
+36-->[androidx.emoji2:emoji2:1.2.0] C:\Users\shish\.gradle\caches\transforms-3\c03fa7bc00a04a375204b573f0966d9f\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+37            android:name="androidx.startup.InitializationProvider"
+37-->[androidx.emoji2:emoji2:1.2.0] C:\Users\shish\.gradle\caches\transforms-3\c03fa7bc00a04a375204b573f0966d9f\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+38            android:authorities="com.example.languagetranslatorapp.androidx-startup"
+38-->[androidx.emoji2:emoji2:1.2.0] C:\Users\shish\.gradle\caches\transforms-3\c03fa7bc00a04a375204b573f0966d9f\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+39            android:exported="false" >
+39-->[androidx.emoji2:emoji2:1.2.0] C:\Users\shish\.gradle\caches\transforms-3\c03fa7bc00a04a375204b573f0966d9f\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+40            <meta-data
+40-->[androidx.emoji2:emoji2:1.2.0] C:\Users\shish\.gradle\caches\transforms-3\c03fa7bc00a04a375204b573f0966d9f\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+41                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+41-->[androidx.emoji2:emoji2:1.2.0] C:\Users\shish\.gradle\caches\transforms-3\c03fa7bc00a04a375204b573f0966d9f\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+42                android:value="androidx.startup" />
+42-->[androidx.emoji2:emoji2:1.2.0] C:\Users\shish\.gradle\caches\transforms-3\c03fa7bc00a04a375204b573f0966d9f\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+43            <meta-data
+43-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\shish\.gradle\caches\transforms-3\0ce9e5f033589fdf0ab757f82f7808ec\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+44                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+44-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\shish\.gradle\caches\transforms-3\0ce9e5f033589fdf0ab757f82f7808ec\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+45                android:value="androidx.startup" />
+45-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\shish\.gradle\caches\transforms-3\0ce9e5f033589fdf0ab757f82f7808ec\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+46        </provider>
+47    </application>
+48
+49</manifest>

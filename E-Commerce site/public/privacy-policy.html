@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Nova Studioz</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<nav class="navbar">
+  <a href="/" class="nav-logo-wrap"><img src="/images/logo.png" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt=""><span class="nav-logo-text" style="display:none">NS</span></a>
+  <div class="nav-links"><a href="/index.html" class="nav-link">Home</a><a href="/shop.html" class="nav-link">Shop</a><a href="/contact.html" class="nav-link">Contact</a></div>
+  <div class="nav-right">
+    <div class="nav-user-wrap" id="navUserWrap">
+      <button class="nav-icon-btn" id="navUserBtn" onclick="toggleDropdown()" title="Account"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></button>
+      <div class="user-dropdown" id="userDropdown">
+        <a href="/login.html" class="dd-item" id="ddLogin"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg> Login / Sign up</a>
+        <a href="/profile.html" class="dd-item" id="ddProfile" style="display:none"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg> Profile</a>
+        <a href="/orders.html" class="dd-item" id="ddOrders" style="display:none"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> My Orders</a>
+        <div class="dd-sep" id="ddSep" style="display:none"></div>
+        <button class="dd-item danger" id="ddLogout" onclick="logout()" style="display:none"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg> Logout</button>
+      </div>
+    </div>
+    <button class="nav-icon-btn" onclick="openCart()" style="position:relative"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="cart-dot" id="cartDot"></span></button>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/index.html" class="mob-link">Home</a><a href="/shop.html" class="mob-link">Shop</a><a href="/contact.html" class="mob-link">Contact</a>
+</div>
+<div id="cartOverlay" onclick="closeCart()"></div>
+<div id="cartDrawer" class="cart-drawer"><div class="cart-hd"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:14px;font-weight:700;color:#fff">Cart</span><span class="cart-badge-pill" id="cartBadge">0</span></div><button class="cart-close-btn" onclick="closeCart()">✕</button></div><div id="cartItemsList" class="cart-items-list"></div><div class="cart-ft"><div class="cart-row"><span>Total</span><span id="cartSubtotal">₹0</span></div><div class="cart-total-row"><span>Total</span><span id="cartTotal">₹0</span></div><button class="btn-w" style="width:100%;justify-content:center" onclick="closeCart();goCheckout()">Checkout →</button></div></div>
+<div class="page-content">
+  <div class="wrap" style="max-width:780px;padding-top:40px;padding-bottom:80px">
+    <p style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--w20);margin-bottom:12px">Nova Studioz · Policies</p>
+    <h1 style="font-size:clamp(26px,4vw,40px);font-weight:900;letter-spacing:-0.02em;color:var(--w88);margin-bottom:40px">Privacy Policy</h1>
+    <div class="policy-body">
+      <p>At Nova Studioz, your privacy is important to us. This policy explains how we collect and use your information.</p>
+      <h2>Information We Collect</h2>
+      <p>We collect basic customer information such as name, email address, phone number, and delivery address to process orders and provide customer support.</p>
+      <h2>How We Use Your Information</h2>
+      <ul>
+        <li>To process and fulfill your orders</li>
+        <li>To send order confirmations and shipping updates</li>
+        <li>To respond to customer support queries</li>
+      </ul>
+      <h2>Data Sharing</h2>
+      <p>We do not sell or share your personal information with third parties, except as required to fulfill your order (for example, with delivery partners).</p>
+      <h2>Payments</h2>
+      <p>All payments are securely processed through Razorpay. We do not store your card or payment details on our servers.</p>
+      <h2>Contact</h2>
+      <p>For any privacy-related queries, contact us at <a href="mailto:novastudioz010@gmail.com" class="policy-link">novastudioz010@gmail.com</a>.</p>
+      <p>By using our website, you agree to the terms of this privacy policy.</p>
+    </div>
+    <div style="margin-top:48px;padding-top:24px;border-top:1px solid var(--bdr);display:flex;gap:12px;flex-wrap:wrap">
+      <a href="/refund-policy.html" class="btn-o btn-sm">Refund Policy</a>
+      <a href="/shipping-policy.html" class="btn-o btn-sm">Shipping Policy</a>
+      <a href="/privacy-policy.html" class="btn-o btn-sm">Privacy Policy</a>
+      <a href="/terms.html" class="btn-o btn-sm">Terms &amp; Conditions</a>
+    </div>
+  </div>
+</div>
+
+<!-- FANART DISCLAIMER -->
+<div class="fanart-disclaimer">
+  <div class="wrap">
+    <div class="fanart-inner">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;opacity:0.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <p class="fanart-disclaimer-text">
+        All artworks featured on this website are created as fan interpretations and are not affiliated with or endorsed by any official brand or organization unless explicitly stated.
+        If you believe any content infringes your rights, please contact us at <a href="mailto:novastudioz010@gmail.com" class="fanart-link">novastudioz010@gmail.com</a>.
+        © Copyright – All rights reserved. Nova Studioz.
+      </p>
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <p class="f-brand-name">Nova Studioz</p>
+        <p class="f-desc">Minimal posters, pop culture accessories, collectibles and lifestyle merch. Delivered across India.</p>
+        <div class="f-tags"><span class="f-tag">Posters</span><span class="f-tag">Collectibles</span><span class="f-tag">Accessories</span><span class="f-tag">T-Shirts Soon</span></div>
+        <div class="f-socials"><button class="f-soc-btn" onclick="window.open('https://instagram.com','_blank')">Instagram</button><button class="f-soc-btn" onclick="window.open('https://wa.me/919999999999','_blank')">WhatsApp</button></div>
+      </div>
+      <div><p class="f-col-title">Shop</p><div class="f-links"><a href="/shop.html" class="f-link">All Products</a><a href="/shop.html?filter=themes" class="f-link">Themes</a><a href="/shop.html?sort=new" class="f-link">New Arrivals</a><a href="/shop.html?category=Limited Editions" class="f-link">Limited Editions</a><a href="/custom-order.html" class="f-link">Custom Order</a></div></div>
+      <div><p class="f-col-title">Company</p><div class="f-links"><a href="/about.html" class="f-link">About Us</a><a href="/contact.html" class="f-link">Contact</a><a href="/shipping-policy.html" class="f-link">Shipping Policy</a><a href="/refund-policy.html" class="f-link">Refund Policy</a><a href="/privacy-policy.html" class="f-link">Privacy Policy</a><a href="/terms.html" class="f-link">Terms &amp; Conditions</a></div></div>
+      <div><p class="f-col-title">Account</p><div class="f-links"><a href="/login.html" class="f-link">Login</a><a href="/signup.html" class="f-link">Sign Up</a><a href="/orders.html" class="f-link">My Orders</a><a href="/profile.html" class="f-link">Profile</a></div></div>
+    </div>
+    <div class="footer-bottom"><span class="f-copy">© 2025 Nova Studioz. All rights reserved.</span><span class="f-copy">Made with ♥ in India</span></div>
+  </div>
+</footer>
+<div id="toastCont"></div>
+<script src="/js/utils.js?v=10"></script>
+<script src="/js/nav-cart.js"></script>
+</body>
+</html>
