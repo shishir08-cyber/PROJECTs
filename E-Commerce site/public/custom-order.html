@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Custom Order — Nova Studioz</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<nav class="navbar"><a href="/" class="nav-logo-wrap"><img src="/images/logo.png" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt=""><span class="nav-logo-text" style="display:none">NS</span></a><div class="nav-links"><a href="/index.html" class="nav-link">Home</a><a href="/shop.html" class="nav-link">Shop</a><a href="/contact.html" class="nav-link">Contact</a></div><div class="nav-right"><button class="nav-icon-btn" onclick="openCart()" style="position:relative"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="cart-dot" id="cartDot"></span></button></div></nav>
+<div id="cartOverlay" onclick="closeCart()"></div>
+<div id="cartDrawer" class="cart-drawer"><div class="cart-hd"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:14px;font-weight:700;color:#fff">Cart</span><span class="cart-badge-pill" id="cartBadge">0</span></div><button class="cart-close-btn" onclick="closeCart()">✕</button></div><div id="cartItemsList" class="cart-items-list"></div><div class="cart-ft"><div class="cart-row"><span>Total</span><span id="cartSubtotal">₹0</span></div><div class="cart-total-row"><span>Total</span><span id="cartTotal">₹0</span></div></div></div>
+
+<div class="page-content">
+  <div class="wrap" style="max-width:640px;padding-bottom:80px">
+    <div style="padding:40px 0 32px;border-bottom:1px solid var(--bdr);margin-bottom:40px">
+      <p style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--w20);margin-bottom:10px">Personalised</p>
+      <h1 style="font-size:clamp(28px,4vw,42px);font-weight:900;letter-spacing:-0.02em;text-transform:uppercase;color:var(--w88);margin-bottom:10px">Custom Order</h1>
+      <p style="font-size:13px;font-weight:300;color:var(--w35)">Tell us what you want — we'll make it happen. Redirecting to WhatsApp for a faster conversation.</p>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div><label class="input-label">Your Name</label><input class="input-field" id="coName" placeholder="Your name"></div>
+      <div><label class="input-label">What do you need?</label><textarea class="input-field" id="coDetails" rows="5" placeholder="e.g. Custom anime poster A3 size, black frame, gift for a friend. Or personalised couple poster..."></textarea></div>
+      <div><label class="input-label">Size Preference</label>
+        <select class="input-field" id="coSize"><option>A4</option><option>A3</option><option>Custom / Not sure</option></select>
+      </div>
+      <div><label class="input-label">Budget (approx)</label><input class="input-field" id="coBudget" placeholder="e.g. ₹300–500"></div>
+      <button class="btn-w" onclick="sendToWhatsApp()" style="width:100%;justify-content:center;padding:14px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.99.583 3.837 1.592 5.388L2 22l4.764-1.527A9.952 9.952 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 11.999 2zm0 18c-1.694 0-3.27-.489-4.594-1.33L4 20l1.356-3.303A7.952 7.952 0 0 1 4 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+        Send via WhatsApp
+      </button>
+      <p style="font-size:11px;color:var(--w20);text-align:center">We'll respond within a few hours · Mon–Sat 10am–7pm IST</p>
+    </div>
+  </div>
+</div>
+<footer class="footer">
+<div class="wrap">
+  <div class="footer-grid">
+    <div>
+      <p class="f-brand-name">Nova Studioz</p>
+      <p class="f-desc">Minimal posters, pop culture accessories, collectibles and lifestyle merch. Delivered across India.</p>
+      <div class="f-socials">
+        <button class="f-soc-btn" onclick="window.open('https://www.instagram.com/novastudioz_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==')">Instagram</button>
+        <button class="f-soc-btn" onclick="window.open('https://chat.whatsapp.com/EyW4wrUTk4uDSLbFrwB4fi','_blank')">WhatsApp</button>
+      </div>
+    </div>
+    <div>
+      <p class="f-col-title">Shop</p>
+      <div class="f-links">
+        <a href="/shop.html" class="f-link">All Products</a>
+        <a href="/shop.html?filter=themes" class="f-link">Themes</a>
+        <a href="/shop.html?sort=new" class="f-link">New Arrivals</a>
+        <a href="/custom-order.html" class="f-link">Custom Order</a>
+      </div>
+    </div>
+    <div>
+      <p class="f-col-title">Company</p>
+      <div class="f-links">
+        <a href="/about.html" class="f-link">About Us</a>
+        <a href="/contact.html" class="f-link">Contact</a>
+        <a href="/shipping-policy.html" class="f-link">Shipping</a>
+        <a href="/refund-policy.html" class="f-link">Refund Policy</a>
+        <a href="/privacy-policy.html" class="f-link">Privacy Policy</a>
+        <a href="/terms.html" class="f-link">Terms</a>
+      </div>
+    </div>
+    <div>
+      <p class="f-col-title">Account</p>
+      <div class="f-links">
+        <a href="/login.html" class="f-link">Login / Sign up</a>
+        <a href="/orders.html" class="f-link">My Orders</a>
+        <a href="/profile.html" class="f-link">Profile</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="f-copy">© 2025 Nova Studioz. All rights reserved.</span>
+    <span class="f-copy">Made with ♥ in India</span>
+  </div>
+</div>
+</footer>
+<div id="toastCont"></div>
+<script src="/js/utils.js?v=10"></script>
+<script src="/js/nav-cart.js"></script>
+<script>
+function sendToWhatsApp() {
+  const name = document.getElementById('coName').value.trim() || 'Customer';
+  const details = document.getElementById('coDetails').value.trim();
+  const size = document.getElementById('coSize').value;
+  const budget = document.getElementById('coBudget').value.trim();
+  if (!details) { toast('Please describe what you need', 'error'); return; }
+  const msg = `Hi Nova Studioz! 👋\n\nName: ${name}\nCustom Order Details: ${details}\nSize: ${size}${budget ? '\nBudget: ' + budget : ''}`;
+  const phone = '919999999999'; // Replace with actual WhatsApp number
+  window.open(`https://chat.whatsapp.com/EyW4wrUTk4uDSLbFrwB4fi?text=${encodeURIComponent(msg)}`, '_blank');
+}
+</script>
+</body>
+</html>

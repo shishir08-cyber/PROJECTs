@@ -1,0 +1,8 @@
+Generate these yourself (ChatGPT image / Higgsfield / Magnific), save into IMAGES/ with these exact names.
+Each project card appears on the site automatically the moment its first file exists.
+
+streetwear-1/2/3.jpg  (portrait 4:5) "Photorealistic fashion campaign, Indian male model, 22, oversized black graphic T-shirt, urban street at night, sodium streetlight rim light, 85mm, shallow depth of field, realistic fabric folds, premium streetwear advertising, film grain"
+beyond-1/2.jpg        "Surreal fashion editorial, model in tailored monochrome outfit standing inside futuristic brutalist architecture, atmospheric haze, cinematic wide shot, 35mm"
+product-front/back/fabric.jpg  "Ghost-mannequin front view of an oversized graphic tee on a clean light-grey studio background, soft realistic shadow" (then back view, then macro cotton texture)
+frame-original.jpg / frame-ai.jpg / frame-final.jpg  your own photo, its AI-enhanced version, and the Photoshop-retouched final (same framing for all three)
+model-1/2/3.jpg       same character reference reused in three locations, outfits and lighting

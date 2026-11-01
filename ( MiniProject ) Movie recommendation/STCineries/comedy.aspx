@@ -1,0 +1,800 @@
+﻿<%@ Page Language="C#" %>
+
+<!DOCTYPE html>
+
+<script runat="server">
+
+</script>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+     <style>
+        @font-face 
+        {
+            font-family : Abel;
+            src:url('Abel-Regular.ttf') 
+          
+        }
+         @font-face 
+        {
+            font-family : Ariel;
+            src:url('Ariel Black.ttf') 
+        }
+         @font-face 
+        {
+            font-family : BIG JOHN;
+            src:url('BIG JOHN.otf') 
+        }
+
+html, body {
+    margin: 0%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+:root {
+    /*      Theme colors        */
+    --text-gray: #3f4954;
+    --text-light: #686666da;
+    --bg-color: #0f0f0f;
+    --white: #ffffff;
+    --midnight: #104f55;
+    /* gradient color   */
+    --sky: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+    /*      theme font-family   */
+    --Abel: 'Abel', cursive;
+    --Anton: 'Anton', cursive;
+    --Josefin: 'Josefin', cursive;
+    --Lexend: 'Lexend', cursive;
+    --Livvic: 'Livvic', cursive;
+}
+
+
+/* ---------------- Global Classes ---------------*/
+
+a {
+    text-decoration: none;
+    color: var(--text-gray);
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+ul {
+    list-style-type: none;
+}
+
+h1 {
+    font-family: var( --Abel);
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-family: var(--Abel);
+}
+
+h3 {
+    font-family: var(--Abel);
+    font-size: 1.3rem;
+}
+
+button.btn {
+    border: none;
+    border-radius: 2rem;
+    padding: 1rem 3rem;
+    font-size: 1rem;
+    font-family: var(--Abel);
+    cursor: pointer;
+    background-color : lightskyblue ;
+}
+.Button {
+  width: 140px;
+  height: 45px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color:  var(--white);
+  background-color: transparent;
+  border:  1px solid var(--white);
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+            border: 1px solid var(--white);
+            color: var(--white);
+  }
+
+.Button:hover {
+  background-color: #42b4e5;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: white;
+  transform: translateY(-7px);
+}
+span {
+    font-family: var( --Abel);
+}
+
+.container {
+    margin: 0 5vw;
+}
+
+.text-gray {
+    color: var(--text-gray);
+}
+
+p {
+    font-family: var(--Abel);
+    color: var(--text-light);
+}
+
+/* ------x------- Global Classes -------x-------*/
+
+/* --------------- navbar ----------------- */
+
+.nav {
+    background: white;
+    padding: 0 2rem;
+    height: 0rem;
+    min-height: 10vh;
+    overflow: hidden;
+    transition: height 1s ease-in-out;
+}
+
+    .nav .nav-menu {
+        justify-content: space-between;
+    }
+
+    .nav .toggle-collapse {
+        position: absolute;
+        top: 0%;
+        width: 90%;
+        cursor: pointer;
+        display: none;
+    }
+
+        .nav .toggle-collapse .toggle-icons {
+            display: flex;
+            justify-content: flex-end;
+            padding: 1.7rem 0;
+        }
+
+            .nav .toggle-collapse .toggle-icons i {
+                font-size: 1.4rem;
+                color: var(--text-gray);
+            }
+
+.collapse {
+    height: 30rem;
+}
+
+.nav .nav-items {
+    display: flex;
+    margin: 0;
+}
+
+    .nav .nav-items .nav-link {
+        padding: 1.6rem 1rem;
+        font-size: 1.1rem;
+        position: relative;
+        font-family: var(--Abel);
+        font-size: 1.1rem;
+        text-shadow: 10px 15px 20px rgba(0, 0, 0, 0.2)
+    }
+
+        .nav .nav-items .nav-link:hover {
+            background-color: var(--midnight);
+        }
+
+            .nav .nav-items .nav-link:hover a {
+                color: var(--white);
+            }
+
+.nav .nav-brand a {
+    font-size: 1.6rem;
+    padding: 1rem 0;
+    display: block;
+    font-family: var(--Ariel);
+    font-size: 1.6rem;
+}
+
+.nav .social {
+    padding: 1.4rem 0
+}
+
+    .nav .social i {
+        padding: 0 .2rem;
+    }
+
+        .nav .social i:hover {
+            color: #a1c4cf;
+        }
+
+/* -------x------- navbar ---------x------- */
+
+
+/* ----------------- Main Content----------- */
+
+
+/* --------------- Site title ---------------- */
+main .site-title {
+    background: url("20220728_071734.jpg");
+    background-size: cover;
+    height: 110vh;
+    display: flex;
+    justify-content: center;
+    
+}
+
+    main .site-title .site-background {
+        padding-top: 10rem;
+        text-align: center;
+        color: var(--white);
+        text-shadow: 10px 15px 20px rgba(0, 0, 0, 0.2)
+    }
+
+    main .site-title h1, h3 {
+        margin: .3rem;
+    }
+
+    main .site-title .btn {
+        margin: 1.8rem;
+        background:var(--sky)
+    }
+
+        main .site-title .btn:hover {
+            background: transparent;
+            border: 1px solid var(--white);
+            color: var(--white);
+        }
+
+/* --------x------ Site title --------x------- */
+
+/* --------------- Blog Carousel ------------ */
+
+main .blog {
+    background: url('Abract01.png');
+    background-repeat: no-repeat;
+    background-position: right;
+    height: 100vh;
+    width: 100%;
+    background-size: 65%;
+}
+
+    main .blog .blog-post {
+        padding-top: 6rem;      
+    }
+
+main .blog-post .blog-content  {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 80%;
+    height:10%;
+    margin: 1rem 0.2rem;
+    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
+   
+}
+
+main .blog-content .blog-title {
+    padding: 2rem 0;
+}
+
+main .blog-content .btn-blog {
+    padding: .7rem 2rem;
+    background: var(--sky);
+    margin: .5rem;
+   
+}
+
+main .blog-content span {
+    display: block ;
+    border-radius :8px;
+   
+}
+
+section .container .owl-nav {
+    position: absolute;
+    top: 0%;
+    margin: 0 auto;
+    width: 100%;
+    border-radius :8px;
+}
+
+        
+
+
+.owl-theme .owl-nav [class*='owl-']:hover {
+    background: transparent;
+    color: var(--midnight);
+}
+
+.owl-theme .owl-nav [class*='owl-'] {
+    outline: none;
+}
+
+
+/* -------x------- Blog Carousel -----x------ */
+
+/* ---------------- Site Content ----------------*/
+
+main .site-content {
+    display: grid;
+    grid-template-columns: 70% 30%;
+}
+
+main .post-content {
+    width: 100%;
+}
+
+main .site-content .post-content > .post-image, .post-title {
+    padding: 1rem 2rem;
+    position: relative;
+}
+
+    main .site-content .post-content > .post-image .post-info {
+        background: var(--sky);
+        padding: 1rem;
+        position: absolute;
+        bottom: 0%;
+        left: 20vw;
+        box-shadow: 10px 15px 20px rgba(0, 0, 0, 0.2);
+         border-radius:12px;
+      
+    }
+
+    main .site-content .post-content > .post-image > div {
+        overflow: hidden;
+       box-shadow: 10px 15px 20px rgba(0, 0, 0, 0.2);
+        border-radius:12px;
+    }
+
+    main .site-content .post-content > .post-image .img {
+        width: 100%;
+        transition: all 1s ease;
+        box-shadow: 10px 15px 20px rgba(0, 0, 0, 0.2);
+         border-radius:12px;
+        
+    }
+
+        main .site-content .post-content > .post-image .img:hover {
+            transform: scale(1.3);
+            box-shadow: 10px 15px 20px rgba(0, 0, 0, 0.2);
+             border-radius:12px;
+        }
+
+    main .site-content .post-content > .post-image .post-info span {
+        margin: 0 .5rem;
+         border-radius:12px;
+         
+    }
+
+main .post-content .post-title a {
+    font-family: var(--Ariel);
+    font-size: 1.5rem;
+    
+}
+
+.site-content .post-content .post-title .post-btn {
+    border-radius: 0;
+    padding: .7rem 1.5rem;
+    background: var(--sky);
+}
+
+.site-content .pagination {
+    justify-content: center;
+    color: var(--text-gray);
+    margin: 4rem 0;
+}
+
+    .site-content .pagination a {
+        padding: .6rem .9rem;
+        border-radius: 2rem;
+        margin: 0 .3rem;
+        font-family: var(--Lexend);
+    }
+
+    .site-content .pagination .pages {
+        background: var(--text-gray);
+        color: var(--white);
+    }
+
+/* -------x-------- Site Content --------x-------*/
+
+
+/* --------------- Sidebar ----------------------- */
+
+.site-content > .sidebar .category-list {
+    font-family: var(--Arial Black);
+}
+
+    .site-content > .sidebar .category-list .list-items {
+        background: var(--sky);
+        padding: .4rem 1rem;
+        margin: .8rem 0;
+        box-shadow: 10px 15px 20px rgba(0, 0, 0, 0.2);
+         border-radius:8px;
+        width: 70%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+        .site-content > .sidebar .category-list .list-items a {
+            color: black;
+        }
+
+.site-content .sidebar .popular-post .post-content {
+    padding: 1rem 0;
+}
+
+.site-content .sidebar .popular-post h2 {
+    padding-top: 8rem;
+}
+
+.site-content .sidebar .popular-post .post-info {
+    padding: .4rem .1rem !important;
+    bottom: 0rem !important;
+    left: 1.5rem !important;
+    font-family:'Arial Rounded MT';
+     border-radius:8px;
+    background: orange !important;
+    color :white;
+    box-shadow: 10px 15px 20px rgba(0, 0, 0, 0.2);
+}
+
+.site-content .sidebar .popular-post .post-title a {
+    font-size: 1rem;
+}
+
+.site-content .sidebar .newsletter {
+    padding-top: 10rem;
+}
+
+    .site-content .sidebar .newsletter .form-element {
+        padding: .5rem 2rem;
+    }
+
+    .site-content .sidebar .newsletter .input-element {
+        width: 80%;
+        height: 1.9rem;
+        padding: .3rem .5rem;
+        font-family: var(--Lexend);
+        font-size: 1rem;
+    }
+
+    .site-content .sidebar .newsletter .form-btn {
+        border-radius: 0;
+        padding: .8rem 32%;
+        margin: 1rem 0;
+        background: var(--sky);
+    }
+
+.site-content .sidebar .popular-tags {
+    padding: 5rem 0;
+}
+
+    .site-content .sidebar .popular-tags .tags .tag {
+        background: var(--sky);
+        padding: .4rem 1rem;
+        border-radius: 3rem;
+        margin: .4rem .6rem;
+    }
+
+
+/* -------x------- Sidebar -----------x----------- */
+
+/* ---------x------- Main Content -----x----- */
+
+
+/* ----------------- Footer --------------------- */
+
+footer.footer {
+    height: 100%;
+    background: var(--bg-color);
+    position: relative;
+}
+
+    footer.footer .container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+         border-radius:8px;
+    }
+
+        footer.footer .container > div {
+            flex-grow: 1;
+            flex-basis: 0;
+            padding: 3rem .9rem;
+             border-radius:8px;
+        }
+
+        footer.footer .container h2 {
+            color: var(--white);
+        }
+
+    footer.footer .newsletter .form-element {
+        background: black;
+        display: inline-block;
+    }
+
+        footer.footer .newsletter .form-element input {
+            padding: .5rem .7rem;
+            border: none;
+            background: transparent;
+            color: white;
+            font-family: var(--Josefin);
+            font-size: 1rem;
+            width: 74%;
+        }
+
+        footer.footer .newsletter .form-element span {
+            background: var(--sky);
+            padding: .5rem .7rem;
+            cursor: pointer;
+        }
+
+    footer.footer .instagram div > img {
+        display: inline-block;
+        width: 25%;
+        height: 50%;
+        margin: .3rem .4rem;
+    }
+
+    footer.footer .follow div i {
+        color: var(--white);
+        padding: 0 .4rem;
+    }
+
+    footer.footer .rights {
+        justify-content: center;
+        font-family: var(--Josefin);
+    }
+
+        footer.footer .rights h4 a {
+            color: var(--white);
+        }
+
+    footer.footer .move-up {
+        position: absolute;
+        right: 6%;
+        top: 50%;
+    }
+
+        footer.footer .move-up span {
+            color: var(--midnight);
+        }
+
+            footer.footer .move-up span:hover {
+                color: var(--white);
+                cursor: pointer;
+            }
+
+/* ---------x------- Footer ----------x---------- */
+
+/*              Viewport less then or equal to 1130px            */
+
+@media only screen and (max-width: 1130px) {
+    .site-content .post-content > .post-image .post-info {
+        left: 2rem !important;
+        bottom: 1.2rem !important;
+        border-radius:8px;
+        box-shadow : 10px 10px 5px black;
+    }
+
+    .site-content .sidebar .popular-post .post-info {
+        display: none !important;
+         border-radius:8px;
+         color :darkcyan;
+    }
+
+    footer.footer .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/*      x       Viewport less then or equal to 1130px    x     */
+
+
+/*              Viewport less then or equal to 750px            */
+
+@media only screen and (max-width: 750px) {
+    .nav .nav-menu, .nav .nav-items {
+        flex-direction: column;
+    }
+
+    .nav .toggle-collapse {
+        display: initial;
+    }
+
+    main .site-content {
+        grid-template-columns: 100%;
+    }
+
+    footer.footer .container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+
+/*        x      Viewport less then or equal to 750px       x     */
+
+
+/*              Viewport less then or equal to 520px            */
+
+@media only screen and (max-width: 520px) {
+    main .blog {
+        height: 125vh;
+    }
+
+    .site-content .post-content > .post-image .post-info {
+        box-shadow :10px,10px,5px;
+        border-radius:8px;
+        display: none;
+         
+    }
+
+    footer.footer .container > div {
+        padding: 1rem .9rem !important;
+    }
+
+    footer .rights {
+        padding: 0 1.4rem;
+        text-align: center;
+    }
+
+    nav .toggle-collapse {
+        width: 80% !important;
+    }
+}
+
+.body {
+  font-family: 'Arial Rounded MT', sans-serif;
+}
+
+.overlay {
+  height: 0%;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.9);
+  overflow-y: hidden;
+  transition: 0.5s;
+}
+
+.overlay-content {
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+  color: #f1f1f1;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay {overflow-y: auto;}
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+  font-size: 40px;
+  top: 15px;
+  right: 35px;
+  }
+}
+
+       
+    /* styling search bar */
+
+
+/*        x      Viewport less then or equal to 520px       x     */
+
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+         <div>
+         <nav class="nav">
+        <div class="nav-menu flex-row">
+            <div class="nav-brand">
+                <a href="#" class="text-black">ST CINERIES</a>
+            </div>
+            <div class="toggle-collapse">
+                <div class="toggle-icons">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+            <div id="myNav" class="overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div class="overlay-content">
+    <a href="action.aspx">Action</a>
+    <a href="thriller.aspx">Thriller</a>
+    <a href="romance.aspx">Romance</a>
+    <a href="comedy.aspx">Comedy</a>
+    <a href="anime.aspx">Animation</a>
+    <a href="horror.aspx">Horror</a>
+    <a href="mystery.aspx">Mystery</a>
+    <a href="sci-fi.aspx">Sci-fi</a>
+  </div>
+</div>
+            <div>
+                <center>
+                <ul class="nav-items">
+                    <li class="nav-link">
+                        <a href="Home.aspx">HOME</a>
+                    </li>
+                    <li class="nav-link"  onclick="openNav()">&#9776;>
+                        <a href="#">CATEGORY</a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="JOIN_US.aspx">BOOK TICKETS</a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="PAGES.aspx">JOIN US</a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="CONTACT_US.aspx">CONTACT US</a>
+                    </li>
+                </ul>
+                    </center>
+            </div>   
+    </div>
+            <div class="social text-gray">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+    </nav>
+        <script>
+            function openNav() {
+                document.getElementById("myNav").style.height = "100%";
+            }
+
+            function closeNav() {
+                document.getElementById("myNav").style.height = "0%";
+            }
+        </script>
+    <!-- ------------x---------------  Navigation --------------------------x------------------- -->
+
+    <!----------------------------- Main Site Section ------------------------------>
+
+    <main>
+
+        <!------------------------ Site Title ---------------------->
+
+        <section class="site-title">
+            <div class="site-background" data-aos="fade-up" data-aos-delay="150">
+                <h1 style="text-shadow: 2px 2px 4px #000000;">S&nbsp;T&nbsp;&nbsp; C&nbsp;I&nbsp;N&nbsp;E&nbsp;R&nbsp;I&nbsp;E&nbsp;S</h1>
+                <h4 style="text-shadow: 2px 2px 4px #000000;">S&nbsp;&nbsp;&nbsp;H&nbsp;&nbsp;&nbsp;I&nbsp;&nbsp;&nbsp;S&nbsp;&nbsp;&nbsp;H&nbsp;&nbsp;&nbsp;I&nbsp;&nbsp;&nbsp;R&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;&nbsp;&nbsp;I&nbsp;&nbsp;&nbsp;R&nbsp;&nbsp;&nbsp;T&nbsp;&nbsp;&nbsp;H</h4>
+            </div>
+        </section>
+        </main>
+        </div>
+    </form>
+</body>
+</html>

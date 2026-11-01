@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile — Nova Studioz</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<nav class="navbar"><a href="/" class="nav-logo-wrap"><img src="/images/logo.png" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt=""><span class="nav-logo-text" style="display:none">NS</span></a><div class="nav-links"><a href="/index.html" class="nav-link">Home</a><a href="/shop.html" class="nav-link">Shop</a><a href="/profile.html" class="nav-link active">Profile</a></div><div class="nav-right"><button class="nav-icon-btn" onclick="openCart()" style="position:relative"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="cart-dot" id="cartDot"></span></button></div></nav>
+<div id="cartOverlay" onclick="closeCart()"></div>
+<div id="cartDrawer" class="cart-drawer"><div class="cart-hd"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:14px;font-weight:700;color:#fff">Cart</span><span class="cart-badge-pill" id="cartBadge">0</span></div><button class="cart-close-btn" onclick="closeCart()">✕</button></div><div id="cartItemsList" class="cart-items-list"></div><div class="cart-ft"><div class="cart-row"><span>Total</span><span id="cartSubtotal">₹0</span></div><div class="cart-total-row"><span>Total</span><span id="cartTotal">₹0</span></div><button class="btn-w" style="width:100%;justify-content:center" onclick="closeCart();goCheckout()">Checkout →</button></div></div>
+
+<div class="page-content">
+  <div class="wrap" style="max-width:680px;padding-bottom:80px">
+
+    <!-- HEADER -->
+    <div style="padding:32px 0 24px;border-bottom:1px solid var(--bdr);margin-bottom:32px">
+      <p style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--w20);margin-bottom:8px">Account</p>
+      <h1 style="font-size:32px;font-weight:900;letter-spacing:-0.02em;text-transform:uppercase;color:var(--w88)">My Profile</h1>
+    </div>
+
+    <!-- LOADER -->
+    <!-- NEW USER WELCOME BANNER -->
+    <div id="newUserBanner" style="display:none;background:#0d1f0d;border:1px solid rgba(34,197,94,0.25);border-radius:10px;padding:16px 20px;margin-bottom:24px">
+      <p style="font-size:14px;font-weight:700;color:#22c55e;margin-bottom:4px">👋 Welcome to Nova Studioz!</p>
+      <p style="font-size:12px;color:rgba(34,197,94,0.7);line-height:1.6">Please fill in your details below. Your phone number and address will be auto-filled at checkout — so you don't have to type them every time.</p>
+    </div>
+
+    <div id="profileLoader" style="display:flex;justify-content:center;padding:40px">
+      <div class="loader-dots"><span></span><span></span><span></span></div>
+    </div>
+
+    <div id="profileContent" style="display:none">
+
+      <!-- AVATAR ROW -->
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:32px;padding:20px;background:var(--bg1);border:1px solid var(--bdr);border-radius:12px">
+        <div style="width:52px;height:52px;border-radius:50%;background:#1a1a1a;border:1px solid var(--bdr);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:rgba(255,255,255,0.7);flex-shrink:0" id="profileAvatar">U</div>
+        <div style="flex:1;min-width:0">
+          <p style="font-size:16px;font-weight:700;color:#fff;margin-bottom:3px" id="profileName">Loading...</p>
+          <p style="font-size:12px;color:var(--w35)" id="profileEmail"></p>
+        </div>
+        <a href="/orders.html"><button class="btn-o btn-sm">My Orders</button></a>
+      </div>
+
+      <form id="profileForm">
+
+        <!-- SECTION: PERSONAL -->
+        <div style="margin-bottom:28px">
+          <p style="font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--w20);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--bdr)">Personal Details</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+            <div>
+              <label class="input-label">Full Name</label>
+              <input class="input-field" id="pfName" placeholder="Your full name">
+            </div>
+            <div>
+              <label class="input-label">Phone Number</label>
+              <input class="input-field" type="tel" id="pfPhone" placeholder="+91 98765 43210">
+            </div>
+            <div style="grid-column:span 2">
+              <label class="input-label">Email <span style="color:var(--w20);font-size:10px">(cannot change)</span></label>
+              <input class="input-field" type="email" id="pfEmail" readonly style="opacity:0.45;cursor:not-allowed">
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION: ADDRESS -->
+        <div style="margin-bottom:28px">
+          <p style="font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--w20);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--bdr)">Default Delivery Address</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+            <div style="grid-column:span 2">
+              <label class="input-label">Address Line (House / Flat / Street)</label>
+              <input class="input-field" id="pfAddrLine" placeholder="e.g. Flat 4B, Shivaji Nagar, MG Road">
+            </div>
+            <div style="grid-column:span 2">
+              <label class="input-label">Landmark <span style="color:var(--w20);font-size:10px">(optional)</span></label>
+              <input class="input-field" id="pfLandmark" placeholder="e.g. Near Central Mall">
+            </div>
+            <div>
+              <label class="input-label">City</label>
+              <input class="input-field" id="pfCity" placeholder="Nagpur">
+            </div>
+            <div>
+              <label class="input-label">State</label>
+              <select class="input-field" id="pfState">
+                <option value="">Select State</option>
+                <option>Andhra Pradesh</option><option>Arunachal Pradesh</option><option>Assam</option>
+                <option>Bihar</option><option>Chhattisgarh</option><option>Goa</option><option>Gujarat</option>
+                <option>Haryana</option><option>Himachal Pradesh</option><option>Jharkhand</option>
+                <option>Karnataka</option><option>Kerala</option><option>Madhya Pradesh</option>
+                <option>Maharashtra</option><option>Manipur</option><option>Meghalaya</option>
+                <option>Mizoram</option><option>Nagaland</option><option>Odisha</option><option>Punjab</option>
+                <option>Rajasthan</option><option>Sikkim</option><option>Tamil Nadu</option>
+                <option>Telangana</option><option>Tripura</option><option>Uttar Pradesh</option>
+                <option>Uttarakhand</option><option>West Bengal</option>
+                <option>Delhi</option><option>Chandigarh</option><option>Puducherry</option>
+                <option>Jammu & Kashmir</option><option>Ladakh</option>
+              </select>
+            </div>
+            <div>
+              <label class="input-label">PIN Code</label>
+              <input class="input-field" id="pfPincode" placeholder="440001" maxlength="6" pattern="[0-9]{6}">
+            </div>
+            <div>
+              <label class="input-label">Country</label>
+              <input class="input-field" id="pfCountry" value="India" readonly style="opacity:0.5;cursor:not-allowed">
+            </div>
+          </div>
+        </div>
+
+        <div id="profileError" style="font-size:12px;color:#ef4444;display:none;margin-bottom:12px"></div>
+        <div id="profileSuccess" style="font-size:12px;color:#22c55e;display:none;margin-bottom:12px">Profile updated successfully!</div>
+
+        <div style="display:flex;gap:10px;align-items:center">
+          <button type="submit" class="btn-w" id="saveBtn" style="flex:1;justify-content:center">Save Changes</button>
+          <a href="/orders.html"><button type="button" class="btn-o">Orders</button></a>
+        </div>
+
+      </form>
+
+      <!-- DANGER ZONE -->
+      <div style="margin-top:36px;padding-top:28px;border-top:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <p style="font-size:12px;font-weight:600;color:var(--w60);margin-bottom:3px">Sign Out</p>
+          <p style="font-size:11px;color:var(--w20)">You'll need to log in again to access your account</p>
+        </div>
+        <button class="btn-o" onclick="doLogout()" style="color:#ef4444;border-color:rgba(239,68,68,0.22);flex-shrink:0">Sign Out</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+<div class="wrap">
+  <div class="footer-grid">
+    <div>
+      <p class="f-brand-name">Nova Studioz</p>
+      <p class="f-desc">Minimal posters, pop culture accessories, collectibles and lifestyle merch. Delivered across India.</p>
+      <div class="f-socials">
+        <button class="f-soc-btn" onclick="window.open('https://instagram.com','_blank')">Instagram</button>
+        <button class="f-soc-btn" onclick="window.open('https://wa.me/919999999999','_blank')">WhatsApp</button>
+      </div>
+    </div>
+    <div>
+      <p class="f-col-title">Shop</p>
+      <div class="f-links">
+        <a href="/shop.html" class="f-link">All Products</a>
+        <a href="/shop.html?filter=themes" class="f-link">Themes</a>
+        <a href="/shop.html?sort=new" class="f-link">New Arrivals</a>
+        <a href="/custom-order.html" class="f-link">Custom Order</a>
+      </div>
+    </div>
+    <div>
+      <p class="f-col-title">Company</p>
+      <div class="f-links">
+        <a href="/about.html" class="f-link">About Us</a>
+        <a href="/contact.html" class="f-link">Contact</a>
+        <a href="/shipping-policy.html" class="f-link">Shipping</a>
+        <a href="/refund-policy.html" class="f-link">Refund Policy</a>
+        <a href="/privacy-policy.html" class="f-link">Privacy Policy</a>
+        <a href="/terms.html" class="f-link">Terms</a>
+      </div>
+    </div>
+    <div>
+      <p class="f-col-title">Account</p>
+      <div class="f-links">
+        <a href="/login.html" class="f-link">Login / Sign up</a>
+        <a href="/orders.html" class="f-link">My Orders</a>
+        <a href="/profile.html" class="f-link">Profile</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="f-copy">© 2025 Nova Studioz. All rights reserved.</span>
+    <span class="f-copy">Made with ♥ in India</span>
+  </div>
+</div>
+</footer>
+<div id="toastCont"></div>
+<script src="/js/utils.js?v=10"></script>
+<script src="/js/nav-cart.js"></script>
+<script>
+// Split stored address string back into fields
+function parseAddress(raw) {
+  if (!raw) return {};
+  // Format stored: "addrLine | landmark | city | state | pincode"
+  const parts = raw.split(' | ');
+  return {
+    addrLine: parts[0] || '',
+    landmark: parts[1] || '',
+    city:     parts[2] || '',
+    state:    parts[3] || '',
+    pincode:  parts[4] || '',
+  };
+}
+
+function buildAddress() {
+  const addrLine = document.getElementById('pfAddrLine').value.trim();
+  const landmark = document.getElementById('pfLandmark').value.trim();
+  const city     = document.getElementById('pfCity').value.trim();
+  const state    = document.getElementById('pfState').value.trim();
+  const pincode  = document.getElementById('pfPincode').value.trim();
+  return [addrLine, landmark, city, state, pincode].join(' | ');
+}
+
+// Show new user banner if redirected from login
+if (new URLSearchParams(location.search).get('new') === '1') {
+  document.addEventListener('DOMContentLoaded', function() {
+    var banner = document.getElementById('newUserBanner');
+    if (banner) banner.style.display = 'block';
+  });
+}
+
+async function loadProfile() {
+  if (!localStorage.getItem('token')) { location.href = '/login.html?redirect=/profile.html'; return; }
+  try {
+    const user = await apiGet('/api/user');
+    document.getElementById('profileLoader').style.display = 'none';
+    document.getElementById('profileContent').style.display = 'block';
+
+    const initial = (user.name || 'U').charAt(0).toUpperCase();
+    document.getElementById('profileAvatar').textContent = initial;
+    document.getElementById('profileName').textContent = user.name || 'User';
+    document.getElementById('profileEmail').textContent = user.email;
+
+    document.getElementById('pfName').value  = user.name  || '';
+    document.getElementById('pfEmail').value = user.email || '';
+    document.getElementById('pfPhone').value = user.phone || '';
+
+    const addr = parseAddress(user.address);
+    document.getElementById('pfAddrLine').value = addr.addrLine || '';
+    document.getElementById('pfLandmark').value = addr.landmark || '';
+    document.getElementById('pfCity').value     = addr.city     || '';
+    document.getElementById('pfState').value    = addr.state    || '';
+    document.getElementById('pfPincode').value  = addr.pincode  || '';
+
+  } catch(e) { location.href = '/login.html'; }
+}
+
+document.getElementById('profileForm').onsubmit = async e => {
+  e.preventDefault();
+  const btn = document.getElementById('saveBtn');
+  const errEl = document.getElementById('profileError');
+  const okEl  = document.getElementById('profileSuccess');
+  errEl.style.display = 'none'; okEl.style.display = 'none';
+
+  // Basic validation
+  const pincode = document.getElementById('pfPincode').value.trim();
+  if (pincode && !/^\d{6}$/.test(pincode)) {
+    errEl.textContent = 'PIN code must be 6 digits.';
+    errEl.style.display = 'block'; return;
+  }
+
+  btn.textContent = 'Saving...'; btn.disabled = true;
+  try {
+    await apiPost('/api/update-user', {
+      name:    document.getElementById('pfName').value.trim(),
+      phone:   document.getElementById('pfPhone').value.trim(),
+      address: buildAddress(),
+    });
+    okEl.style.display = 'block';
+    // Update avatar initial
+    const n = document.getElementById('pfName').value.trim();
+    if (n) {
+      document.getElementById('profileAvatar').textContent = n.charAt(0).toUpperCase();
+      document.getElementById('profileName').textContent = n;
+    }
+    toast('Profile saved!', 'success');
+  } catch(ex) {
+    errEl.textContent = 'Could not save. Try again.';
+    errEl.style.display = 'block';
+    toast('Update failed', 'error');
+  }
+  btn.textContent = 'Save Changes'; btn.disabled = false;
+};
+
+function doLogout() {
+  localStorage.removeItem('token');
+  localStorage.removeItem('user');
+  location.href = '/';
+}
+
+document.addEventListener('DOMContentLoaded', loadProfile);
+</script>
+</body>
+</html>

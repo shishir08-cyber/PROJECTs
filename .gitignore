@@ -1,0 +1,26 @@
+
+# Android / Gradle generated files
+**/build/
+**/.gradle/
+**/intermediates/
+**/.cxx/
+**/local.properties
+**/captures/
+
+# Node.js
+**/node_modules/
+
+# Python
+**/__pycache__/
+**/*.pyc
+**/venv/
+**/.venv/
+
+# Generated output
+**/dist/
+**/out/
+**/.dart_tool/
+
+# IDE files
+**/.idea/
+**/.vscode/

@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shishir Tirth — Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+/* ===== BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0a0a0a;
+  --bg2: #111111;
+  --bg3: #161616;
+  --white: #f0ede8;
+  --white2: #c8c4be;
+  --gray: #6b6b6b;
+  --accent: #e8e0d4;
+  --red: #c8392b;
+  --mono: 'DM Mono', monospace;
+  --sans: 'DM Sans', sans-serif;
+  --display: 'Syne', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* ===== NAV ===== */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 48px;
+  background: rgba(10,10,10,0.88);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.nav-logo {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+.dot { color: var(--red); }
+.nav-links { list-style: none; display: flex; gap: 32px; }
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--gray);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  border: 1px solid rgba(255,255,255,0.2) !important;
+  padding: 8px 16px !important;
+  color: var(--white) !important;
+  transition: all 0.2s !important;
+}
+.nav-cta:hover { background: var(--white) !important; color: var(--bg) !important; }
+
+.hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--white); transition: 0.3s; }
+
+.mobile-menu {
+  display: none; flex-direction: column; gap: 24px;
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 99;
+  background: var(--bg); padding: 96px 48px 48px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: var(--display);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--gray);
+  transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--white); }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 120px 48px 80px;
+  position: relative;
+  overflow: hidden;
+  gap: 40px;
+}
+
+/* Background layers */
+.hero-noise {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.hero-grid-lines {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 72px 72px;
+  pointer-events: none;
+}
+
+/* Corner accent decorations */
+.hero-corner-tl, .hero-corner-br {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  z-index: 1;
+  pointer-events: none;
+}
+.hero-corner-tl {
+  top: 80px; left: 30px;
+  border-top: 1.5px solid rgba(255,255,255,0.15);
+  border-left: 1.5px solid rgba(255,255,255,0.15);
+}
+.hero-corner-br {
+  bottom: 60px; right: 30px;
+  border-bottom: 1.5px solid rgba(255,255,255,0.15);
+  border-right: 1.5px solid rgba(255,255,255,0.15);
+}
+
+/* Floating large graphic text in background */
+.hero-bg-text {
+  position: absolute;
+  bottom: -20px;
+  left: 40px;
+  font-family: var(--display);
+  font-size: clamp(80px, 14vw, 180px);
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.04);
+  pointer-events: none;
+  z-index: 0;
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* Vertical side label */
+.hero-side-label {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: rgba(255,255,255,0.12);
+  pointer-events: none;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+/* Horizontal rule accent */
+.hero-hr-accent {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.08) 30%, rgba(255,255,255,0.08) 70%, transparent 100%);
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 600px; }
+
+.hero-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--gray);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.blink { color: #4caf50; animation: blink 1.2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+.hero-name {
+  font-family: var(--display);
+  font-size: clamp(60px, 8.5vw, 108px);
+  font-weight: 800;
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  margin-bottom: 28px;
+}
+
+.outline-text {
+  -webkit-text-stroke: 1.5px var(--white);
+  color: transparent;
+}
+
+/* White block with double border — graphic design element */
+.hero-descriptor-block {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 32px;
+}
+.hero-descriptor-block::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border: 1px solid rgba(255,255,255,0.12);
+  pointer-events: none;
+}
+.hero-descriptor-block::after {
+  content: '';
+  position: absolute;
+  inset: -12px;
+  border: 1px solid rgba(255,255,255,0.05);
+  pointer-events: none;
+}
+.hero-descriptor-inner {
+  background: rgba(255,255,255,0.04);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.hero-descriptor-line {
+  width: 32px;
+  height: 1px;
+  background: rgba(255,255,255,0.25);
+  flex-shrink: 0;
+}
+.hero-descriptor-text {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--white2);
+}
+
+.hero-chips {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-bottom: 40px;
+}
+.hero-chips span {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  padding: 5px 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--white2);
+  transition: all 0.2s;
+  cursor: default;
+}
+.hero-chips span:hover {
+  border-color: rgba(255,255,255,0.3);
+  color: var(--white);
+  background: rgba(255,255,255,0.04);
+}
+
+.hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+.btn-primary {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  padding: 14px 28px;
+  background: var(--white);
+  color: var(--bg);
+  font-weight: 500;
+  transition: opacity 0.2s;
+  display: inline-block;
+}
+.btn-primary:hover { opacity: 0.85; }
+
+.btn-ghost {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  padding: 14px 28px;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: var(--white2);
+  transition: all 0.2s;
+  display: inline-block;
+}
+.btn-ghost:hover { border-color: var(--white); color: var(--white); }
+
+/* ===== PROFILE — ROUND CIRCLE ===== */
+.hero-profile-wrap {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* Outer rotating dashed ring */
+.hero-profile-orbit {
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px dashed rgba(255,255,255,0.08);
+  animation: orbitSpin 24s linear infinite;
+  pointer-events: none;
+}
+@keyframes orbitSpin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+/* Orbit dot */
+.hero-profile-orbit::before {
+  content: '';
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 50%;
+  top: -2.5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Double-border ring for circle image */
+.hero-profile-rings {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+.hero-profile-rings::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.18);
+  pointer-events: none;
+}
+.hero-profile-rings::after {
+  content: '';
+  position: absolute;
+  inset: -16px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.06);
+  pointer-events: none;
+}
+
+.hero-profile {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top center;
+  filter: grayscale(20%) contrast(1.05);
+  display: block;
+  border: 2px solid rgba(255,255,255,0.1);
+}
+
+.hero-profile-tag {
+  margin-top: 24px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--gray);
+  text-align: center;
+  padding: 6px 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.02);
+  position: relative;
+}
+/* Double border on tag */
+.hero-profile-tag::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border: 1px solid rgba(255,255,255,0.04);
+  pointer-events: none;
+}
+
+/* Stats row below profile */
+.hero-profile-stats {
+  display: flex;
+  gap: 0;
+  margin-top: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+  position: relative;
+}
+.hero-profile-stats::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border: 1px solid rgba(255,255,255,0.04);
+  pointer-events: none;
+}
+.hps-item {
+  padding: 12px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  border-right: 1px solid rgba(255,255,255,0.07);
+}
+.hps-item:last-child { border-right: none; }
+.hps-n {
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.hps-l {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  color: var(--gray);
+  text-transform: uppercase;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 32px; left: 48px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--gray);
+  animation: scrollFloat 2s ease-in-out infinite;
+  z-index: 2;
+}
+@keyframes scrollFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
+
+/* ===== MARQUEE TICKER ===== */
+.ticker-wrap {
+  width: 100%;
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.015);
+  padding: 12px 0;
+  position: relative;
+  z-index: 1;
+}
+.ticker-track {
+  display: flex;
+  white-space: nowrap;
+  animation: tickerMove 22s linear infinite;
+  gap: 0;
+}
+.ticker-track span {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--gray);
+  padding: 0 32px;
+}
+.ticker-track .sep {
+  color: rgba(255,255,255,0.12);
+  padding: 0 8px;
+  letter-spacing: 0;
+}
+@keyframes tickerMove {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ===== WHITE BLOCKS — ABOUT-STYLE CALLOUTS ===== */
+.hero-callouts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  border: 1px solid rgba(255,255,255,0.07);
+  position: relative;
+}
+.hero-callouts::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border: 1px solid rgba(255,255,255,0.035);
+  pointer-events: none;
+  z-index: 0;
+}
+.hc-item {
+  padding: 36px 32px;
+  border-right: 1px solid rgba(255,255,255,0.07);
+  position: relative;
+  background: rgba(255,255,255,0.015);
+  transition: background 0.3s;
+}
+.hc-item:last-child { border-right: none; }
+.hc-item:hover { background: rgba(255,255,255,0.03); }
+.hc-num {
+  font-family: var(--display);
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  margin-bottom: 6px;
+  color: rgba(255,255,255,0.9);
+}
+.hc-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--gray);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.hc-desc {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.6;
+}
+.hc-corner {
+  position: absolute;
+  bottom: 12px; right: 12px;
+  width: 20px; height: 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+.callouts-section {
+  padding: 0 48px 0;
+  position: relative;
+}
+
+/* ===== GRAPHIC TEXT SECTION ===== */
+.graphic-text-section {
+  padding: 60px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+.gt-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.2);
+  margin-bottom: 20px;
+  border-left: 2px solid rgba(255,255,255,0.12);
+  padding-left: 12px;
+}
+.gt-large {
+  font-family: var(--display);
+  font-size: clamp(36px, 6vw, 76px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.0;
+  margin-bottom: 0;
+  position: relative;
+}
+.gt-large .outline {
+  -webkit-text-stroke: 1px rgba(255,255,255,0.2);
+  color: transparent;
+}
+.gt-large .solid {
+  color: var(--white);
+}
+.gt-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+  margin: 28px 0;
+}
+.gt-sub-row {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+.gt-sub-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.gt-sub-val {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+.gt-sub-key {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--gray);
+  text-transform: uppercase;
+}
+
+/* ===== SECTIONS ===== */
+.section-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--gray);
+  margin-bottom: 48px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.section-title {
+  font-family: var(--display);
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 48px;
+}
+
+/* ===== ABOUT ===== */
+.about-section {
+  padding: 100px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.about-text h2 {
+  font-family: var(--display);
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+.about-text h2 em {
+  font-style: italic;
+  color: var(--white2);
+}
+.about-text p {
+  font-size: 15px;
+  color: var(--white2);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+.about-stats {
+  display: flex;
+  gap: 40px;
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.stat { display: flex; flex-direction: column; }
+.stat-n {
+  font-family: var(--display);
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+.stat-l {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--gray);
+}
+.about-card {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 20px;
+  background: var(--bg2);
+  border: 1px solid rgba(255,255,255,0.05);
+  margin-bottom: 12px;
+  transition: border-color 0.2s;
+  position: relative;
+}
+.about-card::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border: 1px solid rgba(255,255,255,0.025);
+  pointer-events: none;
+}
+.about-card:hover { border-color: rgba(255,255,255,0.15); }
+.ac-icon { font-size: 20px; margin-top: 2px; }
+.ac-text { display: flex; flex-direction: column; gap: 4px; }
+.ac-text strong { font-size: 14px; font-weight: 600; }
+.ac-text span { font-family: var(--mono); font-size: 11px; color: var(--gray); }
+.inline-link { color: var(--white2); border-bottom: 1px solid rgba(255,255,255,0.2); }
+
+/* ===== PROJECTS ===== */
+.projects-section {
+  padding: 100px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.project-card {
+  padding: 32px;
+  background: var(--bg2);
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: border-color 0.2s, transform 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.project-card::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border: 1px solid rgba(255,255,255,0.025);
+  pointer-events: none;
+}
+.project-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-2px); }
+.project-card.featured {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+.proj-meta {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 16px;
+}
+.proj-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--gray);
+  background: rgba(255,255,255,0.05);
+  padding: 4px 10px;
+}
+.proj-year {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--gray);
+}
+.project-card h3 {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.project-card p {
+  font-size: 14px;
+  color: var(--white2);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.proj-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.proj-stack span {
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 3px 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--gray);
+}
+.proj-links { display: flex; gap: 16px; }
+.proj-link {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--white2);
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  transition: color 0.2s, border-color 0.2s;
+}
+.proj-link:hover { color: var(--white); border-color: var(--white); }
+.proj-img-wrap img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  filter: grayscale(40%) contrast(0.9);
+  display: block;
+}
+
+/* ===== SKILLS ===== */
+.skills-section {
+  padding: 100px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--bg);
+}
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.skill-group {
+  padding: 28px;
+  background: var(--bg2);
+  border: 1px solid rgba(255,255,255,0.05);
+  position: relative;
+}
+.skill-group::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border: 1px solid rgba(255,255,255,0.025);
+  pointer-events: none;
+}
+.sg-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--gray);
+  margin-bottom: 16px;
+}
+.sg-items { display: flex; flex-wrap: wrap; gap: 8px; }
+.sg-items span {
+  font-size: 13px;
+  color: var(--white2);
+  background: rgba(255,255,255,0.04);
+  padding: 4px 10px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* ===== PROFILES ===== */
+.profiles-section {
+  padding: 80px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.profiles-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px;
+  background: var(--bg2);
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: all 0.2s;
+  position: relative;
+}
+.profile-card::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border: 1px solid rgba(255,255,255,0.025);
+  pointer-events: none;
+}
+.profile-card:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
+.pc-icon { width: 28px; height: 28px; color: var(--white2); flex-shrink: 0; }
+.pc-icon svg { width: 100%; height: 100%; }
+.pc-text { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.pc-text strong { font-size: 13px; font-weight: 600; }
+.pc-text span { font-family: var(--mono); font-size: 10px; color: var(--gray); }
+.pc-arrow { color: var(--gray); font-size: 16px; }
+
+/* ===== FOOTER CTA ===== */
+.footer-cta {
+  padding: 100px 48px;
+  background: var(--bg3);
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.fc-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+.fc-mono {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--gray);
+  margin-bottom: 12px;
+}
+.fc-text h2 {
+  font-family: var(--display);
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+.fc-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+/* ===== FOOTER ===== */
+.footer {
+  padding: 32px 48px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.footer-logo { font-family: var(--display); font-size: 18px; font-weight: 800; }
+.footer p { font-family: var(--mono); font-size: 11px; color: var(--gray); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--gray);
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--white); }
+
+/* ===== FADE IN ===== */
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+.fade-in.visible { opacity: 1; transform: none; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .hero {
+    padding: 110px 24px 80px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 52px;
+  }
+  .hero-profile-wrap { align-self: center; }
+  .hero-profile, .hero-profile-rings { width: 240px; height: 240px; }
+  .hero-profile-orbit { width: 310px; height: 310px; }
+  .hero-bg-text { font-size: 60px; }
+  .hero-callouts { grid-template-columns: 1fr; }
+  .hc-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .hc-item:last-child { border-bottom: none; }
+  .callouts-section { padding: 0 24px; }
+  .about-grid, .projects-grid, .skills-grid, .profiles-row { grid-template-columns: 1fr; }
+  .project-card.featured { grid-column: 1; display: block; }
+  .about-section, .projects-section, .skills-section, .profiles-section { padding: 60px 24px; }
+  .fc-inner { flex-direction: column; align-items: flex-start; }
+  .footer { flex-direction: column; align-items: flex-start; padding: 24px; }
+  .graphic-text-section { padding: 40px 24px; }
+  .gt-sub-row { gap: 28px; }
+}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">ST<span class="dot">.</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">ABOUT</a></li>
+    <li><a href="#projects">PROJECTS</a></li>
+    <li><a href="#skills">SKILLS</a></li>
+    <li><a href="resume.html">RESUME</a></li>
+    <li><a href="cinematography.html">LENS</a></li>
+    <li><a href="contact.html" class="nav-cta">CONTACT</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="toggleMenu()">ABOUT</a>
+  <a href="#projects" onclick="toggleMenu()">PROJECTS</a>
+  <a href="#skills" onclick="toggleMenu()">SKILLS</a>
+  <a href="resume.html" onclick="toggleMenu()">RESUME</a>
+  <a href="cinematography.html" onclick="toggleMenu()">LENS</a>
+  <a href="contact.html" onclick="toggleMenu()">CONTACT</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-corner-tl"></div>
+  <div class="hero-corner-br"></div>
+  <div class="hero-bg-text">SHISHIR</div>
+  <div class="hero-side-label">PORTFOLIO · 2025 · DKTE ICHALKARANJI</div>
+  <div class="hero-hr-accent"></div>
+
+  <div class="hero-content">
+    <div class="hero-tag">
+      <span class="blink">●</span> &nbsp;AVAILABLE FOR OPPORTUNITIES
+    </div>
+    <h1 class="hero-name">SHISHIR<br><span class="outline-text">TIRTH</span></h1>
+
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">VIEW WORK</a>
+      <a href="contact.html" class="btn-ghost">GET IN TOUCH</a>
+    </div>
+  </div>
+
+  <!-- ROUND PROFILE -->
+  <div class="hero-profile-wrap">
+    <div class="hero-profile-orbit"></div>
+    <div class="hero-profile-rings">
+      <img src="IMAGES/profile_img.jpg" alt="Shishir Tirth" class="hero-profile" />
+    </div>
+    <div class="hero-profile-tag">DKTE · 2023–27</div>
+    <div class="hero-profile-stats">
+      <div class="hps-item">
+        <span class="hps-n">2+</span>
+        <span class="hps-l">Yrs Dev</span>
+      </div>
+      <div class="hps-item">
+        <span class="hps-n">5+</span>
+        <span class="hps-l">Projects</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">SCROLL ↓</div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span>FULL-STACK DEVELOPER</span><span class="sep">◆</span>
+    <span>AI & ML ENGINEER</span><span class="sep">◆</span>
+    <span>CYBER SECURITY</span><span class="sep">◆</span>
+    <span>REACT · NODE · PYTHON</span><span class="sep">◆</span>
+    <span>CINEMATOGRAPHER</span><span class="sep">◆</span>
+    <span>OPEN TO WORK</span><span class="sep">◆</span>
+    <span>DKTE · ICHALKARANJI</span><span class="sep">◆</span>
+    <!-- duplicate for infinite loop -->
+    <span>FULL-STACK DEVELOPER</span><span class="sep">◆</span>
+    <span>AI & ML ENGINEER</span><span class="sep">◆</span>
+    <span>CYBER SECURITY</span><span class="sep">◆</span>
+    <span>REACT · NODE · PYTHON</span><span class="sep">◆</span>
+    <span>CINEMATOGRAPHER</span><span class="sep">◆</span>
+    <span>OPEN TO WORK</span><span class="sep">◆</span>
+    <span>DKTE · ICHALKARANJI</span><span class="sep">◆</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="about-section">
+  <div class="section-label">01 — ABOUT</div>
+  <div class="about-grid">
+    <div class="about-text">
+      <h2>Clean code.<br><em>Thoughtful</em> systems.<br>Sharp pixels.</h2>
+      <p>CSE (AI & ML) student at DKTE, Ichalkaranji. I write clean code, think in systems, and care about the final pixel. Interned in Cyber Security at Sunbeam Pune. Built full-stack apps used by 100+ users.</p>
+      <p>I also shoot — wildlife, street, cinema. But here, the code does the talking.</p>
+      <div class="about-stats">
+        <div class="stat"><span class="stat-n">2+</span><span class="stat-l">Years Dev</span></div>
+        <div class="stat"><span class="stat-n">5+</span><span class="stat-l">Projects</span></div>
+      </div>
+    </div>
+    <div class="about-card-col">
+      <div class="about-card fade-in">
+        <div class="ac-icon">🎓</div>
+        <div class="ac-text">
+          <strong>B.Tech AIML</strong>
+          <span>DKTE Institute · CGPA 6.66 · 2023–27</span>
+        </div>
+      </div>
+      <div class="about-card fade-in">
+        <div class="ac-icon">🛡️</div>
+        <div class="ac-text">
+          <strong>Cyber Security Intern</strong>
+          <span>Sunbeam, Pune · Dec 2025 – Jan 2026</span>
+        </div>
+      </div>
+      <div class="about-card fade-in">
+        <div class="ac-icon">🌐</div>
+        <div class="ac-text">
+          <strong>Web Dev Implant</strong>
+          <span>StormSoft, Ichalkaranji · Jul – Aug 2022</span>
+        </div>
+      </div>
+      <div class="about-card fade-in">
+        <div class="ac-icon">📷</div>
+        <div class="ac-text">
+          <strong>Also a Cinematographer</strong>
+          <span><a href="cinematography.html" class="inline-link">See the lens work →</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="projects-section">
+  <div class="section-label">02 — PROJECTS</div>
+  <h2 class="section-title">Selected Work</h2>
+  <div class="projects-grid">
+    <div class="project-card fade-in">
+      <div class="proj-meta"><span class="proj-tag">AI · Chatbot</span><span class="proj-year">2026</span></div>
+      <h3>AI Chatbot with Memory</h3>
+      <p>Local LLM chatbot with persistent memory using Flask + SQLite. Real-time responses with conversational context handling.</p>
+      <div class="proj-stack"><span>Python</span><span>Flask</span><span>SQLite</span><span>JS</span></div>
+      <div class="proj-links"><a href="https://github.com/shishir08-cyber" target="_blank" class="proj-link">↗ GitHub</a></div>
+    </div>
+    <div class="project-card fade-in">
+      <div class="proj-meta"><span class="proj-tag">Group Project</span><span class="proj-year">2023</span></div>
+      <h3>Language Translator</h3>
+      <p>Group project enabling multilingual communication through intelligent translation algorithms.</p>
+      <div class="proj-stack"><span>Android</span><span>XML</span><span>java</span></div>
+      <div class="proj-links"><a href="https://github.com/shishir08-cyber" target="_blank" class="proj-link">↗ GitHub</a></div>
+    </div>
+    <div class="project-card fade-in">
+      <div class="proj-meta"><span class="proj-tag">ASP.NET</span><span class="proj-year">2022</span></div>
+      <h3>Movie recommendation</h3>
+      <p>ASP.Net project of recommending movies for all cinema overs</p>
+      <div class="proj-stack"><span>ASP.NET</span><span>HTML</span><span>CSS and JS</span></div>
+      <div class="proj-links"><a href="https://github.com/shishir08-cyber" target="_blank" class="proj-link">↗ GitHub</a></div>
+    </div>
+    <div class="project-card fade-in">
+      <div class="proj-meta"><span class="proj-tag">Express</span><span class="proj-year">2026</span></div>
+      <h3>E-Commerce site ( Novastudioz )</h3>
+      <p>Clean E-commerce site with Payment iuntegration and authorization for Pop-culture</p>
+      <div class="proj-stack"><span>Express</span><span>Google 0 Authh</span><span>Razorpay</span></div>
+      <div class="proj-links"><a href="https://novastudioz.vercel.app/" target="_blank" class="proj-link">↗ Live site</a></div>
+    </div>
+    <div class="project-card fade-in">
+      <div class="proj-meta"><span class="proj-tag">ML</span><span class="proj-year">2023</span></div>
+      <h3>Employee Salary prediction</h3>
+      <p>ML-based Employee saalry prediction based on his work</p>
+      <div class="proj-stack"><span>Python</span><span>ML</span><span>/span></div>
+      <div class="proj-links"><a href="https://github.com/shishir08-cyber" target="_blank" class="proj-link">↗ GitHub</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-section">
+  <div class="section-label">03 — SKILLS</div>
+  <h2 class="section-title">Tech Stack</h2>
+  <div class="skills-grid">
+    <div class="skill-group fade-in">
+      <div class="sg-label">LANGUAGES</div>
+      <div class="sg-items"><span>Python</span><span>C</span><span>C++</span><span>Java</span><span>JavaScript</span></div>
+    </div>
+    <div class="skill-group fade-in">
+      <div class="sg-label">FRONTEND</div>
+      <div class="sg-items"><span>HTML</span><span>CSS</span><span>React.js</span></div>
+    </div>
+    <div class="skill-group fade-in">
+      <div class="sg-label">BACKEND</div>
+      <div class="sg-items"><span>Node.js</span><span>Express.js</span><span>REST APIs</span></div>
+    </div>
+    <div class="skill-group fade-in">
+      <div class="sg-label">DATABASE</div>
+      <div class="sg-items"><span>PostgreSQL</span><span>SQLite</span></div>
+    </div>
+    <div class="skill-group fade-in">
+      <div class="sg-label">TOOLS & SECURITY</div>
+      <div class="sg-items"><span>Git</span><span>GitHub</span><span>VS Code</span><span>Penetration Testing</span><span>Network Security</span></div>
+    </div>
+    <div class="skill-group fade-in">
+      <div class="sg-label">COURSEWORK</div>
+      <div class="sg-items"><span>AI & ML</span><span>DSA</span><span>DBMS</span><span>OOP</span><span>CN</span><span>Software Engineering</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROFILES -->
+<section class="profiles-section">
+  <div class="section-label">04 — PROFILES</div>
+  <div class="profiles-row">
+    <a href="https://github.com/shishir08-cyber" target="_blank" class="profile-card fade-in">
+      <div class="pc-icon">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      </div>
+      <div class="pc-text"><strong>GitHub</strong><span>shishir08-cyber</span></div>
+      <div class="pc-arrow">↗</div>
+    </a>
+    <a href="https://www.linkedin.com/in/shishir-tirth-93795b291/" target="_blank" class="profile-card fade-in">
+      <div class="pc-icon">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </div>
+      <div class="pc-text"><strong>LinkedIn</strong><span>shishir-tirth-93795b291</span></div>
+      <div class="pc-arrow">↗</div>
+    </a>
+    <a href="https://leetcode.com/u/shishirtirth08/" target="_blank" class="profile-card fade-in">
+      <div class="pc-icon">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/></svg>
+      </div>
+      <div class="pc-text"><strong>LeetCode</strong><span>shishirtirth08</span></div>
+      <div class="pc-arrow">↗</div>
+    </a>
+    <a href="https://www.instagram.com/shishirtirth08/" target="_blank" class="profile-card fade-in">
+      <div class="pc-icon">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </div>
+      <div class="pc-text"><strong>Instagram</strong><span>shishirtirth08</span></div>
+      <div class="pc-arrow">↗</div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<section class="footer-cta">
+  <div class="fc-inner">
+    <div class="fc-text">
+      <div class="fc-mono">// ready to collaborate</div>
+      <h2>Got a project?<br>Let's build it.</h2>
+    </div>
+    <div class="fc-btns">
+      <a href="contact.html" class="btn-primary">CONTACT ME</a>
+      <a href="resume.html" class="btn-ghost">VIEW RESUME</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-logo">ST<span class="dot">.</span></div>
+  <p>© 2025 Shishir Tirth. Designed & coded with intent.</p>
+  <div class="footer-links">
+    <a href="cinematography.html">Lens Work</a>
+    <a href="resume.html">Resume</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
+
+<script>
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
