@@ -1,0 +1,322 @@
+@media screen and (max-width: 1400px) {
+  #profile { height: 83vh; margin-bottom: 6rem; }
+  .about-containers { flex-wrap: wrap; }
+  #contact, #projects { height: fit-content; }
+}
+
+@media screen and (max-width: 1200px) {
+  #desktop-nav { display: none; }
+  #hamburger-nav { display: flex; }
+  #experience, .experience-details-container { margin-top: 2rem; }
+  #profile, .section-container { display: block; }
+  .arrow { display: none; }
+  section, .section-container { height: fit-content; }
+  section { margin: 0 5%; }
+  .section__pic-container { width: 250px; height: 250px; margin: 0 auto 2rem; }
+  .about-containers { margin-top: 0; }
+
+  /* ── Projects section: single column, tighter padding ── */
+  .projects-section { padding: 60px 24px; }
+  .projects-panel { padding: 40px 28px; }
+  .projects-grid { grid-template-columns: 1fr; gap: 16px; }
+  .project-card.featured {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  /* ── Show hamburger, hide desktop nav ── */
+  .hamburger {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 600;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block !important;
+    width: 22px;
+    height: 2px;
+    background: #ffffff;
+    border-radius: 2px;
+  }
+  .nav-links { display: none !important; }
+  .nav-dot { display: none !important; }
+
+  /* ── Mobile dropdown ── */
+  .mobile-menu {
+    position: fixed !important;
+    top: 58px;
+    left: 0;
+    right: 0;
+    background: rgba(8,8,8,0.98) !important;
+    backdrop-filter: blur(20px);
+    z-index: 490;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    flex-direction: column;
+    display: none !important;
+  }
+  .mobile-menu.open { display: flex !important; }
+  .mobile-menu a {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    padding: 0.85rem 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: block;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a:hover { color: #e8ff47; }
+
+  /* ── HERO GAP FIX: override .page padding-top on mobile ── */
+  #page-home {
+    padding-top: 0 !important;
+  }
+
+  /* ── Hero fills full viewport ── */
+  .hero {
+    min-height: 100vh !important;
+    min-height: 100svh !important;
+    height: 100svh;
+  }
+
+  .hero-bg {
+    position: absolute !important;
+    top: 0 !important; left: 0 !important;
+    right: 0 !important; bottom: 0 !important;
+    z-index: 0;
+  }
+  .hero-bg img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center top;
+  }
+
+  .hero-left {
+    padding-top: 75px !important;
+    padding-bottom: 6rem !important;
+    justify-content: flex-end !important;
+  }
+
+  /* ── Projects section: full-width cards, no side overflow ── */
+  .projects-section { padding: 48px 16px; max-width: 100%; }
+  .projects-panel { padding: 32px 20px; border-radius: 14px; }
+  .projects-grid { grid-template-columns: 1fr; gap: 14px; }
+  .project-card { padding: 24px 20px; }
+  .proj-meta { flex-wrap: wrap; gap: 8px; }
+  .project-card h3 { font-size: 19px; }
+}
+
+@media screen and (max-width: 600px) {
+  #contact, footer { height: 40vh; }
+  article { font-size: 1rem; }
+  footer nav { height: fit-content; margin-bottom: 2rem; }
+  .about-containers, .contact-info-upper-container, .btn-container { flex-wrap: wrap; justify-content: center; }
+  .contact-info-container { margin: 0; }
+  .contact-info-container p, .nav-links li a { font-size: 1rem; }
+  .experience-sub-title { font-size: 1.25rem; }
+  .logo { font-size: 1.5rem; }
+  .section__pic-container { width: auto; height: 46vw; justify-content: center; }
+  .section__text__p2 { font-size: 1.1rem; }
+  .title { font-size: 2rem; }
+  .text-container { text-align: justify; }
+  .scroll-hint { display: none; }
+
+  /* ── HERO: still no top gap ── */
+  #page-home {
+    padding-top: 0 !important;
+  }
+  .hero {
+    min-height: 100vh;
+    min-height: 100svh;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 0;
+  }
+  .hero-bg img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center;
+  }
+  .hero-left {
+    position: relative;
+    z-index: 2;
+    padding: 75px 1.4rem 7rem !important;
+    width: 100%;
+    max-width: 100%;
+    justify-content: flex-end !important;
+  }
+  .hero-h1 {
+    font-size: clamp(2.4rem, 10.5vw, 4rem) !important;
+    word-break: break-word;
+    letter-spacing: -0.02em;
+  }
+  .hero-left > a.btn {
+    font-size: 0.58rem !important;
+    padding: 0.5rem 0.9rem !important;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    max-width: 150px;
+  }
+  .hstat { padding: 0.7rem 0.6rem; }
+  .hstat-n { font-size: 1rem; }
+  .hstat-l { font-size: 0.48rem; }
+  .hero-detail-bar { flex-wrap: wrap; gap: 0.6rem; padding: 0.9rem 1rem; }
+
+  /* ── ABOUT GAP FIX: nuke every source of space ── */
+  #me {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+  .spacer {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* Profile section: auto height, no margin/padding gaps */
+  #profile {
+    height: auto !important;
+    min-height: unset !important;
+    margin: 0 !important;
+    padding: 1.5rem 1rem 0.5rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  /* Kill the inherited 83vh from 1400px breakpoint */
+  /* (already overridden above with !important) */
+
+  /* About section itself */
+  #about {
+    padding-top: 0.5rem !important;
+    margin-top: 0 !important;
+    min-height: unset !important;
+    height: auto !important;
+  }
+
+  /* The p.section__text__p1 "EXPLORE" label */
+  .section__text__p1 {
+    margin-top: 0.75rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  /* Magazine layout stacks on mobile */
+  .magazine-layout {
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 1rem !important;
+    gap: 1rem !important;
+  }
+  .panel {
+    width: 100% !important;
+    height: 260px !important;
+  }
+
+  /* ── Projects section: extra-small screens ── */
+  .projects-section { padding: 32px 12px; }
+  .projects-panel { padding: 24px 16px; }
+  .section-title { font-size: 1.6rem; word-break: break-word; }
+  .project-card { padding: 20px 16px; }
+  .project-card h3 { font-size: 17px; }
+  .project-card p { font-size: 13px; }
+  .proj-stack span { font-size: 9px; padding: 2px 6px; }
+}
+
+/* ── MOBILE HERO: text higher up, headline fits the screen, image full-bleed ── */
+@media screen and (max-width: 1200px) {
+  .hero {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: 0;
+  }
+}
+@media screen and (max-width: 768px) {
+  .hero { align-items: flex-start !important; }
+  .hero .hero-left {
+    justify-content: flex-start !important;
+    padding: 13rem 1.2rem 7rem !important;
+  }
+  .hero .poster { width: 56%; max-width: 280px; margin-bottom: .6rem; }
+  .hero .hero-sub { font-size: .76rem; line-height: 1.5; max-width: 270px; margin: 0 auto .9rem; }
+  .hero .hero-btns { gap: .4rem; }
+  .hero .hero-btns .btn { font-size: .56rem; padding: .55rem .95rem; letter-spacing: .06em; }
+}
+
+@media screen and (max-width: 600px) {
+  .section__pic-container { width: min(240px, 62vw) !important; height: min(240px, 62vw) !important; margin: 0 auto 1.2rem !important; }
+}
+
+/* ===== Scroll animations: replay on every scroll, down AND up ===== */
+:root{--sa-ease:cubic-bezier(.22,.8,.24,1);--sa-accent:#e8ff47;}
+
+/* hidden until in view; leaves hidden when scrolled away so it can replay */
+.sa-ready .sa:not(.sa-in){opacity:0;}
+.sa-in{animation-duration:1s;animation-timing-function:var(--sa-ease);animation-delay:var(--d,0s);animation-fill-mode:backwards;}
+.sa-in.sa-up{animation-name:saUp;}
+.sa-in.sa-scale{animation-name:saScale;}
+.sa-in.sa-left{animation-name:saLeft;}
+.sa-in.sa-right{animation-name:saRight;}
+.sa-in.sa-mask{animation-name:saRise;animation-duration:1.2s;}
+.sa-in.sa-fade{animation-name:saFade;animation-duration:1.2s;}
+
+/* --dy / --dx are set by JS: positive when scrolling down, negative when scrolling up */
+@keyframes saUp{from{opacity:0;transform:translate3d(0,var(--dy,44px),0);filter:blur(var(--bl,8px));}}
+@keyframes saScale{from{opacity:0;transform:scale(.88) translate3d(0,var(--dy,30px),0);filter:blur(var(--bl,6px));}}
+@keyframes saLeft{from{opacity:0;transform:translate3d(calc(var(--dx,60px) * -1),0,0);filter:blur(var(--bl,6px));}}
+@keyframes saRight{from{opacity:0;transform:translate3d(var(--dx,60px),0,0);filter:blur(var(--bl,6px));}}
+@keyframes saFade{from{opacity:0;}}
+@keyframes saRise{from{opacity:0;transform:translate3d(0,var(--dy,40px),0) scale(1.04);}}
+@keyframes saWipe{from{clip-path:inset(var(--cl-t,0%) 0 var(--cl-b,100%) 0);}to{clip-path:inset(0 0 0 0);}}
+/* the wipe runs on the child image, NOT the observed element (clip-path on the observed element would hide it from the observer) */
+.sa-in.sa-mask > img{animation:saWipe 1.3s var(--sa-ease) var(--d,0s) backwards;}
+
+/* top scroll progress line */
+.sa-progress{position:fixed;top:0;left:0;height:2px;width:100%;z-index:9999;pointer-events:none;
+  background:linear-gradient(90deg,var(--sa-accent),#fff);transform-origin:0 50%;transform:scaleX(var(--sp,0));
+  box-shadow:0 0 12px rgba(232,255,71,.55);}
+
+/* accent line draws in under titles (and un-draws when they leave) */
+.sa-title::after{content:"";display:block;height:2px;width:0;margin:.9rem 0 0;background:var(--sa-accent);
+  transition:width 1.1s var(--sa-ease) .35s;}
+.sa-title.sa-in::after{width:64px;}
+.sa-title.sa-tc::after{margin-left:auto;margin-right:auto;}
+
+/* scroll-linked drift on big images */
+.sa-drift{will-change:transform;transform:translate3d(0,var(--py,0px),0);}
+
+@media (max-width:768px){
+  .sa-in{animation-duration:.85s;}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .sa-ready .sa:not(.sa-in){opacity:1;}
+  .sa-in{animation:none!important;}
+  .sa-title::after{transition:none;width:64px;}
+  .sa-progress{display:none;}
+  .sa-drift{transform:none;}
+}
